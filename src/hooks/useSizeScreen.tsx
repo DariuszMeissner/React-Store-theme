@@ -1,0 +1,65 @@
+import { useEffect, useState } from 'react'
+import BREAKPOINTS from '../util/brekpoints'
+
+interface ISize {
+  width: number
+  height: number
+  orientation: string
+  currentSize: string
+  isS: boolean
+  isM: boolean
+  isL: boolean
+}
+
+const ORIENTATION_MIN_BREAKPOINT = 1.2
+
+const useSizeScreen = () => {
+  const [size, setSize] = useState<ISize>({
+    width: 0,
+    height: 0,
+    orientation: 'none',
+    currentSize: 'none',
+    isS: false,
+    isM: false,
+    isL: false
+  })
+
+  function handleResize() {
+    const { innerWidth, innerHeight } = window
+
+    let currSize = 'S'
+    if (innerWidth <= BREAKPOINTS.S) {
+      currSize = 'S'
+    } else if (innerWidth >= BREAKPOINTS.M && innerWidth < BREAKPOINTS.L) {
+      currSize = 'M'
+    } else if (innerWidth >= BREAKPOINTS.L) {
+      currSize = 'L'
+    }
+    let orientation = 'none'
+    if (innerWidth > innerHeight * ORIENTATION_MIN_BREAKPOINT) {
+      orientation = 'landscape'
+    } else if (innerHeight > innerWidth * ORIENTATION_MIN_BREAKPOINT) {
+      orientation = 'portrait'
+    }
+    setSize({
+      width: innerWidth,
+      height: innerHeight,
+      currentSize: currSize,
+      orientation,
+      isS: currSize === 'S',
+      isM: currSize === 'M',
+      isL: currSize === 'L'
+    })
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize, true)
+    handleResize()
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+  return size
+}
+
+export default useSizeScreen
