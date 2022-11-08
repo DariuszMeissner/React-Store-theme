@@ -1,0 +1,21 @@
+@use '../../../../assets/style/utils/brekapoint_mixin' as *;
+
+nav.nav {
+  background: black;
+  display: block;
+  position: relative;
+  z-index: 6;
+  position: sticky;
+
+  & ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  & a {
+    font-weight: 400;
+    color: white;
+    line-height: 2rem;
+  }
+}
