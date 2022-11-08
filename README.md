@@ -1,2 +1,3 @@
 # React-Store-theme
-Store theme, React, typescript and fake Rest Api
+
+Private project to learn create ecommerce website.
