@@ -1,11 +1,13 @@
-import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React, { FC } from 'react'
+import { useDispatch } from 'react-redux'
 import { apiSlice } from './api/feature/apiSlice'
-import Cart from './pages/Cart'
-// import { showTotalProductsPrice } from './api/cart/cartSlice'
-import Account from './pages/Account'
+import Header from './layout/header/Header'
 
-const App = () => {
+type TProps = {
+  children: React.ReactNode
+}
+
+const App: FC<TProps> = ({ children }) => {
   const dispatch = useDispatch()
   const productsCategory = apiSlice.useGetProductsOfCategoryQuery('smartphones')
   const productsAll = apiSlice.useGetAllProductsQuery('')
@@ -24,12 +26,9 @@ const App = () => {
   }
 
   return (
-    <div className="App">
-      <button type="button" onClick={onClickLogin}>
-        login
-      </button>
-      <Cart />
-      <Account />
+    <div>
+      <Header />
+      {children}
     </div>
   )
 }

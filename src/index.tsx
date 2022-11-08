@@ -1,17 +1,20 @@
+import 'bootstrap/dist/css/bootstrap.css'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
-
-import App from './App'
+import { BrowserRouter } from 'react-router-dom'
 import reportWebVitals from './reportWebVitals'
-import store from './api/store'
-import './assets/global.scss'
+import store from './api/feature/store'
+import './assets/style/global.scss'
+import AppRoutes from './routes'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>
 )

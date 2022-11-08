@@ -12,6 +12,7 @@ export interface ICartProduct {
   discountPercentage: number
   stock: number
   quantity: number
+  title: string
 }
 
 const initialState: ICart = {
@@ -30,6 +31,7 @@ const cartSlice = createSlice({
       if (!check) {
         state.products.push({
           id: product.id,
+          title: product.title,
           price: product.price,
           discountPercentage: product.discountPercentage,
           stock: product.stock,

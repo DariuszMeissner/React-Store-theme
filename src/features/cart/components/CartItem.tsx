@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { useDispatch } from 'react-redux'
-import { apiSlice } from '../../api/feature/apiSlice'
-import { cartActions } from '../../api/feature/cart-slice/cartSlice'
+import { apiSlice } from '../../../api/feature/apiSlice'
+import { cartActions } from '../../../api/feature/cart-slice/cartSlice'
 
 interface IProps {
   id: number

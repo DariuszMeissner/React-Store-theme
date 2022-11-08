@@ -1,30 +1,43 @@
-// import React, { FC } from 'react'
-// import { Route, Routes, useLocation } from 'react-router-dom'
-// import { TransitionGroup, CSSTransition } from 'react-transition-group'
-// import App from './app'
-// import routes from './routes.config'
+import React, { FC } from 'react'
+import { Route, Routes, useLocation } from 'react-router-dom'
+import App from './App'
+import OrderPage from './layout/OrderPage'
+import routes, { routesOrder } from './routes.config'
 
-// const AppRoutes: FC = () => {
-//   const location = useLocation()
+const AppRoutes: FC = () => {
+  const location = useLocation()
 
-//   return (
-//     <App>
-//       <TransitionGroup component={null}>
-//         <CSSTransition key={location.key} classNames="slide" timeout={500}>
-//           <Routes location={location}>
-//             {routes.map((route) => (
-//               <Route
-//                 key={route.path}
-//                 path={route.path}
-//                 element={route.element}
-//               />
-//             ))}
-//           </Routes>
-//         </CSSTransition>
-//       </TransitionGroup>
-//     </App>
-//   )
-// }
+  return (
+    <>
+      {location.pathname !== '/checkout' && (
+        <App>
+          <Routes location={location}>
+            {routes.map((route) => (
+              <Route
+                key={route.path}
+                path={route.path}
+                element={route.element}
+              />
+            ))}
+          </Routes>
+        </App>
+      )}
 
-// export default AppRoutes
-export {}
+      {location.pathname === '/checkout' && (
+        <OrderPage>
+          <Routes location={location}>
+            {routesOrder.map((route) => (
+              <Route
+                key={route.path}
+                path={route.path}
+                element={route.element}
+              />
+            ))}
+          </Routes>
+        </OrderPage>
+      )}
+    </>
+  )
+}
+
+export default AppRoutes
