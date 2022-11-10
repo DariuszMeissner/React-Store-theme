@@ -1,17 +1,25 @@
 import React, { CSSProperties, FC } from 'react'
 import { IconType } from 'react-icons/lib'
-import useSizeScreen from '../hooks/useSizeScreen'
 
 interface IProps {
   label: string
   icon: IconType
-  text?: string
   onClick: () => void
+  text?: string
+  disabled?: boolean
+  iconSize?: number
   styleCss?: CSSProperties
 }
 
-const IconButton: FC<IProps> = ({ label, icon, onClick, text, styleCss }) => {
-  const screen = useSizeScreen()
+const IconButton: FC<IProps> = ({
+  label,
+  icon,
+  onClick,
+  text,
+  disabled,
+  iconSize,
+  styleCss
+}) => {
   const Icon = icon
 
   const style = {
@@ -22,14 +30,15 @@ const IconButton: FC<IProps> = ({ label, icon, onClick, text, styleCss }) => {
       border: 'none'
     },
     icon: {
-      height: '25px',
-      width: '25px'
+      height: `${iconSize}px`,
+      width: `${iconSize}px`
     }
   }
 
   return (
     <button
       type="button"
+      disabled={disabled}
       style={{ ...style.button, ...styleCss }}
       data-label={label}
       onClick={onClick}>
@@ -41,6 +50,8 @@ const IconButton: FC<IProps> = ({ label, icon, onClick, text, styleCss }) => {
 
 IconButton.defaultProps = {
   text: '',
+  iconSize: 25,
+  disabled: false,
   styleCss: { color: 'white' }
 }
 

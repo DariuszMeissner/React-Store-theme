@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import React, { CSSProperties, FC } from 'react'
-import useOutClick from '../../hooks/useOutClick'
-import useSizeScreen from '../../hooks/useSizeScreen'
+import useOutClick from '../hooks/useOutClick'
+import useSizeScreen from '../hooks/useSizeScreen'
 
 interface IProps {
   children: React.ReactNode

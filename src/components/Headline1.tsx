@@ -7,17 +7,17 @@ interface IProps {
 
 const Headline1: FC<IProps> = ({ children, color }) => {
   const style = {
-    fontSize: '25px',
+    fontSize: '30px',
     color,
-    marginBottom: '25px',
-    textTransform: 'uppercase'
+    marginTop: '30px',
+    textTransform: 'capitalize'
   } as const
 
   return <h2 style={style}>{children}</h2>
 }
 
 Headline1.defaultProps = {
-  color: 'white'
+  color: 'black'
 }
 
 export default Headline1

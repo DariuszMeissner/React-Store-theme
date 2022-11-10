@@ -1,5 +1,6 @@
 import React, { createRef, Suspense } from 'react'
 
+const ProductPage = React.lazy(() => import('./pages/ProductPage'))
 const Checkout = React.lazy(() => import('./pages/Checkout'))
 const All = React.lazy(() => import('./pages/menu/All'))
 const Men = React.lazy(() => import('./pages/menu/Men'))
@@ -7,6 +8,7 @@ const Shoes = React.lazy(() => import('./pages/menu/Shoes'))
 const Watches = React.lazy(() => import('./pages/menu/Watches'))
 const Home = React.lazy(() => import('./pages/Home'))
 const Women = React.lazy(() => import('./pages/menu/Women'))
+const CategoryPage = React.lazy(() => import('./pages/CategoryPage'))
 
 const routes = [
   {
@@ -65,6 +67,26 @@ const routes = [
     element: (
       <Suspense fallback={<div />}>
         <All />
+      </Suspense>
+    ),
+    nodeRef: createRef()
+  },
+  {
+    path: '/products/:category',
+    name: 'category',
+    element: (
+      <Suspense fallback={<div />}>
+        <CategoryPage />
+      </Suspense>
+    ),
+    nodeRef: createRef()
+  },
+  {
+    path: '/product/:id',
+    name: 'category',
+    element: (
+      <Suspense fallback={<div />}>
+        <ProductPage />
       </Suspense>
     ),
     nodeRef: createRef()

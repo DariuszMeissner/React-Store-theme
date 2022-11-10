@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { useDispatch } from 'react-redux'
 import { apiSlice } from './api/feature/apiSlice'
-import Header from './layout/header/Header'
+import Header from './layout/Header'
 
 type TProps = {
   children: React.ReactNode

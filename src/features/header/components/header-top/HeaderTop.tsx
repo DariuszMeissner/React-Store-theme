@@ -1,16 +1,16 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useState } from 'react'
 import { IoCartOutline } from 'react-icons/io5'
 import { HiSearch } from 'react-icons/hi'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import './HeaderTop.scss'
 import IconButton from '../../../../components/IconButton'
-import Logo from '../../../../components/logo/Logo'
+import Logo from '../../../../components/Logo'
 import useSizeScreen from '../../../../hooks/useSizeScreen'
 import LinkItem from '../../../../components/link-item/LinkItem'
-import Overlay from '../../../../components/overlay/Overlay'
+import Overlay from '../../../../components/Overlay'
 
 const Cart = React.lazy(() => import('../../../cart/components/Cart'))
-const Modal = React.lazy(() => import('../../../../components/modal/Modal'))
+const Modal = React.lazy(() => import('../../../../components/Modal'))
 const AnimationCss = React.lazy(
   () => import('../../../../components/animationCss/AnimationCss')
 )
