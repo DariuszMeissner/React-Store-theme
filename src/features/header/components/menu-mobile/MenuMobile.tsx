@@ -2,9 +2,8 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { FC } from 'react'
 import { IoCloseOutline } from 'react-icons/io5'
-import IconButton from '../../../../components/IconButton'
-import LinkItem from '../../../../components/link-item/LinkItem'
-import useSizeScreen from '../../../../hooks/useSizeScreen'
+import { ButtonIcon, ButtonLink } from '../../../../components'
+import { useSizeScreen } from '../../../../hooks'
 import MENU_ITEM from '../../utils/mainMenu.config'
 
 interface IProps {
@@ -42,7 +41,7 @@ const MenuMobile: FC<IProps> = ({ closeOnClick }) => {
     return MENU_ITEM.map((item) => {
       return (
         <li id={item} style={style.linkItem} key={item} onClick={closeOnClick}>
-          <LinkItem
+          <ButtonLink
             text={item}
             variant="underline"
             path={`/${item}`}
@@ -58,7 +57,7 @@ const MenuMobile: FC<IProps> = ({ closeOnClick }) => {
     <>
       <div style={style.menuTop}>
         <div style={style.menuBreadcrumb}>Menu</div>
-        <IconButton
+        <ButtonIcon
           label="icon-close"
           icon={IoCloseOutline}
           onClick={closeOnClick}

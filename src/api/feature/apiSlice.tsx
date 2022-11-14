@@ -46,7 +46,7 @@ export const apiSlice = createApi({
       })
     }),
 
-    getSingleProduct: builder.query<IProduct, string>({
+    getSingleProduct: builder.query<IProduct, string | undefined>({
       query: (id) => ({
         url: `/products/${id}`
       })

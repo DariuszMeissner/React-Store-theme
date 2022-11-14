@@ -1,0 +1,6 @@
+@use 'sass:map';
+@import '../../assets/style/colors';
+
+.swiper-scrollbar-drag {
+  background: map-get($colors, 'secondary');
+}

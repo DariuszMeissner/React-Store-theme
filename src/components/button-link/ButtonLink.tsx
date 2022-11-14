@@ -1,15 +1,15 @@
 import React, { CSSProperties, FC } from 'react'
 import { NavLink } from 'react-router-dom'
-import './LinkItem.scss'
+import './ButtonLink.scss'
 
 interface IProps {
   text: string
-  variant?: 'underline' | 'white' | 'transparent' | ''
+  variant?: 'underline' | 'white' | 'black' | ''
   path: string
   styleCss?: CSSProperties
 }
 
-const LinkItem: FC<IProps> = ({ text, path, variant, styleCss }) => {
+const ButtonLink: FC<IProps> = ({ text, path, variant, styleCss }) => {
   return (
     <NavLink to={path}>
       <span className={`link link-${variant}`} style={styleCss}>
@@ -19,9 +19,9 @@ const LinkItem: FC<IProps> = ({ text, path, variant, styleCss }) => {
   )
 }
 
-LinkItem.defaultProps = {
+ButtonLink.defaultProps = {
   variant: '',
   styleCss: { color: 'inherite' }
 }
 
-export default LinkItem
+export default ButtonLink

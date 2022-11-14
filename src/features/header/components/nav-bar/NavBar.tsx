@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import LinkItem from '../../../../components/link-item/LinkItem'
+import ButtonLink from '../../../../components/button-link/ButtonLink'
 import MENU_ITEM from '../../utils/mainMenu.config'
 import './NavBar.scss'
 
@@ -7,13 +7,8 @@ const NavBar: FC = () => {
   const generateMenuDesktopItem = () => {
     return MENU_ITEM.map((item) => {
       return (
-        <li>
-          <LinkItem
-            text={item}
-            variant="underline"
-            path={`/${item}`}
-            key={item}
-          />
+        <li key={item}>
+          <ButtonLink text={item} variant="underline" path={`/${item}`} />
         </li>
       )
     })

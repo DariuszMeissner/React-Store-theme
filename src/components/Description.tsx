@@ -21,7 +21,7 @@ const Description: FC<IProps> = ({ children, color, align }) => {
 }
 
 Description.defaultProps = {
-  color: 'black',
+  color: '#181818',
   align: 'left'
 }
 

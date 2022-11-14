@@ -4,7 +4,7 @@ import { IProduct } from '../api/feature/apiSlice'
 interface IProps {
   data: IProduct | undefined
   src: string | undefined
-  href: string | undefined
+  href?: string | undefined
 }
 
 const style = {
@@ -12,18 +12,24 @@ const style = {
   height: '100%'
 }
 
-const ImageLink: FC<IProps> = ({ data, src, href }) => {
+const Image: FC<IProps> = ({ data, src, href }) => {
   return (
     <>
       {!data && <p>...loading</p>}
 
-      {data && (
+      {data && href && (
         <a href={href}>
           <img src={src} alt={data?.title} style={style} />
         </a>
       )}
+
+      {!href && <img src={src} alt={data?.title} style={style} />}
     </>
   )
 }
 
-export default ImageLink
+Image.defaultProps = {
+  href: undefined
+}
+
+export default Image

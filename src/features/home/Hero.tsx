@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { apiSlice } from '../../api/feature/apiSlice'
 import Headline1 from '../../components/Headline1'
 import ImageBackground from '../../components/ImageBackground'
-import LinkItem from '../../components/link-item/LinkItem'
+import ButtonLink from '../../components/button-link/ButtonLink'
 import useSizeScreen from '../../hooks/useSizeScreen'
 
 interface IProps {
@@ -11,8 +11,7 @@ interface IProps {
 
 const Hero: FC<IProps> = ({ productId }) => {
   const screen = useSizeScreen()
-  const { data, isFetching, isSuccess } =
-    apiSlice.useGetSingleProductQuery(productId)
+  const { data, isSuccess } = apiSlice.useGetSingleProductQuery(productId)
 
   const style = {
     hero: {
@@ -37,7 +36,7 @@ const Hero: FC<IProps> = ({ productId }) => {
         <ImageBackground pathImage={data?.thumbnail}>
           <div style={style.mediaTitle}>
             <Headline1 color="white">{isSuccess && data.category}</Headline1>
-            <LinkItem
+            <ButtonLink
               text="Discover"
               path={`/products/${data.category}`}
               variant="white"

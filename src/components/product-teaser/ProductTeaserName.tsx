@@ -4,8 +4,15 @@ interface IProps {
   name: string | undefined
 }
 
+const style = {
+  name: {
+    lineHeight: '22px',
+    marginTop: '10px'
+  }
+}
+
 const ProductTeaserName: FC<IProps> = ({ name }) => {
-  return <div>{name}</div>
+  return <div style={style.name}>{name}</div>
 }
 
 export default ProductTeaserName

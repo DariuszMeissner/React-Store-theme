@@ -6,10 +6,12 @@ import SliderNavigation from './SliderNavigation'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
+import './CustomCss.scss'
 
 interface IProps {
   spaceBetween: number
   slidesPerView: number
+  navigation?: boolean
   configuration?: 'scrollbar' | 'pagination'
   children: React.ReactNode
 }
@@ -17,11 +19,15 @@ interface IProps {
 const Slider: FC<IProps> = ({
   spaceBetween,
   slidesPerView,
+  navigation,
   children,
   configuration
 }) => {
   const config = {
-    scrollbar: { enabled: configuration === 'scrollbar', draggable: true },
+    scrollbar: {
+      enabled: configuration === 'scrollbar',
+      draggable: true
+    },
     pagination: {
       enabled: configuration === 'pagination',
       clickable: true,
@@ -41,13 +47,14 @@ const Slider: FC<IProps> = ({
       {React.Children.map(children, (child) => (
         <SwiperSlide>{child}</SwiperSlide>
       ))}
-      <SliderNavigation />
+      {navigation ? <SliderNavigation /> : undefined}
     </Swiper>
   )
 }
 
 Slider.defaultProps = {
-  configuration: 'pagination'
+  configuration: 'pagination',
+  navigation: true
 }
 
 export default Slider

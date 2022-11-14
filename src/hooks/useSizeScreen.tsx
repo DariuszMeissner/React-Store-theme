@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import BREAKPOINTS from '../util/brekpoints'
 
 interface ISize {
@@ -24,7 +24,7 @@ const useSizeScreen = () => {
     isL: false
   })
 
-  function handleResize() {
+  const handleResize = useCallback(() => {
     const { innerWidth, innerHeight } = window
 
     let currSize = 'S'
@@ -50,7 +50,7 @@ const useSizeScreen = () => {
       isM: currSize === 'M',
       isL: currSize === 'L'
     })
-  }
+  }, [size])
 
   useEffect(() => {
     window.addEventListener('resize', handleResize, true)

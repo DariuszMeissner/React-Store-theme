@@ -3,15 +3,15 @@ import { IconType } from 'react-icons/lib'
 
 interface IProps {
   label: string
-  icon: IconType
   onClick: () => void
+  icon: IconType
   text?: string
   disabled?: boolean
   iconSize?: number
   styleCss?: CSSProperties
 }
 
-const IconButton: FC<IProps> = ({
+const ButtonIcon: FC<IProps> = ({
   label,
   icon,
   onClick,
@@ -48,11 +48,11 @@ const IconButton: FC<IProps> = ({
   )
 }
 
-IconButton.defaultProps = {
+ButtonIcon.defaultProps = {
   text: '',
   iconSize: 25,
   disabled: false,
   styleCss: { color: 'white' }
 }
 
-export default IconButton
+export default ButtonIcon

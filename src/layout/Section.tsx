@@ -1,12 +1,13 @@
-import React, { FC } from 'react'
+import React, { CSSProperties, FC } from 'react'
 import useSizeScreen from '../hooks/useSizeScreen'
 
 interface IProps {
   children: React.ReactNode
   type?: 'fullWidth' | 'wrap'
+  styleCss?: CSSProperties
 }
 
-const Section: FC<IProps> = ({ children, type }) => {
+const Section: FC<IProps> = ({ children, type, styleCss }) => {
   const screen = useSizeScreen()
 
   const width =
@@ -20,11 +21,12 @@ const Section: FC<IProps> = ({ children, type }) => {
     margin: (screen.isS && '64px 0') || screen.isM ? '56px 0' : '96px 0'
   } as const
 
-  return <div style={style}>{children}</div>
+  return <div style={{ ...style, ...styleCss }}>{children}</div>
 }
 
 Section.defaultProps = {
-  type: 'wrap'
+  type: 'wrap',
+  styleCss: {}
 }
 
 export default Section

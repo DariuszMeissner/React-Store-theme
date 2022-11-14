@@ -46,7 +46,7 @@
     }
   }
 
-  &-transparent {
+  &-black {
     width: 140px;
     text-transform: uppercase;
     padding: 16px 25px;
@@ -59,7 +59,7 @@
     color: map-get($colors, 'white');
     background-size: 200% 100%;
     background-position: 100% 0;
-    background-color: transparent;
+    background-color: black;
     background-image: linear-gradient(
       to right,
       #fff 0%,
