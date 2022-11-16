@@ -6,7 +6,8 @@ interface IProps {
 
 const style = {
   codeContainer: {
-    marginTop: '10px'
+    marginTop: '40px',
+    fontWeight: '300'
   }
 } as const
 

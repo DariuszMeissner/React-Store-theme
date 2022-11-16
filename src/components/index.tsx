@@ -1,6 +1,6 @@
 import Accordion from './accordion/Accordion'
 import AnimationCss from './animationCss/AnimationCss'
-import ButtonLink from './button-link/ButtonLink'
+import Button from './button/Button'
 import ProductTeaser from './product-teaser/ProductTeaser'
 import Slider from './slider/Slider'
 import BackToTop from './BackToTop'
@@ -9,8 +9,7 @@ import Description from './Description'
 import Dropdown from './DropDown'
 import Grid from './Grid'
 import Headline1 from './Headline1'
-import ButtonIcon from './ButtonIcon'
-import IconLink from './IconLink'
+import Headline2 from './Headline2'
 import Image from './Image'
 import ImageBackground from './ImageBackground'
 import Logo from './Logo'
@@ -21,7 +20,7 @@ import Overlay from './Overlay'
 export {
   Accordion,
   AnimationCss,
-  ButtonLink,
+  Button,
   ProductTeaser,
   Slider,
   BackToTop,
@@ -30,8 +29,7 @@ export {
   Dropdown,
   Grid,
   Headline1,
-  ButtonIcon,
-  IconLink,
+  Headline2,
   Image,
   ImageBackground,
   Logo,

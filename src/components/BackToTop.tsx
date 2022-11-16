@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { AiOutlineArrowUp } from 'react-icons/ai'
-import ButtonIcon from './ButtonIcon'
+import Button from './button/Button'
 
 const BackToTop: FC = () => {
   const scrollToTop = () => {
@@ -11,7 +11,7 @@ const BackToTop: FC = () => {
   }
 
   return (
-    <ButtonIcon
+    <Button
       label="icon-back-to-top"
       icon={AiOutlineArrowUp}
       onClick={scrollToTop}

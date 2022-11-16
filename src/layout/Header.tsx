@@ -10,7 +10,7 @@ const Header: FC = () => {
   return (
     <header>
       <HeaderTop />
-      {screen.isL && <NavBar />}
+      {screen.isX && <NavBar />}
     </header>
   )
 }

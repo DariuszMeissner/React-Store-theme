@@ -12,7 +12,7 @@ const Description: FC<IProps> = ({ children, color, align }) => {
 
   const style = {
     color,
-    marginTop: !screen.isL ? '18px' : '30px',
+    marginTop: !screen.isX ? '18px' : '30px',
     lineHeight: '22px',
     textAlign: align
   } as const

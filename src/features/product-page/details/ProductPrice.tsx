@@ -1,13 +1,14 @@
 import React, { FC } from 'react'
 
 interface IProps {
-  price: number | undefined
+  price: number | string
   currency: '€' | '$' | '£' | 'zl'
 }
 
 const style = {
   priceContainer: {
-    marginTop: '10px'
+    fontSize: '22px',
+    marginTop: '30px'
   }
 } as const
 

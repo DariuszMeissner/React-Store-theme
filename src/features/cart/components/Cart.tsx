@@ -5,7 +5,6 @@ import {
   cartActions,
   selectAllProductsCart
 } from '../../../api/feature/cart-slice/cartSlice'
-import ButtonIcon from '../../../components/ButtonIcon'
 import useSizeScreen from '../../../hooks/useSizeScreen'
 
 interface IProps {
@@ -46,12 +45,6 @@ const Cart: FC<IProps> = ({ closeOnClick }) => {
     <>
       <div style={style.cartTop}>
         <div style={style.menuBreadcrumb}>Menu</div>
-        <ButtonIcon
-          label="icon-close"
-          icon={IoCloseOutline}
-          onClick={closeOnClick}
-          styleCss={style.iconButtonClose}
-        />
       </div>
       <ul>{cartList.length === 0 ? <p>no item in cart</p> : cartList}</ul>
     </>

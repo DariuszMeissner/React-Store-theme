@@ -4,6 +4,7 @@ import useOutClick from '../hooks/useOutClick'
 import useSizeScreen from '../hooks/useSizeScreen'
 
 interface IProps {
+  id: number | null
   children: React.ReactNode
   closeOnClick: () => void
   styleCss?: CSSProperties
@@ -11,6 +12,7 @@ interface IProps {
 }
 
 const Modal: FC<IProps> = ({
+  id,
   children,
   closeOnClick,
   styleCss,
@@ -28,7 +30,7 @@ const Modal: FC<IProps> = ({
       background: 'white',
       width: screen.isS ? '100vw' : '400px',
       height: '100vh',
-      marginTop: screen.isL ? '40px' : undefined,
+      marginTop: screen.isX ? '40px' : undefined,
       padding: '30px 20px',
       zIndex: 5,
       overflowY: 'hidden',
@@ -37,7 +39,11 @@ const Modal: FC<IProps> = ({
   } as const
 
   return (
-    <div className="modal__wrap" style={style.modal} ref={modalRef}>
+    <div
+      className="modal__wrap"
+      id={`modal-${id}`}
+      style={style.modal}
+      ref={modalRef}>
       <div className="modal__content">{children}</div>
     </div>
   )

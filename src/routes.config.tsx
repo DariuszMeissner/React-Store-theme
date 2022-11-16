@@ -1,6 +1,6 @@
 import React, { createRef, Suspense } from 'react'
 
-const ProductPage = React.lazy(() => import('./pages/product-page/ProductPage'))
+const ProductPage = React.lazy(() => import('./pages/ProductPage'))
 const Checkout = React.lazy(() => import('./pages/Checkout'))
 const All = React.lazy(() => import('./pages/menu/All'))
 const Men = React.lazy(() => import('./pages/menu/Men'))

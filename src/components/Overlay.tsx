@@ -3,7 +3,7 @@ import React, { FC } from 'react'
 const style = {
   overlay: {
     position: 'fixed',
-    zIndex: 1,
+    zIndex: 2,
     top: 0,
     left: 0,
     right: 0,

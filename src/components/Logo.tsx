@@ -1,26 +1,28 @@
 import React, { FC } from 'react'
 import { Link } from 'react-router-dom'
 
-interface IProps {
-  width?: string
-}
-
-const Logo: FC<IProps> = ({ width }) => {
+const Logo: FC = () => {
   const style = {
-    img: {
-      height: 'auto',
-      width
+    logo: {
+      color: 'white',
+      fontSize: '18px'
+    },
+    simplePart: {
+      textTransform: 'uppercase'
+    },
+    shopPart: {
+      letterSpacing: '1px'
     }
-  }
+  } as const
 
   return (
     <Link to="/">
-      <img src="/" alt="logo" style={style.img} />
+      <div style={style.logo}>
+        <p style={style.simplePart}>Simple</p>
+        <p style={style.shopPart}>Shop</p>
+      </div>
     </Link>
   )
-}
-Logo.defaultProps = {
-  width: '100px'
 }
 
 export default Logo

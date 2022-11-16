@@ -1,12 +1,6 @@
 import React, { FC } from 'react'
 import { apiSlice } from '../../api/feature/apiSlice'
-import {
-  Description,
-  Grid,
-  Headline1,
-  Image,
-  ButtonLink
-} from '../../components'
+import { Description, Grid, Headline1, Image, Button } from '../../components'
 import Column from '../../layout/Column'
 
 interface IProps {
@@ -26,26 +20,28 @@ const style = {
 } as const
 
 const ProductColumn: FC<IProps> = ({ productId }) => {
-  const { data } = apiSlice.useGetSingleProductQuery(productId)
+  const { data, isSuccess } = apiSlice.useGetSingleProductQuery(productId)
 
   return (
     <Grid
-      rowGap={[0, 0, 0]}
-      columnGap={[0, 0, 0]}
-      gridColumns={[1, 2, 2]}
+      rowGap={[0, 0, 0, 0]}
+      columnGap={[0, 0, 0, 0]}
+      gridColumns={[1, 2, 2, 2]}
       columnEqual>
-      <Image data={data} src={data?.thumbnail} href={`/product/${data?.id}`} />
+      {isSuccess && (
+        <Image
+          data={data}
+          src={data?.thumbnail}
+          href={`/product/${data?.id}`}
+        />
+      )}
       <Column>
         <div style={style.mediaContent}>
           <Headline1>{data?.title || 'title'}</Headline1>
           <Description align="center">
             {data?.description || 'description'}
           </Description>
-          <ButtonLink
-            text="Buy"
-            path={`/product/${data?.id}`}
-            variant="white"
-          />
+          <Button text="Buy" path={`/product/${data?.id}`} variant="white" />
         </div>
       </Column>
     </Grid>

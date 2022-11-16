@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { apiSlice } from '../../api/feature/apiSlice'
 import Headline1 from '../../components/Headline1'
 import ImageBackground from '../../components/ImageBackground'
-import ButtonLink from '../../components/button-link/ButtonLink'
+import Button from '../../components/button/Button'
 import useSizeScreen from '../../hooks/useSizeScreen'
 
 interface IProps {
@@ -36,7 +36,7 @@ const Hero: FC<IProps> = ({ productId }) => {
         <ImageBackground pathImage={data?.thumbnail}>
           <div style={style.mediaTitle}>
             <Headline1 color="white">{isSuccess && data.category}</Headline1>
-            <ButtonLink
+            <Button
               text="Discover"
               path={`/products/${data.category}`}
               variant="white"

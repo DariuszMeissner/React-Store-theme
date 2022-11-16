@@ -8,7 +8,7 @@ const Footer: FC = () => {
   const width =
     (screen.isS && '32px 16px') ||
     (screen.isM && '32px') ||
-    (screen.isL && '32px 96px') ||
+    ((screen.isX || screen.isL) && '32px 96px') ||
     undefined
 
   const style = {

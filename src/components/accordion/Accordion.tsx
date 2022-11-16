@@ -1,27 +1,30 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import React, { FC, useState } from 'react'
-import { IProduct } from '../../api/feature/apiSlice'
+import React, { CSSProperties, FC, useCallback, useState } from 'react'
 import AccordionItem from './AccordionItem'
 
 interface IProps {
   items: IItem[]
+  styleCss?: CSSProperties
 }
 
 interface IItem {
-  title: string | undefined
-  content: string | undefined
+  title: string
+  content: string
 }
 
-const Accordion: FC<IProps> = ({ items }) => {
+const Accordion: FC<IProps> = ({ items, styleCss }) => {
   const [clicked, setClicked] = useState<number>(0)
 
-  const handleToggle = (index: number) => {
-    if (index === clicked) {
-      setClicked(0)
-    } else {
-      setClicked(index)
-    }
-  }
+  const handleToggle = useCallback(
+    (index: number) => {
+      if (index === clicked) {
+        setClicked(0)
+      } else {
+        setClicked(index)
+      }
+    },
+    [clicked]
+  )
 
   const accordionItems = items.map((el, index) => (
     <AccordionItem
@@ -34,7 +37,7 @@ const Accordion: FC<IProps> = ({ items }) => {
   ))
 
   return (
-    <div className="accordion" style={style.accordion}>
+    <div className="accordion" style={{ ...style.accordion, ...styleCss }}>
       {accordionItems}
     </div>
   )
@@ -45,6 +48,10 @@ const style = {
     width: '100%',
     height: '100%'
   }
+}
+
+Accordion.defaultProps = {
+  styleCss: {}
 }
 
 export default Accordion

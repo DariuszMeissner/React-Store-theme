@@ -2,7 +2,7 @@ import React, { FC, useCallback, useEffect, useState } from 'react'
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
 import { useSwiper } from 'swiper/react'
 import useSizeScreen from '../../hooks/useSizeScreen'
-import ButtonIcon from '../ButtonIcon'
+import Button from '../button/Button'
 
 const SliderNavigation: FC = () => {
   const swiper = useSwiper()
@@ -39,7 +39,7 @@ const SliderNavigation: FC = () => {
 
   return (
     <div style={style.buttons}>
-      <ButtonIcon
+      <Button
         disabled={disabledPrev}
         label="prevButton"
         icon={IoIosArrowBack}
@@ -48,7 +48,7 @@ const SliderNavigation: FC = () => {
         styleCss={{ color: disabledPrev ? 'lightgray' : 'black' }}
       />
 
-      <ButtonIcon
+      <Button
         disabled={disabledNext}
         label="nextButton"
         icon={IoIosArrowForward}

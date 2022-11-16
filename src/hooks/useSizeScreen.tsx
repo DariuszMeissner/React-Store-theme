@@ -9,6 +9,7 @@ interface ISize {
   isS: boolean
   isM: boolean
   isL: boolean
+  isX: boolean
 }
 
 const ORIENTATION_MIN_BREAKPOINT = 1.2
@@ -21,7 +22,8 @@ const useSizeScreen = () => {
     currentSize: 'none',
     isS: false,
     isM: false,
-    isL: false
+    isL: false,
+    isX: false
   })
 
   const handleResize = useCallback(() => {
@@ -32,8 +34,10 @@ const useSizeScreen = () => {
       currSize = 'S'
     } else if (innerWidth >= BREAKPOINTS.M && innerWidth < BREAKPOINTS.L) {
       currSize = 'M'
-    } else if (innerWidth >= BREAKPOINTS.L) {
+    } else if (innerWidth >= BREAKPOINTS.L && innerWidth < BREAKPOINTS.X) {
       currSize = 'L'
+    } else if (innerWidth >= BREAKPOINTS.X) {
+      currSize = 'X'
     }
     let orientation = 'none'
     if (innerWidth > innerHeight * ORIENTATION_MIN_BREAKPOINT) {
@@ -48,7 +52,8 @@ const useSizeScreen = () => {
       orientation,
       isS: currSize === 'S',
       isM: currSize === 'M',
-      isL: currSize === 'L'
+      isL: currSize === 'L',
+      isX: currSize === 'X'
     })
   }, [size])
 

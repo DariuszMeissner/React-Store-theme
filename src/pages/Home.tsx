@@ -12,7 +12,7 @@ const Slider = React.lazy(() => import('../components/slider/Slider'))
 const Home: FC = () => {
   const screen = useSizeScreen()
   const slidesOnMS = screen.isS ? 2 : 3
-  const slidesPerView = screen.isL ? 4 : slidesOnMS
+  const slidesPerView = screen.isX ? 4 : slidesOnMS
 
   return (
     <div>

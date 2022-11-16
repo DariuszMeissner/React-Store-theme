@@ -13,7 +13,8 @@ const Section: FC<IProps> = ({ children, type, styleCss }) => {
   const width =
     (screen.isS && '0 16px') ||
     (screen.isM && '0 32px') ||
-    (screen.isL && '0 96px') ||
+    (screen.isL && '0 32px') ||
+    (screen.isX && '0 96px') ||
     undefined
 
   const style = {

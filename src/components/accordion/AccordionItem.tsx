@@ -14,24 +14,37 @@ const AccordionItem: FC<IProps> = ({ active, onToggle, title, content }) => {
   const style = {
     open: {
       height: contentEl?.current?.scrollHeight,
-      transition: 'height 200ms ease-in'
+      marginBottom: '16px',
+      fontWeight: '300',
+      lineHeight: '18px'
     },
     close: {
       height: '0px',
       overflow: 'hidden',
-      transition: 'height 200ms ease-in'
+      marginBottom: '10px'
     },
-    alignBetween: {
+    itemTitle: {
+      width: '100%',
       display: 'flex',
-      justifyContent: 'space-between'
+      justifyContent: 'space-between',
+      marginBottom: '16px',
+      textTransform: 'uppercase'
+    },
+    iconSize: {
+      height: '20px',
+      width: '20px'
     }
-  }
+  } as const
 
   return (
-    <div className="accordion-item">
-      <button type="button" onClick={onToggle} style={style.alignBetween}>
+    <div className="accordion-itemTitle">
+      <button type="button" onClick={onToggle} style={style.itemTitle}>
         <span>{title}</span>
-        {active ? <AiOutlineMinus /> : <AiOutlinePlus />}
+        {active ? (
+          <AiOutlineMinus style={style.iconSize} />
+        ) : (
+          <AiOutlinePlus style={style.iconSize} />
+        )}
       </button>
       <div ref={contentEl} style={active ? style.open : style.close}>
         <p>{content}</p>

@@ -26,7 +26,8 @@ const Slider: FC<IProps> = ({
   const config = {
     scrollbar: {
       enabled: configuration === 'scrollbar',
-      draggable: true
+      draggable: true,
+      el: '.swiper-scrollbar'
     },
     pagination: {
       enabled: configuration === 'pagination',
@@ -48,6 +49,7 @@ const Slider: FC<IProps> = ({
         <SwiperSlide>{child}</SwiperSlide>
       ))}
       {navigation ? <SliderNavigation /> : undefined}
+      <div className="swiper-scrollbar" />
     </Swiper>
   )
 }

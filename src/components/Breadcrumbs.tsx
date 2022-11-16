@@ -1,18 +1,24 @@
 import React, { FC } from 'react'
-import { IProduct } from '../api/feature/apiSlice'
-import ButtonLink from './button-link/ButtonLink'
+import Button from './button/Button'
 
 interface IProps {
-  data: IProduct | undefined
+  category: string
 }
 
-const Breadcrumbs: FC<IProps> = ({ data }) => {
+const Breadcrumbs: FC<IProps> = ({ category }) => {
   return (
     <div className="breadcrumbs">
-      <ButtonLink
-        text={`/${data?.category}`}
-        path={`/products/${data?.category}`}
-        styleCss={{ color: 'black', marginLeft: '0' }}
+      <Button
+        text={`/${category}`}
+        path={`/products/${category}`}
+        styleCss={{
+          color: 'black',
+          marginLeft: '0',
+          marginBottom: '20px',
+          fontWeight: '300',
+          fontSize: '12px',
+          textTransform: 'capitalize'
+        }}
       />
     </div>
   )

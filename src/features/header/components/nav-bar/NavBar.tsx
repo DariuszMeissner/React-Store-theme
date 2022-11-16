@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import ButtonLink from '../../../../components/button-link/ButtonLink'
+import Button from '../../../../components/button/Button'
 import MENU_ITEM from '../../utils/mainMenu.config'
 import './NavBar.scss'
 
@@ -8,7 +8,7 @@ const NavBar: FC = () => {
     return MENU_ITEM.map((item) => {
       return (
         <li key={item}>
-          <ButtonLink text={item} variant="underline" path={`/${item}`} />
+          <Button text={item} variant="underline" path={`/${item}`} />
         </li>
       )
     })

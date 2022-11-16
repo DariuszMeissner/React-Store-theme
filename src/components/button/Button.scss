@@ -62,8 +62,8 @@
     background-color: black;
     background-image: linear-gradient(
       to right,
-      #fff 0%,
-      #fff 50%,
+      #da291c 0%,
+      #da291c 50%,
       transparent 50%,
       transparent 100%
     );
@@ -77,7 +77,6 @@
     transition: color 0.25s, border-color 0.25s, background-position 0.25s;
 
     &:hover {
-      color: #000;
       border-color: #fff;
     }
   }

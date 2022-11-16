@@ -2,9 +2,9 @@ import React, { FC } from 'react'
 import useSizeScreen from '../hooks/useSizeScreen'
 
 interface IProps {
-  rowGap: [number, number, number]
-  columnGap: [number, number, number]
-  gridColumns: [number, number, number]
+  rowGap: [number, number, number, number]
+  columnGap: [number, number, number, number]
+  gridColumns: [number, number, number, number]
   columnEqual?: boolean
   children: React.ReactNode
 }
@@ -17,30 +17,35 @@ const Grid: FC<IProps> = ({
   children
 }) => {
   const screen = useSizeScreen()
+  const [gridColumnS, gridColumnM, gridColumnL, gridColumnX] = gridColumns
+  const [rowGapS, rowGapM, rowGapL, rowGapX] = rowGap
+  const [columnGapS, columnGapM, columnGapL, columnGapX] = columnGap
 
   const setColumnWidth = `${columnEqual ? '1fr ' : 'auto '}`
 
   const gridTemplate =
-    (screen.isS && `${setColumnWidth}`.repeat(gridColumns[0])) ||
-    (screen.isM && `${setColumnWidth}`.repeat(gridColumns[1])) ||
-    (screen.isL && `${setColumnWidth}`.repeat(gridColumns[2]))
+    (screen.isS && `${setColumnWidth}`.repeat(gridColumnS)) ||
+    (screen.isM && `${setColumnWidth}`.repeat(gridColumnM)) ||
+    (screen.isL && `${setColumnWidth}`.repeat(gridColumnL)) ||
+    (screen.isX && `${setColumnWidth}`.repeat(gridColumnX))
 
   const setRowGap =
-    (screen.isS && rowGap[0]) ||
-    (screen.isM && rowGap[1]) ||
-    (screen.isL && rowGap[2])
+    (screen.isS && rowGapS) ||
+    (screen.isM && rowGapM) ||
+    (screen.isL && rowGapL) ||
+    (screen.isX && rowGapX)
 
   const setColumnGap =
-    (screen.isS && columnGap[0]) ||
-    (screen.isM && columnGap[1]) ||
-    (screen.isL && columnGap[2])
+    (screen.isS && columnGapS) ||
+    (screen.isM && columnGapM) ||
+    (screen.isL && columnGapL) ||
+    (screen.isX && columnGapX)
 
   const style = {
     grid: {
       display: 'grid',
       gridTemplateColumns: gridTemplate || undefined,
-      gridGap: `${setRowGap}px ${setColumnGap}px`,
-      marginTop: '25px'
+      gridGap: `${setRowGap}px ${setColumnGap}px`
     }
   } as const
 
@@ -52,7 +57,7 @@ const Grid: FC<IProps> = ({
 }
 
 Grid.defaultProps = {
-  columnEqual: false
+  columnEqual: true
 }
 
 export default Grid

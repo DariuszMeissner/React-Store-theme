@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { apiSlice } from '../../api/feature/apiSlice'
-import { Grid, Headline1, Image, ButtonLink } from '../../components'
+import { Grid, Headline1, Image, Button } from '../../components'
 import { useSizeScreen } from '../../hooks'
 
 interface IProps {
@@ -23,17 +23,20 @@ const TwoColumnsProducts: FC<IProps> = ({ productIdOne, productIdTwo }) => {
 
   return (
     <Grid
-      rowGap={[10, 10, 10]}
-      columnGap={[50, 50, 50]}
-      gridColumns={[1, 2, 2]}>
+      rowGap={[10, 10, 10, 10]}
+      columnGap={[50, 50, 50, 50]}
+      gridColumns={[1, 2, 2, 2]}>
       <div style={style.cartColumn}>
-        <Image
-          src={productOne.data?.images[2]}
-          data={productOne.data}
-          href={`/products/${productOne.data?.category}`}
-        />
+        {productOne.isSuccess && (
+          <Image
+            src={productOne.data?.images[2]}
+            data={productOne.data}
+            href={`/products/${productOne.data?.category}`}
+          />
+        )}
+
         <Headline1>{productOne.data?.category || 'category'}</Headline1>
-        <ButtonLink
+        <Button
           text="Shop"
           path={`/products/${productOne.data?.category}`}
           variant="white"
@@ -45,11 +48,15 @@ const TwoColumnsProducts: FC<IProps> = ({ productIdOne, productIdTwo }) => {
           <Image
             src={productTwo.data?.images[0]}
             data={productTwo.data}
-            href="/"
+            href={`/products/${productTwo.data?.category}`}
           />
         )}
         <Headline1>{productTwo.data?.category || 'category'}</Headline1>
-        <ButtonLink text="Shop" path="/" variant="white" />
+        <Button
+          text="Shop"
+          path={`/products/${productOne.data?.category}`}
+          variant="white"
+        />
       </div>
     </Grid>
   )

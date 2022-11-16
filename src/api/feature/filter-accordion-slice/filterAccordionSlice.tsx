@@ -9,8 +9,8 @@ const initialState: IInitialState = {
   registered: null
 }
 
-const modalSlice = createSlice({
-  name: 'modal',
+const filterAccordionSlice = createSlice({
+  name: 'filterAccordionSlice',
   initialState,
   reducers: {
     register: (state, actions: { payload: number | null }) => {
@@ -20,6 +20,6 @@ const modalSlice = createSlice({
   }
 })
 
-export const modalActions = modalSlice.actions
+export const filterAccordionSliceActions = filterAccordionSlice.actions
 
-export default modalSlice.reducer
+export default filterAccordionSlice.reducer

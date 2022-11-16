@@ -8,7 +8,7 @@ interface IProps {
 const Headline1: FC<IProps> = ({ children, color }) => {
   const style = {
     fontSize: '30px',
-    lineHeight: '50px',
+    lineHeight: '40px',
     color,
     marginTop: '30px',
     textTransform: 'capitalize'

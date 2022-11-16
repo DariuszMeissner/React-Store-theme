@@ -8,8 +8,7 @@ import './HeaderTop.scss'
 import { useSizeScreen } from '../../../../hooks'
 import {
   AnimationCss,
-  ButtonIcon,
-  ButtonLink,
+  Button,
   Logo,
   Modal,
   Overlay
@@ -18,67 +17,68 @@ import { modalActions } from '../../../../api/feature/modal-slice/modalSlice'
 import MenuMobile from '../menu-mobile/MenuMobile'
 import Cart from '../../../cart/components/Cart'
 import { RootState } from '../../../../api/feature/store'
+import MODALS from '../../../../util/modalsID'
 
 const HeaderTop: FC = () => {
   const dispatch = useDispatch()
   const screen = useSizeScreen()
-  const isMountedMenuMobile = useSelector(
-    (state: RootState) => state.modal.menuModal.isOpen
-  )
-  const isMountedCart = useSelector(
-    (state: RootState) => state.modal.cartModal.isOpen
-  )
+  const active = useSelector((state: RootState) => state.modal.registered)
 
-  const showMenuOnClick = () => dispatch(modalActions.openMenuModal())
-
-  const closeMenuOnClick = () => dispatch(modalActions.closeMenuModal())
-
-  const showCartOnClick = () => dispatch(modalActions.openCartModal())
-
-  const closeCartOnClick = () => dispatch(modalActions.closeCartModal())
+  const registerModal = (id: number | null) => {
+    if (active === id) {
+      dispatch(modalActions.register(null))
+    } else {
+      dispatch(modalActions.register(id))
+    }
+  }
 
   return (
     <>
       <div className="header-top wrap">
         <div style={style.w50}>
-          {screen.isL ? (
-            <ButtonLink text="Contact us" path="/" />
+          {screen.isX ? (
+            <Button text="Contact us" path="/" />
           ) : (
-            <ButtonIcon
+            <Button
               label="hamburger-menu"
-              onClick={showMenuOnClick}
+              onClick={() => registerModal(MODALS.MENU_ID)}
               icon={AiOutlineMenu}
             />
           )}
         </div>
 
         <div className="header-logo">
-          <Logo width="100px" />
+          <Logo />
         </div>
         <div style={{ ...style.w50, ...style.alignEnd }}>
-          <ButtonIcon label="search" onClick={() => {}} icon={HiSearch} />
-          <ButtonIcon
+          <Button label="search" onClick={() => {}} icon={HiSearch} />
+          <Button
             label="cart"
-            onClick={showCartOnClick}
+            onClick={() => registerModal(MODALS.CART_ID)}
             icon={IoCartOutline}
           />
         </div>
       </div>
 
-      <AnimationCss isMounted={isMountedMenuMobile} variant="fadeLeft">
-        <Modal closeOnClick={closeMenuOnClick} modalPosition="left">
-          <MenuMobile closeOnClick={closeMenuOnClick} />
+      <AnimationCss isMounted={active === MODALS.MENU_ID} variant="fadeLeft">
+        <Modal
+          id={MODALS.MENU_ID}
+          closeOnClick={() => registerModal(null)}
+          modalPosition="left">
+          <MenuMobile closeOnClick={() => registerModal(null)} />
         </Modal>
       </AnimationCss>
 
-      <AnimationCss isMounted={isMountedCart} variant="fadeRight">
-        <Modal closeOnClick={closeCartOnClick} modalPosition="right">
-          <Cart closeOnClick={closeCartOnClick} />
+      <AnimationCss isMounted={active === MODALS.CART_ID} variant="fadeRight">
+        <Modal
+          id={MODALS.CART_ID}
+          closeOnClick={() => registerModal(null)}
+          modalPosition="right">
+          <Cart closeOnClick={() => registerModal(null)} />
         </Modal>
       </AnimationCss>
 
-      {isMountedMenuMobile ? <Overlay /> : undefined}
-      {isMountedCart ? <Overlay /> : undefined}
+      {active ? <Overlay /> : undefined}
     </>
   )
 }

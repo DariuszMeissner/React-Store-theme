@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { IProduct } from '../api/feature/apiSlice'
 
 interface IProps {
-  data: IProduct | undefined
+  data: IProduct
   src: string | undefined
   href?: string | undefined
 }
@@ -13,18 +13,22 @@ const style = {
 }
 
 const Image: FC<IProps> = ({ data, src, href }) => {
+  const noImage = !data && <p>...loading</p>
+  const imageWithLInk = data && href && (
+    <a href={href}>
+      <img src={src} alt={data?.title} style={style} />
+    </a>
+  )
+  const imageWithoutLInk = !href && (
+    <img src={src} alt={data?.title} style={style} />
+  )
+
   return (
-    <>
-      {!data && <p>...loading</p>}
-
-      {data && href && (
-        <a href={href}>
-          <img src={src} alt={data?.title} style={style} />
-        </a>
-      )}
-
-      {!href && <img src={src} alt={data?.title} style={style} />}
-    </>
+    <div>
+      {noImage}
+      {imageWithLInk}
+      {imageWithoutLInk}
+    </div>
   )
 }
 

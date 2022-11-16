@@ -4,13 +4,17 @@
 @import './utils/brekapoint_mixin';
 @import './utils/wrap';
 
+* {
+}
 body {
-  margin: 0;
-  padding: 0;
   font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 14px;
   overflow-x: hidden;
-  clear: #181818;
+  color: #181818;
+}
+
+button {
+  font-family: 'Poppins', sans-serif;
 }
