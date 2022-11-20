@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import BREAKPOINTS from '../util/brekpoints'
 
 interface ISize {
@@ -9,11 +9,12 @@ interface ISize {
   isS: boolean
   isM: boolean
   isL: boolean
+  isX: boolean
 }
 
 const ORIENTATION_MIN_BREAKPOINT = 1.2
 
-const useSizeScreen = () => {
+const useSizeScreen = (): ISize => {
   const [size, setSize] = useState<ISize>({
     width: 0,
     height: 0,
@@ -21,10 +22,11 @@ const useSizeScreen = () => {
     currentSize: 'none',
     isS: false,
     isM: false,
-    isL: false
+    isL: false,
+    isX: false
   })
 
-  function handleResize() {
+  const handleResize = useCallback(() => {
     const { innerWidth, innerHeight } = window
 
     let currSize = 'S'
@@ -32,8 +34,10 @@ const useSizeScreen = () => {
       currSize = 'S'
     } else if (innerWidth >= BREAKPOINTS.M && innerWidth < BREAKPOINTS.L) {
       currSize = 'M'
-    } else if (innerWidth >= BREAKPOINTS.L) {
+    } else if (innerWidth >= BREAKPOINTS.L && innerWidth < BREAKPOINTS.X) {
       currSize = 'L'
+    } else if (innerWidth >= BREAKPOINTS.X) {
+      currSize = 'X'
     }
     let orientation = 'none'
     if (innerWidth > innerHeight * ORIENTATION_MIN_BREAKPOINT) {
@@ -48,9 +52,10 @@ const useSizeScreen = () => {
       orientation,
       isS: currSize === 'S',
       isM: currSize === 'M',
-      isL: currSize === 'L'
+      isL: currSize === 'L',
+      isX: currSize === 'X'
     })
-  }
+  }, [size])
 
   useEffect(() => {
     window.addEventListener('resize', handleResize, true)

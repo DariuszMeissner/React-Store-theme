@@ -1,6 +1,6 @@
 @use '../../../../assets/style/utils/brekapoint_mixin' as *;
 
-.header__top {
+.header-top {
   color: white;
   height: 60px;
   width: 100%;
@@ -21,7 +21,7 @@
     z-index: 6;
   }
 
-  .header__logo {
+  .header-logo {
     position: absolute;
     top: 50%;
     left: 50%;

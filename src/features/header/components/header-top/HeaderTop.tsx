@@ -1,88 +1,99 @@
-import React, { FC, useEffect, useState } from 'react'
+/* eslint-disable @typescript-eslint/no-use-before-define */
+import React, { FC } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { IoCartOutline } from 'react-icons/io5'
 import { HiSearch } from 'react-icons/hi'
-import { GiHamburgerMenu } from 'react-icons/gi'
+import { AiOutlineMenu } from 'react-icons/ai'
 import './HeaderTop.scss'
-import IconButton from '../../../../components/IconButton'
-import Logo from '../../../../components/logo/Logo'
-import useSizeScreen from '../../../../hooks/useSizeScreen'
-import LinkItem from '../../../../components/link-item/LinkItem'
-import Overlay from '../../../../components/overlay/Overlay'
-
-const Cart = React.lazy(() => import('../../../cart/components/Cart'))
-const Modal = React.lazy(() => import('../../../../components/modal/Modal'))
-const AnimationCss = React.lazy(
-  () => import('../../../../components/animationCss/AnimationCss')
-)
-const MenuMobile = React.lazy(() => import('../menu-mobile/MenuMobile'))
+import { useDisableScroll, useSizeScreen } from '../../../../hooks'
+import {
+  AnimationCss,
+  Button,
+  Logo,
+  Modal,
+  Overlay
+} from '../../../../components'
+import { registerModal } from '../../../../api/feature/modal-slice/modalSlice'
+import MenuMobile from '../menu-mobile/MenuMobile'
+import Cart from '../../../cart/components/Cart'
+import { RootState } from '../../../../api/feature/store'
+import MODALS from '../../../../util/modalsID'
 
 const HeaderTop: FC = () => {
+  const dispatch = useDispatch()
   const screen = useSizeScreen()
-  const [isMountedMenuMobile, setIsMountedMenuMobile] = useState<boolean>(false)
-  const [isMountedCart, setIsMountedCart] = useState<boolean>(false)
+  const active = useSelector((state: RootState) => state.modal.registered)
 
-  const showModalOnClick = () => {
-    setIsMountedMenuMobile((prev) => !prev)
-    setIsMountedCart(false)
-  }
+  const { lockScroll, unlockScroll } = useDisableScroll()
 
-  const closeModalOnClick = () => {
-    setIsMountedMenuMobile(false)
-  }
-
-  const showCartOnClick = () => {
-    setIsMountedCart((prev) => !prev)
-    setIsMountedMenuMobile(false)
-  }
-
-  const closeCartOnClick = () => {
-    setIsMountedCart(false)
+  const handleRegisterModal = (id: number | null) => {
+    if (active === id) {
+      dispatch(registerModal(null))
+      unlockScroll()
+    } else {
+      dispatch(registerModal(id))
+      lockScroll()
+    }
   }
 
   return (
     <>
-      <div className="header__top wrap">
-        <div className="header__section w-50">
-          {screen.isL ? (
-            <LinkItem text="Contact us" path="/" />
+      <div className="header-top wrap">
+        <div style={style.w50}>
+          {screen.isX ? (
+            <Button text="Contact us" path="/" />
           ) : (
-            <IconButton
+            <Button
               label="hamburger-menu"
-              onClick={showModalOnClick}
-              icon={GiHamburgerMenu}
+              onClick={() => handleRegisterModal(MODALS.MENU_ID)}
+              icon={AiOutlineMenu}
             />
           )}
         </div>
 
-        <div className="header__logo">
-          <Logo width="100px" />
+        <div className="header-logo">
+          <Logo />
         </div>
-        <div className="header__section w-50 d-flex justify-content-end">
-          <IconButton label="search" onClick={() => {}} icon={HiSearch} />
-          <IconButton
+        <div style={{ ...style.w50, ...style.alignEnd }}>
+          <Button label="search" onClick={() => {}} icon={HiSearch} />
+          <Button
             label="cart"
-            onClick={showCartOnClick}
+            onClick={() => handleRegisterModal(MODALS.CART_ID)}
             icon={IoCartOutline}
           />
         </div>
       </div>
 
-      <AnimationCss isMounted={isMountedMenuMobile} variant="fadeLeft">
-        <Modal closeOnClick={closeModalOnClick} modalPosition="left">
-          <MenuMobile closeOnClick={closeModalOnClick} />
+      <AnimationCss isMounted={active === MODALS.MENU_ID} variant="fadeLeft">
+        <Modal
+          id={MODALS.MENU_ID}
+          closeOnClick={() => handleRegisterModal(MODALS.MENU_ID)}
+          modalPosition="left">
+          <MenuMobile
+            closeOnClick={() => handleRegisterModal(MODALS.MENU_ID)}
+          />
         </Modal>
       </AnimationCss>
 
-      <AnimationCss isMounted={isMountedCart} variant="fadeRight">
-        <Modal closeOnClick={closeCartOnClick} modalPosition="right">
-          <Cart closeOnClick={closeCartOnClick} />
+      <AnimationCss isMounted={active === MODALS.CART_ID} variant="fadeRight">
+        <Modal
+          id={MODALS.CART_ID}
+          closeOnClick={() => handleRegisterModal(MODALS.CART_ID)}
+          modalPosition="right">
+          <Cart closeOnClick={() => handleRegisterModal(MODALS.CART_ID)} />
         </Modal>
       </AnimationCss>
 
-      {isMountedMenuMobile ? <Overlay /> : undefined}
-      {isMountedCart ? <Overlay /> : undefined}
+      {active === MODALS.CART_ID || active === MODALS.MENU_ID ? (
+        <Overlay />
+      ) : undefined}
     </>
   )
+}
+
+const style = {
+  w50: { width: '50%' },
+  alignEnd: { display: 'flex', justifyContent: 'end' }
 }
 
 export default HeaderTop

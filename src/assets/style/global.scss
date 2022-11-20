@@ -5,5 +5,14 @@
 @import './utils/wrap';
 
 body {
+  font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 14px;
   overflow-x: hidden;
+  color: #181818;
+}
+
+button {
+  font-family: 'Poppins', sans-serif;
 }

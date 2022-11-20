@@ -10,16 +10,3 @@
     padding: 0 96px;
   }
 }
-
-.section {
-  @include mobile {
-    margin: 64px 0;
-  }
-  @include tablet {
-    padding: 48px 0;
-  }
-
-  @include desktop {
-    padding: 96px 0;
-  }
-}

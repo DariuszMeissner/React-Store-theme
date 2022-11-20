@@ -9,6 +9,11 @@ a {
   text-decoration: none;
 }
 
+button {
+  background: transparent;
+  border: none;
+}
+
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0-modified | 20110126
    License: none (public domain)
@@ -361,8 +366,8 @@ input[type='checkbox'],
 input[type='radio'] {
   box-sizing: border-box; /* 1 */
   padding: 0; /* 2 */
-  *height: 13px; /* 3 */
-  *width: 13px; /* 3 */
+  height: 15px; /* 3 */
+  width: 15px; /* 3 */
 }
 
 /**

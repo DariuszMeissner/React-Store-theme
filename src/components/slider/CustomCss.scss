@@ -1,0 +1,21 @@
+@use 'sass:map';
+@import '../../assets/style/colors';
+
+.swiper-scrollbar-drag {
+  background: #da291c;
+  top: -1px;
+  height: 300%;
+}
+
+.swiper-horizontal > .swiper-scrollbar,
+.swiper-scrollbar.swiper-scrollbar-horizontal {
+  height: 1px;
+  background: black;
+}
+
+.swiper-scrollbar {
+  border-radius: 2px;
+  height: 5px;
+  width: 200px;
+  bottom: 0;
+}

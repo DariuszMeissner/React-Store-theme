@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { CSSProperties, FC } from 'react'
 import useDelayUnmount from '../../hooks/useDelayUnmount'
 import useSizeScreen from '../../hooks/useSizeScreen'
 import './AnimationCss.scss'
@@ -7,11 +7,17 @@ interface IProps {
   isMounted: boolean
   children: React.ReactNode
   variant: 'fadeLeft' | 'fadeRight' | 'appear'
+  styleCss?: CSSProperties
 }
 
 const DELAY_TIME = 500
 
-const AnimationCss: FC<IProps> = ({ isMounted, children, variant }) => {
+const AnimationCss: FC<IProps> = ({
+  isMounted,
+  children,
+  variant,
+  styleCss
+}) => {
   const screen = useSizeScreen()
   const showElement = useDelayUnmount(isMounted, DELAY_TIME)
   const animationVariant = screen.isS ? 'fadeBottom' : variant
@@ -20,7 +26,8 @@ const AnimationCss: FC<IProps> = ({ isMounted, children, variant }) => {
   const style = {
     layerAnimation: {
       position: 'relative',
-      zIndex: 6
+      zIndex: 6,
+      ...styleCss
     },
     mountedStyle: {
       animation: `${animationVariant}InAnimation ${duration} ease`
@@ -40,6 +47,10 @@ const AnimationCss: FC<IProps> = ({ isMounted, children, variant }) => {
       ) : undefined}
     </div>
   )
+}
+
+AnimationCss.defaultProps = {
+  styleCss: {}
 }
 
 export default AnimationCss
