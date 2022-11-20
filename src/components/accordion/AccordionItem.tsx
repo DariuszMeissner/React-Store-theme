@@ -4,11 +4,11 @@ import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
 interface IProps {
   active: boolean
   onToggle: () => void
-  title: string | undefined
-  content: string | undefined
+  title: string
+  children: React.ReactNode
 }
 
-const AccordionItem: FC<IProps> = ({ active, onToggle, title, content }) => {
+const AccordionItem: FC<IProps> = ({ active, onToggle, title, children }) => {
   const contentEl = useRef<HTMLDivElement>(null)
 
   const style = {
@@ -47,7 +47,7 @@ const AccordionItem: FC<IProps> = ({ active, onToggle, title, content }) => {
         )}
       </button>
       <div ref={contentEl} style={active ? style.open : style.close}>
-        <p>{content}</p>
+        {children}
       </div>
     </div>
   )

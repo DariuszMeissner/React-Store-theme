@@ -1,11 +1,29 @@
-import React, { FC, useCallback, useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { ChangeEvent, FC, useCallback, useEffect, useState } from 'react'
+import { IoCloseOutline } from 'react-icons/io5'
+import { useDispatch, useSelector } from 'react-redux'
 import { apiSlice, IProduct } from '../../api/feature/apiSlice'
-import { filterAccordionSliceActions } from '../../api/feature/filter-accordion-slice/filterAccordionSlice'
-import { searchRefeimentsActions } from '../../api/feature/search-refeiments-slice/searchRefeimentsSlice'
-import { Button } from '../../components'
-import { useSizeScreen } from '../../hooks'
+import { registerModal } from '../../api/feature/modal-slice/modalSlice'
+import {
+  filterByBrand,
+  sortByHeigestPrice,
+  sortByLowestPrice,
+  sortByRating
+} from '../../api/feature/search-refeiments-slice/searchRefeimentsSlice'
+import { RootState } from '../../api/feature/store'
+import {
+  Accordion,
+  AnimationCss,
+  Button,
+  Headline1,
+  Headline2,
+  Modal,
+  Overlay
+} from '../../components'
+import { useDisableScroll, useRect, useSizeScreen } from '../../hooks'
+import MODALS from '../../util/modalsID'
 import FilterAccordion from './FilterAccordion'
+import FilterBrand from './FilterBrand'
+import FilterSort from './FilterSort'
 
 interface IProps {
   data: IProduct[]
@@ -20,121 +38,226 @@ const style = {
     justifyContent: 'end'
   },
   button: {
-    color: 'black'
+    margin: '0',
+    marginBottom: '15px'
+  },
+  modal: {
+    position: 'absolute',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    display: 'flex',
+    justifyContent: 'start',
+    padding: '50px',
+    maxWidth: '600px'
+  },
+  iconButtonClose: {
+    color: 'black',
+    position: 'absolute',
+    top: 20,
+    right: 20
   }
 } as const
+
+const INITIAL_SORT_VALUE = 'Recommended'
+const INITIAL_FILTER_BRAND_VALUE = 'Brand-all'
 
 const SearchRefeiments: FC<IProps> = ({ data, category }) => {
   const screen = useSizeScreen()
   const dispatch = useDispatch()
-  const [orderByTitle, setOrderByTitle] = useState<string>('Recommended')
-  const [brandTitle, setBrandTitle] = useState<string>('All')
 
+  // get state active of modal
+  const isActiveModal = useSelector(
+    (state: RootState) => state.modal.registered
+  )
+
+  const { lockScroll, unlockScroll } = useDisableScroll()
+
+  // get size of search refeiments
+  const [rect, ref] = useRect()
+
+  // filters state
+  const [sortingValue, setSortingValue] = useState<string>(INITIAL_SORT_VALUE)
+  const [filterBrandValue, setFilterBrandValue] = useState<string>(
+    INITIAL_FILTER_BRAND_VALUE
+  )
+  // get data for brand filter
   const queryProducts = apiSlice.useGetProductsOfCategoryQuery(category)
 
   // unfreeze data
-  const products = data?.slice()
-  const allProducts = queryProducts.data?.products.slice()
+  const filteredProducts = data?.slice()
+  const allCategoryProducts = queryProducts.data?.products.slice()
 
-  const handleHeighestPrice = useCallback(() => {
-    dispatch(searchRefeimentsActions.sortByHeigestPrice(products || []))
-    setOrderByTitle('Price Low to High')
-  }, [products])
+  const onChangeSortFilter = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const { value } = e.target
+      setSortingValue(value)
 
-  const handleLowestPrice = useCallback(() => {
-    dispatch(searchRefeimentsActions.sortByLowestPrice(products || []))
-    setOrderByTitle('Price High to Low')
-  }, [products])
+      switch (value) {
+        case 'Price Low to High':
+          dispatch(sortByLowestPrice(filteredProducts || []))
+          break
+        case 'Price High to Low':
+          dispatch(sortByHeigestPrice(filteredProducts || []))
+          break
+        case 'Recommended':
+          dispatch(sortByRating(filteredProducts || []))
+          break
+        default:
+      }
+    },
+    [filteredProducts]
+  )
 
-  const handleRating = useCallback(() => {
-    dispatch(searchRefeimentsActions.sortByRating(products || []))
-    setOrderByTitle('Recommended')
-  }, [products])
+  const onChangeBrandFilter = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const { value } = e.target
+      setFilterBrandValue(value)
 
-  const handleBrand = useCallback(
-    (brand: string) => {
       dispatch(
-        searchRefeimentsActions.filterByBrand({
+        filterByBrand({
           products: queryProducts.data?.products || [],
-          brand
+          brand: value
         })
       )
-      setBrandTitle(brand)
     },
-    [products]
+    [filteredProducts]
   )
 
   const handleAllProductsCategory = useCallback(() => {
     if (queryProducts.isSuccess) {
-      dispatch(searchRefeimentsActions.sortByHeigestPrice(allProducts || []))
+      dispatch(sortByHeigestPrice(allCategoryProducts || []))
     }
-    setBrandTitle('all')
-  }, [products])
+    setFilterBrandValue('Brand-all')
+  }, [filteredProducts])
 
   const closeFilterAccordion = useCallback(() => {
-    dispatch(filterAccordionSliceActions.register(null))
-  }, [products])
+    dispatch(registerModal(null))
+    unlockScroll()
+  }, [filteredProducts])
+
+  const handleRegisterModal = (id: number | null) => {
+    if (isActiveModal === id) {
+      dispatch(registerModal(null))
+      unlockScroll()
+    } else {
+      dispatch(registerModal(id))
+      lockScroll()
+    }
+  }
 
   return (
-    <div className="search-refeiments" style={style.wrapper}>
-      {(screen.isX || screen.isL) && (
-        <>
-          {/* sort filter */}
-          <FilterAccordion id={1} title={`Order by : ${orderByTitle}`}>
-            <Button
-              text="Price Low to High"
-              onClick={handleLowestPrice}
-              styleCss={style.button}
-            />
-            <Button
-              text="Price High to Low"
-              onClick={handleHeighestPrice}
-              styleCss={style.button}
-            />
-            <Button
-              text="Raecommended"
-              onClick={handleRating}
-              styleCss={style.button}
-            />
-
-            {/* apply button */}
-            <Button
-              text="Apply"
-              onClick={closeFilterAccordion}
-              variant="black"
-              styleCss={{ width: '100%', margin: '0', marginTop: '25px' }}
-            />
-          </FilterAccordion>
-
-          {/* brand filter */}
-          <FilterAccordion id={2} title={`${brandTitle}`}>
-            {queryProducts.data?.products.map((el) => (
-              <Button
-                text={`${el.brand}`}
-                onClick={() => handleBrand(el.brand)}
-                styleCss={style.button}
-                key={el.id}
+    <>
+      <div className="search-refeiments" style={style.wrapper} ref={ref}>
+        {/* sort filter on X/L */}
+        {(screen.isX || screen.isL) && (
+          <>
+            <FilterAccordion
+              id={MODALS.FILTER_SORT_ID}
+              title={`Order by : ${sortingValue}`}>
+              <FilterSort
+                sortingValue={sortingValue}
+                onChangeSortFilter={onChangeSortFilter}
+                closeFilter={closeFilterAccordion}
               />
-            ))}
+            </FilterAccordion>
+
+            {/* brand filter on X/L */}
+            <FilterAccordion
+              id={MODALS.FILTER_BRAND_ID}
+              title={`${filterBrandValue}`}>
+              <FilterBrand
+                filterBrandValue={filterBrandValue}
+                allCategoryProducts={allCategoryProducts || []}
+                onChangeBrandFilter={onChangeBrandFilter}
+                closeFilter={closeFilterAccordion}
+                handleAllProductsCategory={handleAllProductsCategory}
+              />
+            </FilterAccordion>
+
+            {/* overlay accordion */}
+            {(isActiveModal === MODALS.FILTER_BRAND_ID ||
+              isActiveModal === MODALS.FILTER_SORT_ID) && (
+              <Overlay
+                styleCss={{ top: (rect?.top || 0) + (rect?.height || 0) }}
+              />
+            )}
+          </>
+        )}
+
+        {/* button open filter modal on M/S */}
+        {(screen.isS || screen.isM) && (
+          <>
             <Button
-              text="All"
-              onClick={handleAllProductsCategory}
+              text="Filters"
+              onClick={() => handleRegisterModal(MODALS.ALL_FILTERS)}
+              variant="black"
               styleCss={style.button}
             />
 
-            {/* apply button */}
+            {/* overlay on M/S */}
+            {isActiveModal === MODALS.ALL_FILTERS && (
+              <Overlay
+                styleCss={{
+                  top: 0 - (rect?.top || 0) - (rect?.height || 0),
+                  zIndex: '6'
+                }}
+              />
+            )}
+          </>
+        )}
+      </div>
+
+      {/* filters modal M/S */}
+      {(screen.isS || screen.isM) && (
+        <AnimationCss
+          isMounted={isActiveModal === MODALS.ALL_FILTERS}
+          variant="appear"
+          styleCss={{ zIndex: '999' }}>
+          {/* modal */}
+          <Modal
+            id={MODALS.ALL_FILTERS}
+            closeOnClick={() => handleRegisterModal(MODALS.ALL_FILTERS)}
+            modalPosition="left"
+            styleCss={{
+              ...style.modal,
+              top: 0 - (rect?.top || 0) - (rect?.height || 0)
+            }}>
+            {/* content */}
+            <Button
+              label="icon-close"
+              icon={IoCloseOutline}
+              onClick={() => handleRegisterModal(MODALS.ALL_FILTERS)}
+              styleCss={style.iconButtonClose}
+            />
+            <Headline1>Filter</Headline1>
+            <Accordion
+              titles={[
+                `Sort by: ${sortingValue}`,
+                `Brand: ${filterBrandValue} `
+              ]}
+              styleCss={{ height: 'auto', marginTop: '20px' }}>
+              <FilterSort
+                sortingValue={sortingValue}
+                onChangeSortFilter={onChangeSortFilter}
+              />
+              <FilterBrand
+                filterBrandValue={filterBrandValue}
+                onChangeBrandFilter={onChangeBrandFilter}
+                allCategoryProducts={allCategoryProducts || []}
+                handleAllProductsCategory={handleAllProductsCategory}
+              />
+            </Accordion>
+
             <Button
               text="Apply"
-              onClick={closeFilterAccordion}
+              onClick={() => handleRegisterModal(MODALS.ALL_FILTERS)}
               variant="black"
-              styleCss={{ width: '100%', margin: '0', marginTop: '25px' }}
+              styleCss={style.button}
             />
-          </FilterAccordion>
-        </>
+          </Modal>
+        </AnimationCss>
       )}
-
-      {(screen.isS || screen.isM) && <div>filter button</div>}
-    </div>
+    </>
   )
 }
 

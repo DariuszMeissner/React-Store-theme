@@ -45,9 +45,12 @@ const Slider: FC<IProps> = ({
       slidesPerView={config.slidesPerView}
       pagination={config.pagination}
       scrollbar={config.scrollbar}>
+      {/* slides  */}
       {React.Children.map(children, (child) => (
         <SwiperSlide>{child}</SwiperSlide>
       ))}
+
+      {/* navigation */}
       {navigation ? <SliderNavigation /> : undefined}
       <div className="swiper-scrollbar" />
     </Swiper>

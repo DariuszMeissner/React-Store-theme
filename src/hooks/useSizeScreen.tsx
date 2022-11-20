@@ -14,7 +14,7 @@ interface ISize {
 
 const ORIENTATION_MIN_BREAKPOINT = 1.2
 
-const useSizeScreen = () => {
+const useSizeScreen = (): ISize => {
   const [size, setSize] = useState<ISize>({
     width: 0,
     height: 0,

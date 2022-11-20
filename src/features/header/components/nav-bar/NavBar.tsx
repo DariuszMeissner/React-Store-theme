@@ -18,7 +18,14 @@ const NavBar: FC = () => {
 
   return (
     <nav className="nav wrap">
-      <ul>{menuListNavBar}</ul>
+      <ul>
+        <Button
+          text="furniture"
+          variant="underline"
+          path="/products/furniture"
+        />
+        {menuListNavBar}
+      </ul>
     </nav>
   )
 }

@@ -16,6 +16,7 @@ import Logo from './Logo'
 import Modal from './Modal'
 import Newsletter from './Newsletter'
 import Overlay from './Overlay'
+import RadioButton from './RadioButton'
 
 export {
   Accordion,
@@ -35,5 +36,6 @@ export {
   Logo,
   Modal,
   Newsletter,
-  Overlay
+  Overlay,
+  RadioButton
 }

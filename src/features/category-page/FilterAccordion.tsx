@@ -1,8 +1,9 @@
 import React, { FC } from 'react'
 import { RiArrowDownSFill, RiArrowUpSFill } from 'react-icons/ri'
 import { useDispatch, useSelector } from 'react-redux'
-import { filterAccordionSliceActions } from '../../api/feature/filter-accordion-slice/filterAccordionSlice'
+import { registerModal } from '../../api/feature/modal-slice/modalSlice'
 import { RootState } from '../../api/feature/store'
+import { useDisableScroll } from '../../hooks'
 
 interface IProps {
   id: number
@@ -13,6 +14,7 @@ interface IProps {
 const style = {
   open: {
     position: 'absolute',
+    zIndex: '7',
     width: '400px',
     marginBottom: '16px',
     fontWeight: '300',
@@ -21,7 +23,8 @@ const style = {
     background: 'white',
     padding: '30px',
     display: 'flex',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    textAlign: 'center'
   },
   close: {
     position: 'absolute',
@@ -42,31 +45,36 @@ const style = {
 
 const FilterAccordion: FC<IProps> = ({ id, title, children }) => {
   const dispatch = useDispatch()
-  const active = useSelector(
-    (state: RootState) => state.filterAccordionSlice.registered
-  )
+  const active = useSelector((state: RootState) => state.modal.registered)
 
-  const register = active === id
+  const { lockScroll, unlockScroll } = useDisableScroll()
 
-  const registerAccordion = () => {
-    if (register) {
-      dispatch(filterAccordionSliceActions.register(null))
+  const registered = active === id
+
+  const handleRegisterAccordion = () => {
+    if (registered) {
+      dispatch(registerModal(null))
+      unlockScroll()
     } else {
-      dispatch(filterAccordionSliceActions.register(id))
+      lockScroll()
+      dispatch(registerModal(id))
     }
   }
 
   return (
     <div className="filter-accordion">
-      <button type="button" onClick={registerAccordion} style={style.button}>
+      <button
+        type="button"
+        onClick={handleRegisterAccordion}
+        style={style.button}>
         {title}
-        {register ? (
+        {registered ? (
           <RiArrowUpSFill style={style.iconSize} />
         ) : (
           <RiArrowDownSFill style={style.iconSize} />
         )}
       </button>
-      <div style={register ? style.open : style.close}>{children}</div>
+      <div style={registered ? style.open : style.close}>{children}</div>
     </div>
   )
 }

@@ -5,7 +5,7 @@ import { IoCartOutline } from 'react-icons/io5'
 import { HiSearch } from 'react-icons/hi'
 import { AiOutlineMenu } from 'react-icons/ai'
 import './HeaderTop.scss'
-import { useSizeScreen } from '../../../../hooks'
+import { useDisableScroll, useSizeScreen } from '../../../../hooks'
 import {
   AnimationCss,
   Button,
@@ -13,7 +13,7 @@ import {
   Modal,
   Overlay
 } from '../../../../components'
-import { modalActions } from '../../../../api/feature/modal-slice/modalSlice'
+import { registerModal } from '../../../../api/feature/modal-slice/modalSlice'
 import MenuMobile from '../menu-mobile/MenuMobile'
 import Cart from '../../../cart/components/Cart'
 import { RootState } from '../../../../api/feature/store'
@@ -24,11 +24,15 @@ const HeaderTop: FC = () => {
   const screen = useSizeScreen()
   const active = useSelector((state: RootState) => state.modal.registered)
 
-  const registerModal = (id: number | null) => {
+  const { lockScroll, unlockScroll } = useDisableScroll()
+
+  const handleRegisterModal = (id: number | null) => {
     if (active === id) {
-      dispatch(modalActions.register(null))
+      dispatch(registerModal(null))
+      unlockScroll()
     } else {
-      dispatch(modalActions.register(id))
+      dispatch(registerModal(id))
+      lockScroll()
     }
   }
 
@@ -41,7 +45,7 @@ const HeaderTop: FC = () => {
           ) : (
             <Button
               label="hamburger-menu"
-              onClick={() => registerModal(MODALS.MENU_ID)}
+              onClick={() => handleRegisterModal(MODALS.MENU_ID)}
               icon={AiOutlineMenu}
             />
           )}
@@ -54,7 +58,7 @@ const HeaderTop: FC = () => {
           <Button label="search" onClick={() => {}} icon={HiSearch} />
           <Button
             label="cart"
-            onClick={() => registerModal(MODALS.CART_ID)}
+            onClick={() => handleRegisterModal(MODALS.CART_ID)}
             icon={IoCartOutline}
           />
         </div>
@@ -63,22 +67,26 @@ const HeaderTop: FC = () => {
       <AnimationCss isMounted={active === MODALS.MENU_ID} variant="fadeLeft">
         <Modal
           id={MODALS.MENU_ID}
-          closeOnClick={() => registerModal(null)}
+          closeOnClick={() => handleRegisterModal(MODALS.MENU_ID)}
           modalPosition="left">
-          <MenuMobile closeOnClick={() => registerModal(null)} />
+          <MenuMobile
+            closeOnClick={() => handleRegisterModal(MODALS.MENU_ID)}
+          />
         </Modal>
       </AnimationCss>
 
       <AnimationCss isMounted={active === MODALS.CART_ID} variant="fadeRight">
         <Modal
           id={MODALS.CART_ID}
-          closeOnClick={() => registerModal(null)}
+          closeOnClick={() => handleRegisterModal(MODALS.CART_ID)}
           modalPosition="right">
-          <Cart closeOnClick={() => registerModal(null)} />
+          <Cart closeOnClick={() => handleRegisterModal(MODALS.CART_ID)} />
         </Modal>
       </AnimationCss>
 
-      {active ? <Overlay /> : undefined}
+      {active === MODALS.CART_ID || active === MODALS.MENU_ID ? (
+        <Overlay />
+      ) : undefined}
     </>
   )
 }

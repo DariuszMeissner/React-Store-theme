@@ -35,6 +35,9 @@ const Modal: FC<IProps> = ({
       zIndex: 5,
       overflowY: 'hidden',
       ...styleCss
+    },
+    modalContent: {
+      width: '100%'
     }
   } as const
 
@@ -44,7 +47,9 @@ const Modal: FC<IProps> = ({
       id={`modal-${id}`}
       style={style.modal}
       ref={modalRef}>
-      <div className="modal__content">{children}</div>
+      <div className="modal__content" style={style.modalContent}>
+        {children}
+      </div>
     </div>
   )
 }

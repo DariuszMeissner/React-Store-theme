@@ -3,16 +3,12 @@ import React, { CSSProperties, FC, useCallback, useState } from 'react'
 import AccordionItem from './AccordionItem'
 
 interface IProps {
-  items: IItem[]
   styleCss?: CSSProperties
+  children: React.ReactNode
+  titles: string[]
 }
 
-interface IItem {
-  title: string
-  content: string
-}
-
-const Accordion: FC<IProps> = ({ items, styleCss }) => {
+const Accordion: FC<IProps> = ({ styleCss, children, titles }) => {
   const [clicked, setClicked] = useState<number>(0)
 
   const handleToggle = useCallback(
@@ -26,19 +22,18 @@ const Accordion: FC<IProps> = ({ items, styleCss }) => {
     [clicked]
   )
 
-  const accordionItems = items.map((el, index) => (
+  const itemsList = React.Children.map(children, (child, index) => (
     <AccordionItem
-      key={el.title}
-      title={el.title}
-      content={el.content}
+      title={titles[index]}
       active={clicked === index + 1}
-      onToggle={() => handleToggle(index + 1)}
-    />
+      onToggle={() => handleToggle(index + 1)}>
+      {child}
+    </AccordionItem>
   ))
 
   return (
     <div className="accordion" style={{ ...style.accordion, ...styleCss }}>
-      {accordionItems}
+      {itemsList}
     </div>
   )
 }

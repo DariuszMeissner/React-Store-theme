@@ -83,7 +83,7 @@ const routes = [
   },
   {
     path: '/product/:id',
-    name: 'category',
+    name: 'product',
     element: (
       <Suspense fallback={<div />}>
         <ProductPage />

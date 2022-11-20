@@ -50,7 +50,13 @@ const searchRefeimentsSlice = createSlice({
     }
   }
 })
-
 export const searchRefeimentsActions = searchRefeimentsSlice.actions
+
+export const {
+  sortByHeigestPrice,
+  sortByLowestPrice,
+  sortByRating,
+  filterByBrand
+} = searchRefeimentsSlice.actions
 
 export default searchRefeimentsSlice.reducer

@@ -1,21 +1,30 @@
-import React, { FC } from 'react'
+import React, { CSSProperties, FC } from 'react'
 
-const style = {
-  overlay: {
-    position: 'fixed',
-    zIndex: 2,
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    background: 'black',
-    opacity: 0.7,
-    transition: 'opacity 500ms ease-in'
-  }
-} as const
+interface IProps {
+  styleCss?: CSSProperties
+}
 
-const Overlay: FC = () => {
+const Overlay: FC<IProps> = ({ styleCss }) => {
+  const style = {
+    overlay: {
+      position: 'fixed',
+      zIndex: 2,
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      background: 'black',
+      opacity: 0.7,
+      transition: 'opacity 500ms ease-in',
+      ...styleCss
+    }
+  } as const
+
   return <div style={style.overlay} />
+}
+
+Overlay.defaultProps = {
+  styleCss: {}
 }
 
 export default Overlay

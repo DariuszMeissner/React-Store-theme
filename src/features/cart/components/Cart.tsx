@@ -33,7 +33,7 @@ const Cart: FC<IProps> = ({ closeOnClick }) => {
   } as const
 
   const generateCartList = () => {
-    return cartAll.map((item) => <li>{item.title}</li>)
+    return cartAll.map((item) => <li key={item.id}>{item.title}</li>)
   }
 
   const cartList = generateCartList()

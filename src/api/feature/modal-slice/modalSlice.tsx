@@ -13,7 +13,7 @@ const modalSlice = createSlice({
   name: 'modal',
   initialState,
   reducers: {
-    register: (state, actions: { payload: number | null }) => {
+    registerModal: (state, actions: { payload: number | null }) => {
       const id = actions.payload
       state.registered = id
     }
@@ -21,5 +21,6 @@ const modalSlice = createSlice({
 })
 
 export const modalActions = modalSlice.actions
+export const { registerModal } = modalSlice.actions
 
 export default modalSlice.reducer

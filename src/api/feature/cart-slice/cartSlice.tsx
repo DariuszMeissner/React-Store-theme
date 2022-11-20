@@ -26,7 +26,7 @@ const cartSlice = createSlice({
   reducers: {
     addProduct: (state, action) => {
       const product = action.payload
-      const check = state.products.find((item) => item.id)
+      const check = state.products.find((item) => item.id === product.id)
 
       if (!check) {
         state.products.push({
@@ -80,6 +80,9 @@ export const totalQuantity = (state: { cart: ICart }) =>
 
 export const totalProducts = (state: { cart: ICart }) =>
   state.cart.products.length
+
+export const { addProduct, removeProduct, increase, decrease } =
+  cartSlice.actions
 
 export const cartActions = cartSlice.actions
 
