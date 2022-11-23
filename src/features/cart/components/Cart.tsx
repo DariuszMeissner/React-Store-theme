@@ -1,52 +1,86 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC } from 'react'
 import { IoCloseOutline } from 'react-icons/io5'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import {
-  cartActions,
-  selectAllProductsCart
+  selectAllProductsCart,
+  totalPrice
 } from '../../../api/feature/cart-slice/cartSlice'
-import useSizeScreen from '../../../hooks/useSizeScreen'
+import { Button, Headline2 } from '../../../components'
+import CartItem from './CartItem'
+import CountLabel from './CountLabel'
+import Subtotal from './Subtotal'
 
 interface IProps {
   closeOnClick: () => void
 }
 
-const Cart: FC<IProps> = ({ closeOnClick }) => {
-  const dispatch = useDispatch()
-  const cartAll = useSelector(selectAllProductsCart)
-  const screen = useSizeScreen()
+const style = {
+  cartTop: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginBottom: '30px',
+    position: 'relative'
+  },
+  iconButtonClose: {
+    color: 'black',
+    position: 'absolute',
+    marginRight: 0,
+    top: 0,
+    right: 0
+  },
+  cartList: {
+    height: '45vh',
+    overflow: 'auto'
+  },
+  cartInfo: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginBottom: '20px'
+  },
+  headline2: {
+    textAlign: 'left'
+  }
+} as const
 
-  const style = {
-    cartTop: {
-      display: 'flex',
-      justifyContent: screen.isS ? 'center' : 'space-between',
-      marginBottom: '50px',
-      position: 'relative'
-    },
-    menuBreadcrumb: { fontSize: '1.5rem' },
-    iconButtonClose: {
-      color: 'black',
-      position: screen.isS ? 'absolute' : undefined,
-      top: 0,
-      right: 0
-    }
-  } as const
+const Cart: FC<IProps> = ({ closeOnClick }) => {
+  const allProductsCart = useSelector(selectAllProductsCart)
+  const cartTotal = useSelector(totalPrice)
 
   const generateCartList = () => {
-    return cartAll.map((item) => <li key={item.id}>{item.title}</li>)
+    return allProductsCart.map((product) => (
+      <CartItem product={product} key={product.id} />
+    ))
   }
 
   const cartList = generateCartList()
 
-  const onClickClearCart = () => {
-    dispatch(cartActions.clearCart())
-  }
   return (
     <>
       <div style={style.cartTop}>
-        <div style={style.menuBreadcrumb}>Menu</div>
+        <Button
+          label="icon-close"
+          icon={IoCloseOutline}
+          onClick={closeOnClick}
+          styleCss={style.iconButtonClose}
+        />
       </div>
-      <ul>{cartList.length === 0 ? <p>no item in cart</p> : cartList}</ul>
+      <Headline2 styleCss={style.headline2}>Shopping Bag</Headline2>
+
+      {cartList.length > 0 && (
+        <div style={style.cartInfo}>
+          <CountLabel count={cartList.length} />
+          <Subtotal subtotal={cartTotal} />
+        </div>
+      )}
+      <ul style={style.cartList}>
+        {cartList.length === 0 ? <p>no item in cart</p> : cartList}
+      </ul>
+      <Button
+        text="Procced to purchase"
+        path="/checkout"
+        variant="white"
+        styleCss={{ width: '250px', marginLeft: '0' }}
+      />
     </>
   )
 }

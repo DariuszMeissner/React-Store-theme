@@ -5,7 +5,8 @@ const Logo: FC = () => {
   const style = {
     logo: {
       color: 'white',
-      fontSize: '18px'
+      fontSize: '18px',
+      textAlign: 'center'
     },
     simplePart: {
       textTransform: 'uppercase'

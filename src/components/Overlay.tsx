@@ -15,7 +15,6 @@ const Overlay: FC<IProps> = ({ styleCss }) => {
       bottom: 0,
       background: 'black',
       opacity: 0.7,
-      transition: 'opacity 500ms ease-in',
       ...styleCss
     }
   } as const

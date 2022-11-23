@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useCallback, useEffect, useState } from 'react'
+import React, { ChangeEvent, FC, useCallback, useState } from 'react'
 import { IoCloseOutline } from 'react-icons/io5'
 import { useDispatch, useSelector } from 'react-redux'
 import { apiSlice, IProduct } from '../../api/feature/apiSlice'
@@ -15,7 +15,6 @@ import {
   AnimationCss,
   Button,
   Headline1,
-  Headline2,
   Modal,
   Overlay
 } from '../../components'

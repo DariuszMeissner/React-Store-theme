@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC, useState } from 'react'
+import React, { CSSProperties, FC } from 'react'
 import { NavLink } from 'react-router-dom'
 import './Button.scss'
 
@@ -11,7 +11,8 @@ interface IProps {
   icon?: React.ElementType | undefined
   disabled?: boolean
   iconSize?: number
-  onClick?: (() => void) | undefined
+  onClick?: ((e: React.MouseEvent) => void) | undefined
+  children?: React.ReactNode
 }
 
 const Button: FC<IProps> = ({
@@ -23,7 +24,8 @@ const Button: FC<IProps> = ({
   label,
   iconSize,
   disabled,
-  onClick
+  onClick,
+  children
 }) => {
   const Icon = icon ?? 'i'
 
@@ -32,11 +34,15 @@ const Button: FC<IProps> = ({
       background: variant ? undefined : 'transparent',
       color: '#fff',
       margin: '0 16px',
-      border: 'none'
+      border: 'none',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center'
     },
     icon: {
       height: `${iconSize}px`,
-      width: `${iconSize}px`
+      width: `${iconSize}px`,
+      marginRight: '5px'
     }
   }
 
@@ -60,7 +66,7 @@ const Button: FC<IProps> = ({
           data-label={label}
           onClick={onClick}>
           {icon && <Icon style={style.icon} />}
-          {text}
+          {text || children}
         </button>
       )}
     </>
@@ -76,7 +82,8 @@ Button.defaultProps = {
   disabled: false,
   path: null,
   icon: undefined,
-  onClick: undefined
+  onClick: undefined,
+  children: null
 }
 
 export default Button

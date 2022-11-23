@@ -9,7 +9,7 @@ const useSticky = <T extends HTMLDivElement>(): [
 
   const set = () => {
     if (ref.current?.offsetHeight) {
-      if (window.pageYOffset > ref.current?.offsetHeight) {
+      if (window.pageYOffset >= ref.current?.offsetHeight) {
         setIsSticky(true)
       } else {
         setIsSticky(false)

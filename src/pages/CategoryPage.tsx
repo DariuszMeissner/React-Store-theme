@@ -6,9 +6,11 @@ import { searchRefeimentsActions } from '../api/feature/search-refeiments-slice/
 import { RootState } from '../api/feature/store'
 import { Grid, Headline2, ProductTeaser } from '../components'
 import { LoadMore, SearchRefeiments } from '../features'
+import { useSizeScreen } from '../hooks'
 import { Section } from '../layout'
 
 const CategoryPage: FC = () => {
+  const screen = useSizeScreen()
   const { category } = useParams()
   const dispatch = useDispatch()
   const { data, isSuccess } = apiSlice.useGetProductsOfCategoryQuery(

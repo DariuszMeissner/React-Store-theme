@@ -1,99 +1,97 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import React, { FC } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { IoCartOutline } from 'react-icons/io5'
-import { HiSearch } from 'react-icons/hi'
+import { useSelector } from 'react-redux'
+import { IoCartOutline, IoCloseOutline } from 'react-icons/io5'
+// import { HiSearch } from 'react-icons/hi'
 import { AiOutlineMenu } from 'react-icons/ai'
-import './HeaderTop.scss'
-import { useDisableScroll, useSizeScreen } from '../../../../hooks'
-import {
-  AnimationCss,
-  Button,
-  Logo,
-  Modal,
-  Overlay
-} from '../../../../components'
-import { registerModal } from '../../../../api/feature/modal-slice/modalSlice'
-import MenuMobile from '../menu-mobile/MenuMobile'
-import Cart from '../../../cart/components/Cart'
+import { useSizeScreen } from '../../../../hooks'
+import { Button, Logo } from '../../../../components'
 import { RootState } from '../../../../api/feature/store'
+import { selectAllProductsCart } from '../../../../api/feature/cart-slice/cartSlice'
 import MODALS from '../../../../util/modalsID'
 
-const HeaderTop: FC = () => {
-  const dispatch = useDispatch()
-  const screen = useSizeScreen()
-  const active = useSelector((state: RootState) => state.modal.registered)
-
-  const { lockScroll, unlockScroll } = useDisableScroll()
-
-  const handleRegisterModal = (id: number | null) => {
-    if (active === id) {
-      dispatch(registerModal(null))
-      unlockScroll()
-    } else {
-      dispatch(registerModal(id))
-      lockScroll()
-    }
-  }
-
-  return (
-    <>
-      <div className="header-top wrap">
-        <div style={style.w50}>
-          {screen.isX ? (
-            <Button text="Contact us" path="/" />
-          ) : (
-            <Button
-              label="hamburger-menu"
-              onClick={() => handleRegisterModal(MODALS.MENU_ID)}
-              icon={AiOutlineMenu}
-            />
-          )}
-        </div>
-
-        <div className="header-logo">
-          <Logo />
-        </div>
-        <div style={{ ...style.w50, ...style.alignEnd }}>
-          <Button label="search" onClick={() => {}} icon={HiSearch} />
-          <Button
-            label="cart"
-            onClick={() => handleRegisterModal(MODALS.CART_ID)}
-            icon={IoCartOutline}
-          />
-        </div>
-      </div>
-
-      <AnimationCss isMounted={active === MODALS.MENU_ID} variant="fadeLeft">
-        <Modal
-          id={MODALS.MENU_ID}
-          closeOnClick={() => handleRegisterModal(MODALS.MENU_ID)}
-          modalPosition="left">
-          <MenuMobile
-            closeOnClick={() => handleRegisterModal(MODALS.MENU_ID)}
-          />
-        </Modal>
-      </AnimationCss>
-
-      <AnimationCss isMounted={active === MODALS.CART_ID} variant="fadeRight">
-        <Modal
-          id={MODALS.CART_ID}
-          closeOnClick={() => handleRegisterModal(MODALS.CART_ID)}
-          modalPosition="right">
-          <Cart closeOnClick={() => handleRegisterModal(MODALS.CART_ID)} />
-        </Modal>
-      </AnimationCss>
-
-      {active === MODALS.CART_ID || active === MODALS.MENU_ID ? (
-        <Overlay />
-      ) : undefined}
-    </>
-  )
+interface IProps {
+  onClick: (id: number) => void
 }
 
-const style = {
-  w50: { width: '50%' },
-  alignEnd: { display: 'flex', justifyContent: 'end' }
+const HeaderTop: FC<IProps> = ({ onClick }) => {
+  const screen = useSizeScreen()
+  const allProductsCart = useSelector(selectAllProductsCart)
+  const activeModal = useSelector((state: RootState) => state.modal.registered)
+
+  const style = {
+    headerTop: {
+      position: 'relative',
+      zIndex: 6,
+      height: '100%',
+      width: '100%',
+      color: 'white',
+      background: 'black',
+      display: 'flex',
+      alignItems: 'center'
+    },
+    w50: { width: '50%' },
+    alignEnd: { display: 'flex', justifyContent: 'end' },
+    cartIcon: {
+      position: 'relative',
+      borderBottom:
+        activeModal === MODALS.CART_ID
+          ? '1px solid #da291c'
+          : '1px solid transparent',
+      transition: '300ms ease-in'
+    },
+    itemNumbers: {
+      position: 'absolute',
+      bottom: 8,
+      right: 8,
+      height: 20,
+      width: 20,
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: '50%',
+      fontSize: 12,
+      background: '#da291c'
+    }
+  } as const
+
+  return (
+    <div className="header-top wrap" style={style.headerTop}>
+      <div style={style.w50}>
+        {screen.isX ? (
+          <div />
+        ) : (
+          // <Button text="Contact us" path="/" />
+          <Button
+            label="hamburger-menu"
+            onClick={() => onClick(MODALS.MENU_ID)}
+            icon={
+              activeModal === MODALS.MENU_ID ? IoCloseOutline : AiOutlineMenu
+            }
+          />
+        )}
+      </div>
+
+      <Logo />
+
+      <div style={{ ...style.w50, ...style.alignEnd }}>
+        {/* search button */}
+        {/* <Button label="search" onClick={() => {}} icon={HiSearch} /> */}
+
+        <div style={style.cartIcon}>
+          <Button
+            label="cart"
+            onClick={() => onClick(MODALS.CART_ID)}
+            icon={IoCartOutline}>
+            {/* count products badge */}
+            {allProductsCart.length !== 0 && (
+              <span style={style.itemNumbers}>{allProductsCart.length}</span>
+            )}
+          </Button>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export default HeaderTop

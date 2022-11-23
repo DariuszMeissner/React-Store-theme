@@ -26,6 +26,7 @@ const AnimationCss: FC<IProps> = ({
   const style = {
     layerAnimation: {
       position: 'relative',
+      top: 0,
       zIndex: 6,
       ...styleCss
     },

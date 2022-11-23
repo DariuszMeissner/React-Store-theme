@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { IProduct } from '../apiSlice'
 
 interface IInitialState {
@@ -14,7 +14,7 @@ const searchRefeimentsSlice = createSlice({
   name: 'searchRefeimentsSlice',
   initialState,
   reducers: {
-    sortByHeigestPrice: (state, actions: { payload: IProduct[] }) => {
+    sortByHeigestPrice: (state, actions: PayloadAction<IProduct[]>) => {
       const products = actions.payload || []
 
       state.products = products.sort(
@@ -22,7 +22,7 @@ const searchRefeimentsSlice = createSlice({
           next.price - curr.price
       )
     },
-    sortByLowestPrice: (state, actions: { payload: IProduct[] }) => {
+    sortByLowestPrice: (state, actions: PayloadAction<IProduct[]>) => {
       const products = actions.payload || []
 
       state.products = products.sort(
@@ -30,7 +30,7 @@ const searchRefeimentsSlice = createSlice({
           curr.price - next.price
       )
     },
-    sortByRating: (state, actions: { payload: IProduct[] }) => {
+    sortByRating: (state, actions: PayloadAction<IProduct[]>) => {
       const products = actions.payload || []
 
       state.products = products.sort(
