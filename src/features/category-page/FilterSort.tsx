@@ -17,7 +17,8 @@ const FilterSort: FC<IProps> = ({
 
   const style = {
     container: {
-      width: '100%'
+      width: '100%',
+      padding: 30
     },
     buttons: {
       display: 'flex',

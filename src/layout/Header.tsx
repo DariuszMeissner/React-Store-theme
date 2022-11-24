@@ -30,68 +30,70 @@ const Header: FC = () => {
     }
   }
 
-  const heightOnX = isSticky ? 0 : 60
+  const positionSticky = isSticky ? 'translateY(-60px)' : 'translateY(0)'
 
   const style = {
     header: {
       position: 'sticky',
       top: 0,
-      zIndex: 6
+      zIndex: 6,
+      transform: screen.isX ? positionSticky : undefined,
+      transition: 'transform 300ms'
     },
     headerTop: {
-      height: screen.isX ? heightOnX : 60,
-      transition: 'height 500ms'
+      height: 60
     },
     modalCart: {
-      padding: '36px'
+      padding: 36
     },
     modalMenu: {
-      padding: '36px'
+      padding: 36
     }
   } as const
 
   return (
-    <header style={style.header} ref={ref}>
-      {/* header top */}
-      <div style={style.headerTop}>
-        <HeaderTop onClick={handleRegisterModal} />
-      </div>
-      {/* navbar */}
-      {screen.isX && <NavBar />}
+    <>
+      <header style={style.header} ref={ref}>
+        {/* header top */}
+        <div style={style.headerTop}>
+          <HeaderTop onClick={handleRegisterModal} />
+        </div>
+        {/* navbar */}
+        {screen.isX && <NavBar />}
 
-      {/* menu modal */}
-      <AnimationCss
-        isMounted={activeModal === MODALS.MENU_ID}
-        variant="fadeLeft">
-        <Modal
-          id={MODALS.MENU_ID}
-          closeOnClick={() => handleRegisterModal(MODALS.MENU_ID)}
-          modalPosition="left"
-          styleCss={style.modalMenu}>
-          <MenuMobile
+        {/* menu modal */}
+        <AnimationCss
+          isMounted={activeModal === MODALS.MENU_ID}
+          variant="fadeLeft">
+          <Modal
+            id={MODALS.MENU_ID}
             closeOnClick={() => handleRegisterModal(MODALS.MENU_ID)}
-          />
-        </Modal>
-      </AnimationCss>
+            modalPosition="left"
+            styleCss={style.modalMenu}>
+            <MenuMobile
+              closeOnClick={() => handleRegisterModal(MODALS.MENU_ID)}
+            />
+          </Modal>
+        </AnimationCss>
 
-      {/* cart modal */}
-      <AnimationCss
-        isMounted={activeModal === MODALS.CART_ID}
-        variant="fadeRight">
-        <Modal
-          id={MODALS.CART_ID}
-          closeOnClick={() => handleRegisterModal(MODALS.CART_ID)}
-          modalPosition="right"
-          styleCss={style.modalCart}>
-          <Cart closeOnClick={() => handleRegisterModal(MODALS.CART_ID)} />
-        </Modal>
-      </AnimationCss>
-
+        {/* cart modal */}
+        <AnimationCss
+          isMounted={activeModal === MODALS.CART_ID}
+          variant="fadeRight">
+          <Modal
+            id={MODALS.CART_ID}
+            closeOnClick={() => handleRegisterModal(MODALS.CART_ID)}
+            modalPosition="right"
+            styleCss={style.modalCart}>
+            <Cart closeOnClick={() => handleRegisterModal(MODALS.CART_ID)} />
+          </Modal>
+        </AnimationCss>
+      </header>
       {/* add overlay */}
       {activeModal === MODALS.CART_ID || activeModal === MODALS.MENU_ID ? (
         <Overlay />
       ) : undefined}
-    </header>
+    </>
   )
 }
 

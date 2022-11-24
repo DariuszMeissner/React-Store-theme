@@ -1,7 +1,8 @@
 import React, { FC } from 'react'
+import { Link } from 'react-router-dom'
 
 interface IProps {
-  path: string | undefined
+  path: string
 }
 
 const style = {
@@ -15,9 +16,9 @@ const style = {
 
 const ProductTeaserButton: FC<IProps> = ({ path }) => {
   return (
-    <a href={path} type="button" style={style}>
+    <Link to={path} style={style}>
       Shop now
-    </a>
+    </Link>
   )
 }
 

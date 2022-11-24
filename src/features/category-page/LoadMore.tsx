@@ -6,7 +6,7 @@ interface IProps {
 
 const LoadMore: FC<IProps> = ({ length }) => {
   const style = {
-    fontWeight: '300',
+    fontWeight: 300,
     textAlign: 'center',
     margin: '30px 0'
   } as const

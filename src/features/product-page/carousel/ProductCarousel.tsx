@@ -8,13 +8,13 @@ interface IProps {
 
 const ProductCarousel: FC<IProps> = ({ images }) => {
   const screen = useSizeScreen()
-  const i = images?.slice(0, 4)
+  const maxImages = images?.slice(0, 4)
 
   const IMAGE_HEIGHT = screen.isS ? '90vh' : '350px'
 
   const style = {
     carouselWrapper: {
-      marginBottom: screen.isS || screen.isM ? '20px' : undefined
+      marginBottom: screen.isS || screen.isM ? 20 : undefined
     }
   }
 
@@ -23,7 +23,7 @@ const ProductCarousel: FC<IProps> = ({ images }) => {
       rowGap={[2, 2, 10, 10]}
       columnGap={[2, 2, 10, 10]}
       gridColumns={[2, 2, 2, 2]}>
-      {i?.map((item) => (
+      {maxImages?.map((item) => (
         <div
           className="image-slider"
           style={{ height: IMAGE_HEIGHT }}
@@ -43,7 +43,7 @@ const ProductCarousel: FC<IProps> = ({ images }) => {
         {images?.map((item) => (
           <div
             className="image-slider"
-            style={{ height: IMAGE_HEIGHT, marginBottom: '30px' }}
+            style={{ height: IMAGE_HEIGHT, marginBottom: 30 }}
             key={item}>
             <ImageBackground pathImage={item} />
           </div>

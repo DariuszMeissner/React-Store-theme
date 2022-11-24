@@ -12,16 +12,13 @@ const AccordionItem: FC<IProps> = ({ active, onToggle, title, children }) => {
   const contentEl = useRef<HTMLDivElement>(null)
 
   const style = {
-    open: {
-      height: contentEl?.current?.scrollHeight,
+    itemContent: {
+      height: active ? contentEl?.current?.scrollHeight : 0,
       marginBottom: '16px',
-      fontWeight: '300',
-      lineHeight: '18px'
-    },
-    close: {
-      height: '0px',
-      overflow: 'hidden',
-      marginBottom: '10px'
+      fontWeight: 300,
+      lineHeight: '18px',
+      transition: 'height 300ms ease',
+      overflow: 'hidden'
     },
     itemTitle: {
       width: '100%',
@@ -31,8 +28,8 @@ const AccordionItem: FC<IProps> = ({ active, onToggle, title, children }) => {
       textTransform: 'uppercase'
     },
     iconSize: {
-      height: '20px',
-      width: '20px'
+      height: 20,
+      width: 20
     }
   } as const
 
@@ -46,7 +43,7 @@ const AccordionItem: FC<IProps> = ({ active, onToggle, title, children }) => {
           <AiOutlinePlus style={style.iconSize} />
         )}
       </button>
-      <div ref={contentEl} style={active ? style.open : style.close}>
+      <div ref={contentEl} style={style.itemContent}>
         {children}
       </div>
     </div>

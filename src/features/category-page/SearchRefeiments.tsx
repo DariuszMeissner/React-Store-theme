@@ -31,14 +31,14 @@ interface IProps {
 const style = {
   wrapper: {
     position: 'relative',
-    paddingTop: '40px',
-    paddingBottom: '20px',
+    paddingTop: 40,
+    paddingBottom: 20,
     display: 'flex',
     justifyContent: 'end'
   },
   button: {
-    margin: '0',
-    marginBottom: '15px'
+    margin: 0,
+    marginBottom: 15
   },
   modal: {
     position: 'absolute',
@@ -46,8 +46,8 @@ const style = {
     transform: 'translateX(-50%)',
     display: 'flex',
     justifyContent: 'start',
-    padding: '50px',
-    maxWidth: '600px'
+    padding: 50,
+    maxWidth: 600
   },
   iconButtonClose: {
     color: 'black',

@@ -8,6 +8,7 @@ interface IProps {
   variant?: 'underline' | 'white' | 'black' | undefined
   path?: string | null
   styleCss?: CSSProperties
+  activeCss?: CSSProperties
   icon?: React.ElementType | undefined
   disabled?: boolean
   iconSize?: number
@@ -20,6 +21,7 @@ const Button: FC<IProps> = ({
   path,
   variant,
   styleCss,
+  activeCss,
   icon,
   label,
   iconSize,
@@ -33,7 +35,7 @@ const Button: FC<IProps> = ({
     button: {
       background: variant ? undefined : 'transparent',
       color: '#fff',
-      margin: '0 16px',
+      lineHeight: '28px',
       border: 'none',
       display: 'flex',
       justifyContent: 'center',
@@ -43,13 +45,18 @@ const Button: FC<IProps> = ({
       height: `${iconSize}px`,
       width: `${iconSize}px`,
       marginRight: '5px'
+    },
+    activeLink: {
+      ...activeCss
     }
   }
 
   return (
     <>
-      {path && (
-        <NavLink to={`${path}`}>
+      {path && !onClick && (
+        <NavLink
+          to={`${path}`}
+          style={({ isActive }) => (isActive ? style.activeLink : undefined)}>
           <span className={`link link-${variant}`} style={styleCss}>
             {text}
           </span>
@@ -57,7 +64,7 @@ const Button: FC<IProps> = ({
         </NavLink>
       )}
 
-      {onClick && (
+      {onClick && !path && (
         <button
           type="button"
           className={`link link-${variant}`}
@@ -69,6 +76,16 @@ const Button: FC<IProps> = ({
           {text || children}
         </button>
       )}
+
+      {path && onClick && (
+        <NavLink
+          to={`${path}`}
+          style={({ isActive }) => (isActive ? style.activeLink : undefined)}
+          className={`link link-${variant}`}
+          onClick={onClick}>
+          <span style={{ ...styleCss, lineHeight: '30px' }}>{text}</span>
+        </NavLink>
+      )}
     </>
   )
 }
@@ -78,6 +95,7 @@ Button.defaultProps = {
   text: '',
   variant: undefined,
   styleCss: {},
+  activeCss: {},
   iconSize: 25,
   disabled: false,
   path: null,
