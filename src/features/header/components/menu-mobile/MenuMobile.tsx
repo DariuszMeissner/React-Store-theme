@@ -40,9 +40,13 @@ const MenuMobile: FC<IProps> = ({ closeOnClick }) => {
   const generateMenuMobileItem = () => {
     return MENU_ITEM.map((item) => {
       return (
-        <li id={item} style={style.linkItem} key={item} onClick={closeOnClick}>
+        <li
+          id={`${item.id}`}
+          style={style.linkItem}
+          key={item.id}
+          onClick={closeOnClick}>
           <Button
-            text={item}
+            text={item.label}
             variant="underline"
             path={`/${item}`}
             styleCss={style.textLink}

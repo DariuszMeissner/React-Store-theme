@@ -6,8 +6,8 @@ interface IProps {
 
 const style = {
   titleContainer: {
-    fontSize: '22px',
-    marginTop: '15px'
+    fontSize: 22,
+    marginTop: 15
   }
 } as const
 

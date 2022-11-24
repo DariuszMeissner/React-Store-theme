@@ -3,10 +3,12 @@ import { createSlice } from '@reduxjs/toolkit'
 
 interface IInitialState {
   registered: number | null
+  scrollY: number | null
 }
 
 const initialState: IInitialState = {
-  registered: null
+  registered: null,
+  scrollY: null
 }
 
 const modalSlice = createSlice({
@@ -16,6 +18,7 @@ const modalSlice = createSlice({
     registerModal: (state, actions: { payload: number | null }) => {
       const id = actions.payload
       state.registered = id
+      state.scrollY = window.scrollY
     }
   }
 })

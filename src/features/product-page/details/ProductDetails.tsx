@@ -9,10 +9,8 @@ import ProductPrice from './ProductPrice'
 import ProductStock from './ProductStock'
 import ProductTitle from './ProductTitle'
 import MODALS from '../../../util/modalsID'
-import {
-  addProduct,
-  removeProduct
-} from '../../../api/feature/cart-slice/cartSlice'
+import { addProduct } from '../../../api/feature/cart-slice/cartSlice'
+import { useDisableScroll } from '../../../hooks'
 
 interface IProps {
   data: IProduct
@@ -20,25 +18,12 @@ interface IProps {
 
 const ProductDetails: FC<IProps> = ({ data }) => {
   const dispatch = useDispatch()
+  const { lockScroll } = useDisableScroll()
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    })
-  }
-
-  const registerModalCart = useCallback(
-    (id: number) => {
-      dispatch(registerModal(id))
-      dispatch(addProduct(data))
-      scrollToTop()
-    },
-    [MODALS.CART_ID, data]
-  )
-
-  const handleRemoveProduct = useCallback((id: number) => {
-    dispatch(removeProduct(id))
+  const registerModalCart = useCallback((id: number) => {
+    dispatch(registerModal(id))
+    dispatch(addProduct(data))
+    lockScroll()
   }, [])
 
   return (
@@ -49,12 +34,6 @@ const ProductDetails: FC<IProps> = ({ data }) => {
       <Button
         text="Add to shopping bag"
         onClick={() => registerModalCart(MODALS.CART_ID)}
-        variant="black"
-        styleCss={{ width: '100%', margin: '0', marginTop: '25px' }}
-      />
-      <Button
-        text="remove"
-        onClick={() => handleRemoveProduct(data.id)}
         variant="black"
         styleCss={{ width: '100%', margin: '0', marginTop: '25px' }}
       />

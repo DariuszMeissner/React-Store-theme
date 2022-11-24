@@ -7,8 +7,8 @@ interface IProps {
 
 const style = {
   priceContainer: {
-    fontSize: '22px',
-    marginTop: '30px'
+    fontSize: 22,
+    marginTop: 30
   }
 } as const
 

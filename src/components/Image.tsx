@@ -1,8 +1,9 @@
 import React, { FC } from 'react'
 import { IProduct } from '../api/feature/apiSlice'
+import { ICartProduct } from '../api/feature/cart-slice/cartSlice'
 
 interface IProps {
-  data: IProduct
+  data: IProduct | ICartProduct
   src: string | undefined
   href?: string | undefined
 }

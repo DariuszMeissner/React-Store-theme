@@ -1,5 +1,7 @@
+/* eslint-disable no-return-assign */
 /* eslint-disable no-param-reassign */
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { IProduct } from '../apiSlice'
 
 export interface ICart {
   userId: number | null
@@ -13,6 +15,7 @@ export interface ICartProduct {
   stock: number
   quantity: number
   title: string
+  images: string[]
 }
 
 const initialState: ICart = {
@@ -24,22 +27,30 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addProduct: (state, action) => {
+    addProduct: (state, action: PayloadAction<IProduct>) => {
       const product = action.payload
-      const check = state.products.find((item) => item.id === product.id)
+      const exist = state.products.find((item) => item.id === product.id)
 
-      if (!check) {
+      if (exist) {
+        state.products.map((item) => {
+          if (item.id === product.id) {
+            return (item.quantity += 1)
+          }
+          return item
+        })
+      } else {
         state.products.push({
           id: product.id,
           title: product.title,
           price: product.price,
           discountPercentage: product.discountPercentage,
           stock: product.stock,
-          quantity: 1
+          quantity: 1,
+          images: product.images
         })
       }
     },
-    removeProduct: (state, action) => {
+    removeProduct: (state, action: PayloadAction<number>) => {
       const itemId = action.payload
       state.products = state.products.filter((el) => el.id !== itemId)
     },
@@ -48,7 +59,7 @@ const cartSlice = createSlice({
       state.products = []
     },
 
-    increase: (state, action) => {
+    increase: (state, action: PayloadAction<number>) => {
       const itemId = action.payload
       const itemIndex = state.products.findIndex((item) => item.id === itemId)
       const itemAmount = state.products[itemIndex].quantity
@@ -56,7 +67,7 @@ const cartSlice = createSlice({
       if (itemAmount) state.products[itemIndex].quantity += 1
     },
 
-    decrease: (state, action) => {
+    decrease: (state, action: PayloadAction<number>) => {
       const itemId = action.payload
       const itemIndex = state.products.findIndex((item) => item.id === itemId)
       const itemAmount = state.products[itemIndex].quantity

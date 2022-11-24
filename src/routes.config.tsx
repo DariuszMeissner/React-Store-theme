@@ -97,7 +97,11 @@ const routesOrder = [
   {
     path: '/checkout',
     name: 'Checkout',
-    element: <Checkout />,
+    element: (
+      <Suspense fallback={<div />}>
+        <Checkout />
+      </Suspense>
+    ),
     nodeRef: createRef()
   }
 ]

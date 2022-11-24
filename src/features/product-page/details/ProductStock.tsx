@@ -6,7 +6,7 @@ interface IProps {
 
 const style = {
   stockContainer: {
-    marginTop: '50px'
+    marginTop: 50
   }
 } as const
 

@@ -24,15 +24,14 @@ const Modal: FC<IProps> = ({
   const style = {
     modal: {
       position: 'absolute',
+      zIndex: 7,
+      top: 0,
       left: modalPosition === 'left' ? 0 : undefined,
       right: modalPosition === 'right' ? 0 : undefined,
-      top: 0,
       background: 'white',
-      width: screen.isS ? '100vw' : '400px',
+      width: screen.isS ? '100vw' : '500px',
       height: '100vh',
-      marginTop: screen.isX ? '40px' : undefined,
       padding: '30px 20px',
-      zIndex: 5,
       overflowY: 'hidden',
       ...styleCss
     },

@@ -3,11 +3,13 @@ import useOutClick from './useOutClick'
 import useSizeScreen from './useSizeScreen'
 import useRect from './useRect'
 import useDisableScroll from './useDisableScroll'
+import useSticky from './useSticky'
 
 export {
   useDelayUnmount,
   useOutClick,
   useSizeScreen,
   useRect,
-  useDisableScroll
+  useDisableScroll,
+  useSticky
 }

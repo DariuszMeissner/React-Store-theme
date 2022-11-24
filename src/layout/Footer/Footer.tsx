@@ -5,8 +5,8 @@ import FooterPayments from './FooterPayments'
 
 const Footer: FC = () => {
   const screen = useSizeScreen()
-  const width =
-    (screen.isS && '32px 16px') ||
+  const padding =
+    (screen.isS && '32px 16px 80px 16px') ||
     (screen.isM && '32px') ||
     ((screen.isX || screen.isL) && '32px 96px') ||
     undefined
@@ -15,7 +15,7 @@ const Footer: FC = () => {
     footerContainer: {
       color: 'white',
       background: '#181818',
-      padding: width,
+      padding,
       textAlign: 'center'
     }
   } as const
