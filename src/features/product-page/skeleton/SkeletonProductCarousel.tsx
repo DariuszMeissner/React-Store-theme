@@ -6,7 +6,8 @@ import { useSizeScreen } from '../../../hooks'
 
 const SkeletonProductCarousel = () => {
   const screen = useSizeScreen()
-  const maxImages = 4
+
+  const MAX_IMAGES = 4
 
   const IMAGE_HEIGHT = screen.isS ? '90vh' : '350px'
 
@@ -21,8 +22,8 @@ const SkeletonProductCarousel = () => {
       rowGap={[2, 2, 10, 10]}
       columnGap={[2, 2, 10, 10]}
       gridColumns={[2, 2, 2, 2]}>
-      {[...Array(maxImages)].map(() => (
-        <Skeleton style={{ height: IMAGE_HEIGHT }} />
+      {[...Array(MAX_IMAGES)].map((el, i) => (
+        <Skeleton style={{ height: IMAGE_HEIGHT }} key={i} />
       ))}
     </Grid>
   )
@@ -32,8 +33,8 @@ const SkeletonProductCarousel = () => {
       slidesPerView={screen.isS ? 1 : 2}
       navigation={false}
       configuration="scrollbar">
-      {[...Array(maxImages)].map(() => (
-        <Skeleton style={{ height: IMAGE_HEIGHT }} />
+      {[...Array(MAX_IMAGES)].map((el, i) => (
+        <Skeleton style={{ height: IMAGE_HEIGHT }} key={i} />
       ))}
     </Slider>
   )

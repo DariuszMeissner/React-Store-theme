@@ -135,15 +135,18 @@ const SearchRefeiments: FC<IProps> = ({ data, category }) => {
     unlockScroll()
   }, [filteredProducts])
 
-  const handleRegisterModal = (id: number | null) => {
-    if (isActiveModal === id) {
-      dispatch(registerModal(null))
-      unlockScroll()
-    } else {
-      dispatch(registerModal(id))
-      lockScroll()
-    }
-  }
+  const handleRegisterModal = useCallback(
+    (id: number | null) => {
+      if (isActiveModal === id) {
+        dispatch(registerModal(null))
+        unlockScroll()
+      } else {
+        dispatch(registerModal(id))
+        lockScroll()
+      }
+    },
+    [isActiveModal]
+  )
 
   return (
     <>

@@ -7,7 +7,6 @@ import MENU_ITEM from '../../utils/mainMenu.config'
 import { RootState } from '../../../../api/feature/store'
 import MenuMobileLevel from './MenuMobileLevel'
 import { registerMenu } from '../../../../api/feature/modal-slice/modalSlice'
-import { useDisableScroll } from '../../../../hooks'
 
 interface IProps {
   closeOnClick: () => void
@@ -50,10 +49,6 @@ const MenuMobile: FC<IProps> = ({ closeOnClick }) => {
   // get active modal
   const activeMenu = useSelector(
     (state: RootState) => state.modal.mobileMenu.registered
-  )
-  // get active level
-  const activeLevel = useSelector(
-    (state: RootState) => state.modal.mobileMenu.level
   )
 
   const openLevel = (menuId: number, levelId: number) => {
@@ -100,6 +95,7 @@ const MenuMobile: FC<IProps> = ({ closeOnClick }) => {
             isOpen={activeMenu === item.id}
             categories={item.categories}
             title={item.label}
+            key={item.id}
           />
         )
       })}

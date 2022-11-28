@@ -1,4 +1,4 @@
-import React, { FC, Suspense } from 'react'
+import React, { FC } from 'react'
 import { Grid, ImageBackground, Slider } from '../../../components'
 import { useSizeScreen } from '../../../hooks'
 

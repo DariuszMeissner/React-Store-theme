@@ -70,18 +70,21 @@ const Cart: FC<IProps> = ({ closeOnClick }) => {
       </div>
       <Headline2 styleCss={style.headline2}>Shopping Bag</Headline2>
 
-      {/* show products cart */}
+      {/* show products */}
       {cartList.length > 0 && (
         <>
+          {/* cart info */}
           <div style={style.cartInfo}>
             <CountLabel count={cartList.length} />
             <Subtotal subtotal={cartTotal} />
           </div>
 
-          {cartList}
+          {/* listing products */}
+          <div style={style.cartList}>{cartList}</div>
 
+          {/* go to checkout button */}
           <Button
-            type="button"
+            type="link"
             text="Procced to purchase"
             path="/checkout"
             variant="white"

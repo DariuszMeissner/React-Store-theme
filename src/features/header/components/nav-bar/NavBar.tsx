@@ -85,6 +85,7 @@ const NavBar: FC = () => {
           <MegaNav
             isOpen={activeModal === item.id}
             categories={item.categories}
+            key={item.id}
           />
         )
       })}

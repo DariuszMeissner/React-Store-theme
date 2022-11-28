@@ -10,23 +10,18 @@ import SkeletonProductDetails from './SkeletonProductDetails'
 const SkeletonProductPage = () => {
   const screen = useSizeScreen()
 
-  const paddingCarouselOnS = screen.isS && { padding: '0' }
-  const paddingDetailsOnS = screen.isS && { padding: '0 16px' }
-
   const style = {
     carouselWrapper: {
       width: screen.isS || screen.isM ? '100%' : '69%'
     },
     deatilsWrapper: {
-      width: screen.isL || screen.isX ? '29%' : '100%',
-      ...paddingDetailsOnS
+      width: screen.isL || screen.isX ? '29%' : '100%'
     },
     section: {
       display: 'flex',
       justifyContent: 'space-between',
       flexDirection: screen.isS || screen.isM ? 'column' : 'row',
-      margin: '25px 0',
-      ...paddingCarouselOnS
+      margin: '25px 0'
     }
   } as const
 
@@ -51,11 +46,11 @@ const SkeletonProductPage = () => {
           slidesPerView={slidesPerView}
           navigation={false}
           configuration="scrollbar">
-          <SkeletonProductTeaser />
-          <SkeletonProductTeaser />
-          <SkeletonProductTeaser />
-          <SkeletonProductTeaser />
-          <SkeletonProductTeaser />
+          <SkeletonProductTeaser key={1} />
+          <SkeletonProductTeaser key={2} />
+          <SkeletonProductTeaser key={3} />
+          <SkeletonProductTeaser key={4} />
+          <SkeletonProductTeaser key={5} />
         </Slider>
       </Section>
     </>

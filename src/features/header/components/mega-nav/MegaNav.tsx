@@ -38,7 +38,7 @@ const MegaNav: FC<IProps> = ({ isOpen, categories }) => {
     }
   } as const
 
-  const location = useLocation()
+  // const location = useLocation()
   const dispatch = useDispatch()
   const { unlockScroll } = useDisableScroll()
 
@@ -49,13 +49,10 @@ const MegaNav: FC<IProps> = ({ isOpen, categories }) => {
     })
   }
 
-  useEffect(() => {
-    scrollToTop()
-  }, [location])
-
   const closeOnClick = () => {
     dispatch(registerModal(null))
     unlockScroll()
+    scrollToTop()
   }
 
   const generateLinks = (): JSX.Element[] => {
@@ -81,6 +78,7 @@ const MegaNav: FC<IProps> = ({ isOpen, categories }) => {
     <>
       <div className="meganav" style={style.meganav}>
         <Section>
+          {/* button close */}
           <div style={style.iconButtonClose}>
             <Button
               type="button"
@@ -90,6 +88,8 @@ const MegaNav: FC<IProps> = ({ isOpen, categories }) => {
               styleCss={{ color: 'black' }}
             />
           </div>
+
+          {/* links */}
           <ul style={style.section}>{links}</ul>
         </Section>
       </div>
