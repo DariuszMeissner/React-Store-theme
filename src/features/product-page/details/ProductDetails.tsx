@@ -36,11 +36,9 @@ const ProductDetails: FC<IProps> = ({ data }) => {
         text="Add to shopping bag"
         onClick={() => registerModalCart(MODALS.CART_ID)}
         variant="black"
-        styleCss={{ width: '100%', margin: '0', marginTop: '25px' }}
+        styleCss={{ width: '100%', margin: 0, marginTop: 25 }}
       />
-      <Accordion
-        titles={['Description', 'Brand']}
-        styleCss={{ marginTop: '40px' }}>
+      <Accordion titles={['Description', 'Brand']} styleCss={{ marginTop: 40 }}>
         <p>{data?.description}</p>
         <p>{data?.brand}</p>
       </Accordion>

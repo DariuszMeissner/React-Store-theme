@@ -11,7 +11,7 @@ import RelatedItems from '../components/RelatedItems'
 const ProductPage: FC = () => {
   const screen = useSizeScreen()
   const { id } = useParams()
-  const { data, isSuccess } = apiSlice.useGetSingleProductQuery(id)
+  const { data } = apiSlice.useGetSingleProductQuery(id)
 
   const paddingCarouselOnS = screen.isS && { padding: '0' }
   const paddingDetailsOnS = screen.isS && { padding: '0 16px' }
@@ -33,35 +33,25 @@ const ProductPage: FC = () => {
     }
   } as const
 
-  const breadcrumbsOnS = screen.isS && isSuccess && (
-    <Column>
-      <Breadcrumbs category={data.category} />
-    </Column>
-  )
-
-  const breadcrumbsOnM = screen.isM && isSuccess && (
-    <Breadcrumbs category={data.category} />
-  )
-
-  const breadcrumbsOnXL = (screen.isL || screen.isX) && isSuccess && (
-    <Breadcrumbs category={data.category} />
-  )
-
   return (
-    <>
-      <Section styleCss={style.section}>
-        <div style={style.carouselWrapper}>
-          {breadcrumbsOnS}
-          {breadcrumbsOnM}
-          {isSuccess && <ProductCarousel images={data?.images} />}
-        </div>
-        <div style={style.deatilsWrapper}>
-          {breadcrumbsOnXL}
-          {isSuccess && <ProductDetails data={data} />}
-        </div>
-      </Section>
-      <Section>{isSuccess && <RelatedItems product={data} />}</Section>
-    </>
+    <div className="product-page">
+      {data && (
+        <>
+          <Section styleCss={style.section}>
+            <div style={style.carouselWrapper}>
+              <ProductCarousel images={data?.images} />
+            </div>
+            <div style={style.deatilsWrapper}>
+              <Breadcrumbs category={data.category} />
+              <ProductDetails data={data} />
+            </div>
+          </Section>
+          <Section>
+            <RelatedItems product={data} />
+          </Section>
+        </>
+      )}
+    </div>
   )
 }
 

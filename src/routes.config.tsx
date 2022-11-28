@@ -1,5 +1,9 @@
 import React, { createRef, Suspense } from 'react'
-import { SkeletonCategoryPage, SkeletonHome } from './features'
+import {
+  SkeletonCategoryPage,
+  SkeletonHome,
+  SkeletonProductPage
+} from './features'
 
 const Home = React.lazy(() => import('./pages/Home'))
 const ProductPage = React.lazy(() => import('./pages/ProductPage'))
@@ -23,7 +27,6 @@ const routes = [
     element: (
       <Suspense fallback={<SkeletonCategoryPage />}>
         <CategoryPage />
-        {/* <SkeletonCategoryPage /> */}
       </Suspense>
     ),
     nodeRef: createRef()
@@ -32,7 +35,7 @@ const routes = [
     path: '/product/:id',
     name: 'product',
     element: (
-      <Suspense fallback={<div />}>
+      <Suspense fallback={<SkeletonProductPage />}>
         <ProductPage />
       </Suspense>
     ),

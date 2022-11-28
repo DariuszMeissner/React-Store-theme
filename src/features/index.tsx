@@ -16,6 +16,8 @@ import SkeletonHero from './home/skeleton/SkeletonHero'
 import SkeletonProductColumn from './home/skeleton/SkeletonProductColumn'
 import SkeletonHome from './home/skeleton/SkeletonHome'
 import SkeletonProductPage from './product-page/skeleton/SkeletonProductPage'
+import SkeletonProductCarousel from './product-page/skeleton/SkeletonProductCarousel'
+import SkeletonProductDetails from './product-page/skeleton/SkeletonProductDetails'
 
 export {
   Cart,
@@ -37,5 +39,7 @@ export {
   SkeletonTwoColumnsProducts,
   SkeletonHero,
   SkeletonProductColumn,
-  SkeletonProductPage
+  SkeletonProductPage,
+  SkeletonProductCarousel,
+  SkeletonProductDetails
 }

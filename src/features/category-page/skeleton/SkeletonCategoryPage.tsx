@@ -1,9 +1,12 @@
+/* eslint-disable import/no-cycle */
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { Grid } from '../../../components'
 import Headline2 from '../../../components/Headline2'
 import SkeletonProductTeaser from '../../../components/product-teaser/SkeletonProductTeaser'
 import Section from '../../../layout/Section'
+
+export const PRODUCT_PER_PAGE = 8
 
 export const style = {
   section: {
@@ -30,10 +33,9 @@ const SkeletonCategoryPage = () => {
           columnGap={[20, 20, 20, 20]}
           gridColumns={[2, 3, 4, 4]}
           columnEqual>
-          <SkeletonProductTeaser />
-          <SkeletonProductTeaser />
-          <SkeletonProductTeaser />
-          <SkeletonProductTeaser />
+          {[...Array(PRODUCT_PER_PAGE)].map(() => (
+            <SkeletonProductTeaser />
+          ))}
         </Grid>
 
         {/* load more */}

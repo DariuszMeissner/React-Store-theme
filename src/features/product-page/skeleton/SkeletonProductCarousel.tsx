@@ -1,14 +1,12 @@
-import React, { FC, Suspense } from 'react'
-import { Grid, ImageBackground, Slider } from '../../../components'
+/* eslint-disable react/no-array-index-key */
+import React from 'react'
+import Skeleton from 'react-loading-skeleton'
+import { Grid, Slider } from '../../../components'
 import { useSizeScreen } from '../../../hooks'
 
-interface IProps {
-  images: string[] | undefined
-}
-
-const ProductCarousel: FC<IProps> = ({ images }) => {
+const SkeletonProductCarousel = () => {
   const screen = useSizeScreen()
-  const maxImages = images?.slice(0, 4)
+  const maxImages = 4
 
   const IMAGE_HEIGHT = screen.isS ? '90vh' : '350px'
 
@@ -23,13 +21,8 @@ const ProductCarousel: FC<IProps> = ({ images }) => {
       rowGap={[2, 2, 10, 10]}
       columnGap={[2, 2, 10, 10]}
       gridColumns={[2, 2, 2, 2]}>
-      {maxImages?.map((item) => (
-        <div
-          className="image-slider"
-          style={{ height: IMAGE_HEIGHT }}
-          key={item}>
-          <ImageBackground pathImage={item} />
-        </div>
+      {[...Array(maxImages)].map(() => (
+        <Skeleton style={{ height: IMAGE_HEIGHT }} />
       ))}
     </Grid>
   )
@@ -39,17 +32,11 @@ const ProductCarousel: FC<IProps> = ({ images }) => {
       slidesPerView={screen.isS ? 1 : 2}
       navigation={false}
       configuration="scrollbar">
-      {images?.map((item) => (
-        <div
-          className="image-slider"
-          style={{ height: IMAGE_HEIGHT, marginBottom: 30 }}
-          key={item}>
-          <ImageBackground pathImage={item} />
-        </div>
+      {[...Array(maxImages)].map(() => (
+        <Skeleton style={{ height: IMAGE_HEIGHT }} />
       ))}
     </Slider>
   )
-
   return (
     <div className="product-carousel" style={style.carouselWrapper}>
       {(screen.isL || screen.isX) && carouselOnXL}
@@ -58,4 +45,4 @@ const ProductCarousel: FC<IProps> = ({ images }) => {
   )
 }
 
-export default ProductCarousel
+export default SkeletonProductCarousel

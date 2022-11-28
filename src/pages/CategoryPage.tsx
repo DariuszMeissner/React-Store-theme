@@ -1,5 +1,4 @@
 import React, { FC, useEffect } from 'react'
-import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
@@ -16,6 +15,8 @@ export const style = {
   }
 } as const
 
+export const PRODUCT_PER_PAGE = 8
+
 const CategoryPage: FC = () => {
   const { category } = useParams()
   const dispatch = useDispatch()
@@ -31,7 +32,7 @@ const CategoryPage: FC = () => {
   useEffect(() => {
     // set recommended products on start
     if (isSuccess) {
-      const productsCopy = data?.products?.slice()
+      const productsCopy = data?.products?.slice(0, PRODUCT_PER_PAGE)
       dispatch(searchRefeimentsActions.sortByRating(productsCopy || []))
     }
   }, [isSuccess, category, data])
