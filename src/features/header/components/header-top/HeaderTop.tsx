@@ -63,6 +63,7 @@ const HeaderTop: FC<IProps> = ({ onClick }) => {
         ) : (
           // <Button text="Contact us" path="/" />
           <Button
+            type="button"
             label="hamburger-menu"
             onClick={() => onClick(MODALS.MENU_ID)}
             icon={
@@ -80,6 +81,7 @@ const HeaderTop: FC<IProps> = ({ onClick }) => {
 
         <div style={style.cartIcon}>
           <Button
+            type="button"
             label="cart"
             onClick={() => onClick(MODALS.CART_ID)}
             icon={IoCartOutline}>

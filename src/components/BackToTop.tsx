@@ -12,6 +12,7 @@ const BackToTop: FC = () => {
 
   return (
     <Button
+      type="button"
       label="icon-back-to-top"
       icon={AiOutlineArrowUp}
       onClick={scrollToTop}

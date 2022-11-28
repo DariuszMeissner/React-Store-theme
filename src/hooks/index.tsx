@@ -4,6 +4,7 @@ import useSizeScreen from './useSizeScreen'
 import useRect from './useRect'
 import useDisableScroll from './useDisableScroll'
 import useSticky from './useSticky'
+import useImageLoad from './useImageLoad'
 
 export {
   useDelayUnmount,
@@ -11,5 +12,6 @@ export {
   useSizeScreen,
   useRect,
   useDisableScroll,
-  useSticky
+  useSticky,
+  useImageLoad
 }

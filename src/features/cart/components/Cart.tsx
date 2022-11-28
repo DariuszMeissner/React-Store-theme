@@ -15,6 +15,9 @@ interface IProps {
 }
 
 const style = {
+  container: {
+    padding: 20
+  },
   cartTop: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -55,9 +58,10 @@ const Cart: FC<IProps> = ({ closeOnClick }) => {
   const cartList = generateCartList()
 
   return (
-    <>
+    <div className="cart-modal">
       <div style={style.cartTop}>
         <Button
+          type="button"
           label="icon-close"
           icon={IoCloseOutline}
           onClick={closeOnClick}
@@ -66,22 +70,36 @@ const Cart: FC<IProps> = ({ closeOnClick }) => {
       </div>
       <Headline2 styleCss={style.headline2}>Shopping Bag</Headline2>
 
+      {/* show products cart */}
       {cartList.length > 0 && (
-        <div style={style.cartInfo}>
-          <CountLabel count={cartList.length} />
-          <Subtotal subtotal={cartTotal} />
-        </div>
+        <>
+          <div style={style.cartInfo}>
+            <CountLabel count={cartList.length} />
+            <Subtotal subtotal={cartTotal} />
+          </div>
+
+          {cartList}
+
+          <Button
+            type="button"
+            text="Procced to purchase"
+            path="/checkout"
+            variant="white"
+            styleCss={{
+              width: '250px',
+              marginLeft: '0',
+              color: 'black',
+              border: '1px solid'
+            }}
+          />
+        </>
       )}
+
+      {/* no item in cart */}
       <ul style={style.cartList}>
-        {cartList.length === 0 ? <p>no item in cart</p> : cartList}
+        {cartList.length === 0 && <p>no item in cart</p>}
       </ul>
-      <Button
-        text="Procced to purchase"
-        path="/checkout"
-        variant="white"
-        styleCss={{ width: '250px', marginLeft: '0' }}
-      />
-    </>
+    </div>
   )
 }
 

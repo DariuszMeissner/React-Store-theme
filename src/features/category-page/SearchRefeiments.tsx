@@ -28,6 +28,7 @@ interface IProps {
   data: IProduct[]
   category: string
 }
+
 const style = {
   wrapper: {
     position: 'relative',
@@ -187,6 +188,7 @@ const SearchRefeiments: FC<IProps> = ({ data, category }) => {
         {(screen.isS || screen.isM) && (
           <>
             <Button
+              type="button"
               text="Filters"
               onClick={() => handleRegisterModal(MODALS.ALL_FILTERS)}
               variant="black"
@@ -223,6 +225,7 @@ const SearchRefeiments: FC<IProps> = ({ data, category }) => {
             }}>
             {/* content */}
             <Button
+              type="button"
               label="icon-close"
               icon={IoCloseOutline}
               onClick={() => handleRegisterModal(MODALS.ALL_FILTERS)}
@@ -248,6 +251,7 @@ const SearchRefeiments: FC<IProps> = ({ data, category }) => {
             </Accordion>
 
             <Button
+              type="button"
               text="Apply"
               onClick={() => handleRegisterModal(MODALS.ALL_FILTERS)}
               variant="black"

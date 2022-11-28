@@ -32,6 +32,7 @@ const ProductDetails: FC<IProps> = ({ data }) => {
       <ProductPrice price={data?.price || 'no price'} currency="€" />
       <ProductStock stock={data?.stock || 'no stock'} />
       <Button
+        type="button"
         text="Add to shopping bag"
         onClick={() => registerModalCart(MODALS.CART_ID)}
         variant="black"

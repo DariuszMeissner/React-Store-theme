@@ -8,6 +8,14 @@ import SearchRefeiments from './category-page/SearchRefeiments'
 import FilterAccordion from './category-page/FilterAccordion'
 import FilterSort from './category-page/FilterSort'
 import FilterBrand from './category-page/FilterBrand'
+import Hero from './home/Hero'
+import SkeletonCategoryPage from './category-page/skeleton/SkeletonCategoryPage'
+import SkeletonCollectionProducts from './home/skeleton/SkeletonCollectionProducts'
+import SkeletonTwoColumnsProducts from './home/skeleton/SkeletonTwoColumnsProducts'
+import SkeletonHero from './home/skeleton/SkeletonHero'
+import SkeletonProductColumn from './home/skeleton/SkeletonProductColumn'
+import SkeletonHome from './home/skeleton/SkeletonHome'
+import SkeletonProductPage from './product-page/skeleton/SkeletonProductPage'
 
 export {
   Cart,
@@ -19,5 +27,15 @@ export {
   SearchRefeiments,
   FilterAccordion,
   FilterSort,
-  FilterBrand
+  FilterBrand,
+  Hero,
+
+  // skeletons
+  SkeletonHome,
+  SkeletonCategoryPage,
+  SkeletonCollectionProducts,
+  SkeletonTwoColumnsProducts,
+  SkeletonHero,
+  SkeletonProductColumn,
+  SkeletonProductPage
 }

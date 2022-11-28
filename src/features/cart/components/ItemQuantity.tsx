@@ -27,6 +27,7 @@ const ItemQuantity: FC<IProps> = ({ qty, stock, increase, decrease }) => {
   return (
     <div className="qty-label" style={style.container}>
       <Button
+        type="button"
         label="icon-decrease"
         disabled={qty === 1}
         icon={AiOutlineMinusCircle}
@@ -38,6 +39,7 @@ const ItemQuantity: FC<IProps> = ({ qty, stock, increase, decrease }) => {
       />
       <span style={style.qty}>{qty}</span>
       <Button
+        type="button"
         label="icon-increase"
         disabled={qty === stock}
         icon={AiOutlinePlusCircle}

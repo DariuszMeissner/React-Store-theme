@@ -60,6 +60,7 @@ const NavBar: FC = () => {
       return (
         <li key={item.id}>
           <Button
+            type="button"
             text={item.label}
             variant="underline"
             onClick={() => openMegaNav(item.id)}

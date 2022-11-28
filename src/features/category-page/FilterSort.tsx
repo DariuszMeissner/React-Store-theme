@@ -53,6 +53,7 @@ const FilterSort: FC<IProps> = ({
       {/* apply button */}
       {(screen.isL || screen.isX) && (
         <Button
+          type="button"
           text="Apply"
           onClick={closeFilter}
           variant="black"

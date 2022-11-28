@@ -16,8 +16,7 @@ const Hero: FC<IProps> = ({ productId }) => {
   const style = {
     hero: {
       width: '100%',
-      height: screen.isS ? '100vh' : '600px',
-      position: 'relative'
+      height: screen.isS ? '100vh' : '600px'
     },
     mediaTitle: {
       display: 'flex',
@@ -37,6 +36,7 @@ const Hero: FC<IProps> = ({ productId }) => {
           <div style={style.mediaTitle}>
             <Headline1 color="white">{isSuccess && data.category}</Headline1>
             <Button
+              type="link"
               text="Discover"
               path={`/products/${data.category}`}
               variant="white"

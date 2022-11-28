@@ -9,6 +9,7 @@ const Breadcrumbs: FC<IProps> = ({ category }) => {
   return (
     <div className="breadcrumbs">
       <Button
+        type="link"
         text={`/${category}`}
         path={`/products/${category}`}
         styleCss={{

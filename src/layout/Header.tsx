@@ -44,10 +44,7 @@ const Header: FC = () => {
       height: 60
     },
     modalCart: {
-      padding: 36
-    },
-    modalMenu: {
-      padding: 36
+      padding: screen.isS ? 15 : 36
     }
   } as const
 
@@ -68,8 +65,7 @@ const Header: FC = () => {
           <Modal
             id={MODALS.MENU_ID}
             closeOnClick={() => handleRegisterModal(MODALS.MENU_ID)}
-            modalPosition="left"
-            styleCss={style.modalMenu}>
+            modalPosition="left">
             <MenuMobile
               closeOnClick={() => handleRegisterModal(MODALS.MENU_ID)}
             />

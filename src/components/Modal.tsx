@@ -31,7 +31,6 @@ const Modal: FC<IProps> = ({
       background: 'white',
       width: screen.isS ? '100vw' : '500px',
       height: '100vh',
-      padding: '30px 20px',
       overflowY: 'hidden',
       ...styleCss
     },

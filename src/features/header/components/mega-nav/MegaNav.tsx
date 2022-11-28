@@ -1,6 +1,7 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { IoCloseOutline } from 'react-icons/io5'
 import { useDispatch } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 import { registerModal } from '../../../../api/feature/modal-slice/modalSlice'
 import { Button, Overlay } from '../../../../components'
 import { useDisableScroll } from '../../../../hooks'
@@ -37,8 +38,8 @@ const MegaNav: FC<IProps> = ({ isOpen, categories }) => {
     }
   } as const
 
+  const location = useLocation()
   const dispatch = useDispatch()
-
   const { unlockScroll } = useDisableScroll()
 
   const scrollToTop = () => {
@@ -48,10 +49,13 @@ const MegaNav: FC<IProps> = ({ isOpen, categories }) => {
     })
   }
 
+  useEffect(() => {
+    scrollToTop()
+  }, [location])
+
   const closeOnClick = () => {
     dispatch(registerModal(null))
     unlockScroll()
-    scrollToTop()
   }
 
   const generateLinks = (): JSX.Element[] => {
@@ -59,6 +63,7 @@ const MegaNav: FC<IProps> = ({ isOpen, categories }) => {
       return (
         <li key={item.title}>
           <Button
+            type="button-link"
             text={item.title}
             path={`/products/${item.path}`}
             variant="underline"
@@ -78,6 +83,7 @@ const MegaNav: FC<IProps> = ({ isOpen, categories }) => {
         <Section>
           <div style={style.iconButtonClose}>
             <Button
+              type="button"
               label="icon-close"
               icon={IoCloseOutline}
               onClick={closeOnClick}
@@ -88,7 +94,7 @@ const MegaNav: FC<IProps> = ({ isOpen, categories }) => {
         </Section>
       </div>
       {/* overlay */}
-      {isOpen && <Overlay styleCss={{ zIndex: 2, height: '100vh' }} />}
+      {isOpen && <Overlay styleCss={{ zIndex: 2, height: '200vh' }} />}
     </>
   )
 }
