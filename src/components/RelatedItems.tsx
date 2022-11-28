@@ -1,4 +1,4 @@
-import React, { FC, Suspense } from 'react'
+import React, { FC } from 'react'
 import { Headline2, ProductTeaser, Slider } from '.'
 import { apiSlice, IProduct } from '../api/feature/apiSlice'
 import { useSizeScreen } from '../hooks'
@@ -19,18 +19,16 @@ const RelatedItems: FC<IProps> = ({ product }) => {
     <div className="collection-products">
       <Headline2>You may also like</Headline2>
 
-      {/* slider */}
-      <Suspense fallback={<p>loading slider</p>}>
-        <Slider
-          spaceBetween={40}
-          slidesPerView={slidesPerView}
-          navigation={false}
-          configuration="scrollbar">
-          {relatedProducts.data?.products.map((item) => (
-            <ProductTeaser productId={`${item.id}`} key={item.id} />
-          ))}
-        </Slider>
-      </Suspense>
+      <Slider
+        spaceBetween={40}
+        slidesPerView={slidesPerView}
+        navigation={false}
+        configuration="scrollbar">
+        {/* slides */}
+        {relatedProducts.data?.products.map((item) => (
+          <ProductTeaser productId={`${item.id}`} key={item.id} />
+        ))}
+      </Slider>
     </div>
   )
 }

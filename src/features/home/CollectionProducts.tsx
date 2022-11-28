@@ -49,6 +49,7 @@ const CollectionProducts: FC<IProps> = ({ productId }) => {
       {/* button */}
       <div style={style.center}>
         <Button
+          type="link"
           text="Shop"
           path={`/products/${data?.category}`}
           variant="white"

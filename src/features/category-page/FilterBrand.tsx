@@ -56,6 +56,7 @@ const FilterBrand: FC<IProps> = ({
 
       {(screen.isL || screen.isX) && (
         <Button
+          type="button"
           text="Apply"
           onClick={closeFilter}
           variant="black"

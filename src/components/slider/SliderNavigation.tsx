@@ -40,6 +40,7 @@ const SliderNavigation: FC = () => {
   return (
     <div style={style.buttons}>
       <Button
+        type="button"
         disabled={disabledPrev}
         label="prevButton"
         icon={IoIosArrowBack}
@@ -49,6 +50,7 @@ const SliderNavigation: FC = () => {
       />
 
       <Button
+        type="button"
         disabled={disabledNext}
         label="nextButton"
         icon={IoIosArrowForward}

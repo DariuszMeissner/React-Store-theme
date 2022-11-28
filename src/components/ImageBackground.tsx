@@ -1,13 +1,17 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
+import Skeleton from 'react-loading-skeleton'
+import { useImageLoad } from '../hooks'
 
 interface IProps {
   pathImage: string | undefined
   children?: React.ReactNode
-  height?: string
+  height?: string | number
   href?: string | undefined
 }
 
 const ImageBackground: FC<IProps> = ({ pathImage, children, height, href }) => {
+  const [isImage] = useImageLoad(pathImage)
+
   const style = {
     width: '100%',
     height,
@@ -17,7 +21,9 @@ const ImageBackground: FC<IProps> = ({ pathImage, children, height, href }) => {
     backgroundSize: 'cover'
   } as const
 
-  return (
+  return !isImage ? (
+    <Skeleton height={height} />
+  ) : (
     <>
       {href && (
         <a href={href}>

@@ -10,6 +10,7 @@ const ItemRemove: FC<IProps> = ({ onClick }) => {
   return (
     <div className="name-label">
       <Button
+        type="button"
         text="Remove"
         label="icon-remove"
         icon={IoTrashBinOutline}

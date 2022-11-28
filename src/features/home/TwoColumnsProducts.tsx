@@ -1,25 +1,24 @@
 import React, { FC } from 'react'
 import { apiSlice } from '../../api/feature/apiSlice'
-import { Grid, Headline1, Image, Button } from '../../components'
-import { useSizeScreen } from '../../hooks'
+import { Grid, Headline1, Button, ImageBackground } from '../../components'
 
 interface IProps {
   productIdOne: string
   productIdTwo: string
 }
 
+export const IMAGE_HEIGHT = 400
+
+export const style = {
+  cartColumn: {
+    textAlign: 'center',
+    height: 'fit-content'
+  }
+} as const
+
 const TwoColumnsProducts: FC<IProps> = ({ productIdOne, productIdTwo }) => {
-  const screen = useSizeScreen()
   const productOne = apiSlice.useGetSingleProductQuery(productIdOne)
   const productTwo = apiSlice.useGetSingleProductQuery(productIdTwo)
-
-  const style = {
-    cartColumn: {
-      textAlign: 'center',
-      height: 'fit-content',
-      marginBottom: screen.isS ? '25px' : undefined
-    }
-  } as const
 
   return (
     <Grid
@@ -28,15 +27,16 @@ const TwoColumnsProducts: FC<IProps> = ({ productIdOne, productIdTwo }) => {
       gridColumns={[1, 2, 2, 2]}>
       <div style={style.cartColumn}>
         {productOne.isSuccess && (
-          <Image
-            src={productOne.data?.images[2]}
-            data={productOne.data}
+          <ImageBackground
+            pathImage={productOne.data?.images[2]}
             href={`/products/${productOne.data?.category}`}
+            height={IMAGE_HEIGHT}
           />
         )}
 
         <Headline1>{productOne.data?.category || 'category'}</Headline1>
         <Button
+          type="link"
           text="Shop"
           path={`/products/${productOne.data?.category}`}
           variant="white"
@@ -45,14 +45,15 @@ const TwoColumnsProducts: FC<IProps> = ({ productIdOne, productIdTwo }) => {
 
       <div style={style.cartColumn}>
         {productTwo.isSuccess && (
-          <Image
-            src={productTwo.data?.images[0]}
-            data={productTwo.data}
+          <ImageBackground
+            pathImage={productTwo.data?.images[0]}
             href={`/products/${productTwo.data?.category}`}
+            height={IMAGE_HEIGHT}
           />
         )}
         <Headline1>{productTwo.data?.category || 'category'}</Headline1>
         <Button
+          type="link"
           text="Shop"
           path={`/products/${productOne.data?.category}`}
           variant="white"

@@ -5,7 +5,8 @@ import './Button.scss'
 interface IProps {
   label?: string
   text?: string
-  variant?: 'underline' | 'white' | 'black' | undefined
+  type: 'link' | 'button' | 'button-link' | 'skeleton'
+  variant?: 'underline' | 'white' | 'black' | null
   path?: string | null
   styleCss?: CSSProperties
   activeCss?: CSSProperties
@@ -17,13 +18,14 @@ interface IProps {
 }
 
 const Button: FC<IProps> = ({
+  label,
   text,
+  type,
   path,
   variant,
   styleCss,
   activeCss,
   icon,
-  label,
   iconSize,
   disabled,
   onClick,
@@ -41,6 +43,10 @@ const Button: FC<IProps> = ({
       justifyContent: 'center',
       alignItems: 'center'
     },
+    skeleton: {
+      width: 100,
+      textAlign: 'center'
+    },
     icon: {
       height: `${iconSize}px`,
       width: `${iconSize}px`,
@@ -49,11 +55,11 @@ const Button: FC<IProps> = ({
     activeLink: {
       ...activeCss
     }
-  }
+  } as const
 
   return (
     <>
-      {path && !onClick && (
+      {type === 'link' && (
         <NavLink
           to={`${path}`}
           style={({ isActive }) => (isActive ? style.activeLink : undefined)}>
@@ -64,7 +70,7 @@ const Button: FC<IProps> = ({
         </NavLink>
       )}
 
-      {onClick && !path && (
+      {type === 'button' && (
         <button
           type="button"
           className={`link link-${variant}`}
@@ -73,18 +79,27 @@ const Button: FC<IProps> = ({
           data-label={label}
           onClick={onClick}>
           {icon && <Icon style={style.icon} />}
-          {text || children}
+          {text}
+          {children}
         </button>
       )}
 
-      {path && onClick && (
+      {type === 'button-link' && (
         <NavLink
           to={`${path}`}
-          style={({ isActive }) => (isActive ? style.activeLink : undefined)}
+          style={styleCss}
           className={`link link-${variant}`}
           onClick={onClick}>
-          <span style={{ ...styleCss, lineHeight: '30px' }}>{text}</span>
+          <span style={{ lineHeight: '30px' }}>{text}</span>
         </NavLink>
+      )}
+
+      {type === 'skeleton' && (
+        <button type="button" style={style.button}>
+          {React.Children.map(children, (child) => (
+            <div style={style.skeleton}>{child}</div>
+          ))}
+        </button>
       )}
     </>
   )

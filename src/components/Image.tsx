@@ -1,11 +1,13 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
+import Skeleton from 'react-loading-skeleton'
 import { IProduct } from '../api/feature/apiSlice'
 import { ICartProduct } from '../api/feature/cart-slice/cartSlice'
+import { useImageLoad } from '../hooks'
 
 interface IProps {
   data: IProduct | ICartProduct
-  src: string | undefined
-  href?: string | undefined
+  src: string
+  href?: string
 }
 
 const style = {
@@ -14,7 +16,8 @@ const style = {
 }
 
 const Image: FC<IProps> = ({ data, src, href }) => {
-  const noImage = !data && <p>...loading</p>
+  const [isImage] = useImageLoad(src)
+
   const imageWithLInk = data && href && (
     <a href={href}>
       <img src={src} alt={data?.title} style={style} />
@@ -24,17 +27,18 @@ const Image: FC<IProps> = ({ data, src, href }) => {
     <img src={src} alt={data?.title} style={style} />
   )
 
-  return (
-    <div>
-      {noImage}
+  return !isImage ? (
+    <Skeleton height="100%" />
+  ) : (
+    <>
       {imageWithLInk}
       {imageWithoutLInk}
-    </div>
+    </>
   )
 }
 
 Image.defaultProps = {
-  href: undefined
+  href: '/'
 }
 
 export default Image

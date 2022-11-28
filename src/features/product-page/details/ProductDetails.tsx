@@ -31,18 +31,22 @@ const ProductDetails: FC<IProps> = ({ data }) => {
       <ProductTitle title={data?.title || 'no title'} />
       <ProductPrice price={data?.price || 'no price'} currency="€" />
       <ProductStock stock={data?.stock || 'no stock'} />
+
+      {/* add to cart */}
       <Button
+        type="button"
         text="Add to shopping bag"
         onClick={() => registerModalCart(MODALS.CART_ID)}
         variant="black"
-        styleCss={{ width: '100%', margin: '0', marginTop: '25px' }}
+        styleCss={{ width: '100%', margin: 0, marginTop: 25 }}
       />
-      <Accordion
-        titles={['Description', 'Brand']}
-        styleCss={{ marginTop: '40px' }}>
+
+      {/* product feature */}
+      <Accordion titles={['Description', 'Brand']} styleCss={{ marginTop: 40 }}>
         <p>{data?.description}</p>
         <p>{data?.brand}</p>
       </Accordion>
+
       <ProductCode code={data?.id} />
     </div>
   )

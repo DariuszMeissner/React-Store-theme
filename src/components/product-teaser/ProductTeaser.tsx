@@ -1,4 +1,5 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
+import Skeleton from 'react-loading-skeleton'
 import { apiSlice } from '../../api/feature/apiSlice'
 import { useSizeScreen } from '../../hooks'
 import ImageBackground from '../ImageBackground'
@@ -19,6 +20,9 @@ const ProductTeaser: FC<IProps> = ({ productId }) => {
   const style = {
     teaser: {
       marginBottom: screen.isS ? '15px' : '40px'
+    },
+    data: {
+      marginTop: '10px'
     }
   }
 
@@ -29,6 +33,7 @@ const ProductTeaser: FC<IProps> = ({ productId }) => {
         height={HEIGHT_IMAGE}
         href={`/product/${data?.id}`}
       />
+
       <ProductTeaserName name={data?.title} />
       <ProductTeaserPrice price={data?.price} currency="$" />
       <ProductTeaserButton path={`/product/${data?.id}`} />
