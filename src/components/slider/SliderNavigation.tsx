@@ -4,20 +4,31 @@ import { useSwiper } from 'swiper/react'
 import useSizeScreen from '../../hooks/useSizeScreen'
 import Button from '../button/Button'
 
-const SliderNavigation: FC = () => {
+interface IProps {
+  position: string | undefined
+}
+
+const SliderNavigation: FC<IProps> = ({ position }) => {
   const swiper = useSwiper()
   const [disabledPrev, setDisabledPrev] = useState(false)
   const [disabledNext, setDisabledNext] = useState(false)
   const screen = useSizeScreen()
 
   const style = {
-    buttons: {
+    wrapper: {
       position: 'relative',
       width: '100%',
       display: 'flex',
       justifyContent: 'space-between',
       zIndex: 99,
-      marginTop: screen.isS ? '30px' : '10px'
+      marginTop: screen.isS ? '30px' : '10px',
+      transform: position === 'center' ? 'translateY(-50vh)' : undefined
+    },
+    buttons: {
+      background: 'white',
+      borderRadius: '50%',
+      height: 40,
+      width: 40
     }
   } as const
 
@@ -38,7 +49,7 @@ const SliderNavigation: FC = () => {
   }, [disabledPrev])
 
   return (
-    <div style={style.buttons}>
+    <div style={style.wrapper}>
       <Button
         type="button"
         disabled={disabledPrev}
@@ -46,7 +57,10 @@ const SliderNavigation: FC = () => {
         icon={IoIosArrowBack}
         onClick={onClickPrev}
         iconSize={35}
-        styleCss={{ color: disabledPrev ? 'lightgray' : 'black' }}
+        styleCss={{
+          ...style.buttons,
+          color: disabledPrev ? 'lightgray' : 'black'
+        }}
       />
 
       <Button
@@ -56,7 +70,10 @@ const SliderNavigation: FC = () => {
         icon={IoIosArrowForward}
         onClick={onClickNext}
         iconSize={35}
-        styleCss={{ color: disabledNext ? 'lightgray' : 'black' }}
+        styleCss={{
+          ...style.buttons,
+          color: disabledNext ? 'lightgray' : 'black'
+        }}
       />
     </div>
   )
