@@ -6,6 +6,7 @@ import { Button, Overlay } from '../../../../components'
 import { useDisableScroll } from '../../../../hooks'
 import Section from '../../../../layout/Section'
 import NavBarButton from '../nav-bar/NavBarButton'
+import NavBarButtonLink from '../nav-bar/NavBarButtonLink'
 
 interface IProps {
   isOpen: boolean
@@ -57,17 +58,19 @@ const MegaNav: FC<IProps> = ({ isOpen, categories }) => {
   const gotoOnClick = () => {
     dispatch(registerModal(null))
     scrollToTop()
+    unlockScroll()
   }
 
   const generateLinks = (): JSX.Element[] => {
     return categories.map((item, index) => {
       return (
         <li key={item.title}>
-          <NavBarButton
+          <NavBarButtonLink
             title={item.title}
             id={index}
             onClick={gotoOnClick}
             color="black"
+            path={`/products/${item.path}`}
           />
         </li>
       )
