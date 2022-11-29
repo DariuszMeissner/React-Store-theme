@@ -47,7 +47,8 @@ const Button: FC<IProps> = ({
     },
     icon: {
       height: `${iconSize}px`,
-      width: `${iconSize}px`
+      width: `${iconSize}px`,
+      marginRight: text ? 5 : 0
     }
   } as const
 
