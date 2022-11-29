@@ -18,12 +18,12 @@ const style = {
 const Image: FC<IProps> = ({ data, src, href }) => {
   const [isImage] = useImageLoad(src)
 
-  const imageWithLInk = data && href && (
+  const imageWithLInk = data && href && src && (
     <a href={href}>
       <img src={src} alt={data?.title} style={style} />
     </a>
   )
-  const imageWithoutLInk = src && (
+  const imageWithoutLInk = data && src && !href && (
     <img src={src} alt={data?.title} style={style} />
   )
 
