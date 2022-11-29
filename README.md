@@ -4,7 +4,7 @@ Private project to learn create ecommerce website.
 
 #### demo https://dariuszmeissner.github.io/React-Store-theme/
 
-#### tech stacks
+#### tech stack
 
 - React
 - Typescript
