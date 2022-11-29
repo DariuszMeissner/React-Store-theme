@@ -32,9 +32,11 @@ const ProductPage: FC = () => {
     <div className="product-page">
       {data && (
         <>
+          {screen.isS && <ProductCarousel images={data?.images} />}
+
           <Section styleCss={style.section}>
             <div style={style.carouselWrapper}>
-              <ProductCarousel images={data?.images} />
+              {!screen.isS && <ProductCarousel images={data?.images} />}
             </div>
             <div style={style.deatilsWrapper}>
               <Breadcrumbs category={data.category} />

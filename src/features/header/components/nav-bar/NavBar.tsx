@@ -1,13 +1,11 @@
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { registerModal } from '../../../../api/feature/modal-slice/modalSlice'
 import { RootState } from '../../../../api/feature/store'
-import { Overlay } from '../../../../components'
-import Button from '../../../../components/button/Button'
 import { useDisableScroll } from '../../../../hooks'
-import MODALS from '../../../../util/modalsID'
 import MENU_ITEM from '../../utils/mainMenu.config'
 import MegaNav from '../mega-nav/MegaNav'
+import NavBarButton from './NavBarButton'
 
 const style = {
   container: {
@@ -19,7 +17,6 @@ const style = {
     top: 0,
     zIndex: 6,
     width: '100%',
-    height: '60px',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -31,10 +28,11 @@ const style = {
     alignItems: 'center'
   },
   itemLink: {
-    color: 'white'
+    color: 'white',
+    lineHeight: '36px'
   },
   activeLink: {
-    borderBottom: '2px solid black'
+    borderBottom: '2px solid red'
   }
 } as const
 
@@ -59,13 +57,10 @@ const NavBar: FC = () => {
     return MENU_ITEM.map((item) => {
       return (
         <li key={item.id}>
-          <Button
-            type="button"
-            text={item.label}
-            variant="underline"
+          <NavBarButton
+            title={item.label}
+            id={item.id}
             onClick={() => openMegaNav(item.id)}
-            styleCss={style.itemLink}
-            activeCss={style.activeLink}
           />
         </li>
       )

@@ -9,11 +9,10 @@ interface IProps {
   variant?: 'underline' | 'white' | 'black' | null
   path?: string | null
   styleCss?: CSSProperties
-  activeCss?: CSSProperties
   icon?: React.ElementType | undefined
-  disabled?: boolean
   iconSize?: number
-  onClick?: ((e: React.MouseEvent) => void) | undefined
+  disabled?: boolean
+  onClick?: (e: React.MouseEvent) => void
   children?: React.ReactNode
 }
 
@@ -24,7 +23,6 @@ const Button: FC<IProps> = ({
   path,
   variant,
   styleCss,
-  activeCss,
   icon,
   iconSize,
   disabled,
@@ -37,7 +35,7 @@ const Button: FC<IProps> = ({
     button: {
       background: variant ? undefined : 'transparent',
       color: '#fff',
-      lineHeight: '28px',
+      lineHeight: '20px',
       border: 'none',
       display: 'flex',
       justifyContent: 'center',
@@ -49,20 +47,14 @@ const Button: FC<IProps> = ({
     },
     icon: {
       height: `${iconSize}px`,
-      width: `${iconSize}px`,
-      marginRight: '5px'
-    },
-    activeLink: {
-      ...activeCss
+      width: `${iconSize}px`
     }
   } as const
 
   return (
     <>
       {type === 'link' && (
-        <NavLink
-          to={`${path}`}
-          style={({ isActive }) => (isActive ? style.activeLink : undefined)}>
+        <NavLink to={`${path}`}>
           <span className={`link link-${variant}`} style={styleCss}>
             {text}
           </span>
@@ -110,7 +102,6 @@ Button.defaultProps = {
   text: '',
   variant: undefined,
   styleCss: {},
-  activeCss: {},
   iconSize: 25,
   disabled: false,
   path: null,

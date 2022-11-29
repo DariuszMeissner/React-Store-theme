@@ -12,6 +12,7 @@ interface IProps {
   spaceBetween: number
   slidesPerView: number
   navigation?: boolean
+  navigationPosition?: 'center' | 'bottom'
   configuration?: 'scrollbar' | 'pagination'
   children: React.ReactNode
 }
@@ -20,6 +21,7 @@ const Slider: FC<IProps> = ({
   spaceBetween,
   slidesPerView,
   navigation,
+  navigationPosition,
   children,
   configuration
 }) => {
@@ -51,7 +53,9 @@ const Slider: FC<IProps> = ({
       ))}
 
       {/* navigation */}
-      {navigation ? <SliderNavigation /> : undefined}
+      {navigation ? (
+        <SliderNavigation position={navigationPosition} />
+      ) : undefined}
       <div className="swiper-scrollbar" />
     </Swiper>
   )
@@ -59,7 +63,8 @@ const Slider: FC<IProps> = ({
 
 Slider.defaultProps = {
   configuration: 'pagination',
-  navigation: true
+  navigation: true,
+  navigationPosition: 'bottom'
 }
 
 export default Slider

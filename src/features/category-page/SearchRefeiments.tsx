@@ -14,7 +14,7 @@ import {
   Accordion,
   AnimationCss,
   Button,
-  Headline1,
+  Headline2,
   Modal,
   Overlay
 } from '../../components'
@@ -47,14 +47,13 @@ const style = {
     transform: 'translateX(-50%)',
     display: 'flex',
     justifyContent: 'start',
-    padding: 50,
-    maxWidth: 600
+    padding: 15
   },
   iconButtonClose: {
     color: 'black',
     position: 'absolute',
     top: 20,
-    right: 20
+    right: -5
   }
 } as const
 
@@ -154,6 +153,7 @@ const SearchRefeiments: FC<IProps> = ({ data, category }) => {
         {/* sort filter on X/L */}
         {(screen.isX || screen.isL) && (
           <>
+            {/* sort */}
             <FilterAccordion
               id={MODALS.FILTER_SORT_ID}
               title={`Order by : ${sortingValue}`}>
@@ -202,8 +202,7 @@ const SearchRefeiments: FC<IProps> = ({ data, category }) => {
             {isActiveModal === MODALS.ALL_FILTERS && (
               <Overlay
                 styleCss={{
-                  top: 0 - (rect?.top || 0) - (rect?.height || 0),
-                  zIndex: '6'
+                  top: 0 - (rect?.top || 0) - (rect?.height || 0)
                 }}
               />
             )}
@@ -234,13 +233,13 @@ const SearchRefeiments: FC<IProps> = ({ data, category }) => {
               onClick={() => handleRegisterModal(MODALS.ALL_FILTERS)}
               styleCss={style.iconButtonClose}
             />
-            <Headline1>Filter</Headline1>
+            <Headline2>Filter</Headline2>
             <Accordion
+              styleCss={{ height: 'auto', marginTop: '20px' }}
               titles={[
                 `Sort by: ${sortingValue}`,
                 `Brand: ${filterBrandValue} `
-              ]}
-              styleCss={{ height: 'auto', marginTop: '20px' }}>
+              ]}>
               <FilterSort
                 sortingValue={sortingValue}
                 onChangeSortFilter={onChangeSortFilter}

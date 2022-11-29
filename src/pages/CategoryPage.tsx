@@ -9,12 +9,6 @@ import { Grid, Headline2, ProductTeaser } from '../components'
 import { LoadMore, SearchRefeiments } from '../features'
 import { Section } from '../layout'
 
-export const style = {
-  section: {
-    margin: '25px 0'
-  }
-} as const
-
 export const PRODUCT_PER_PAGE = 8
 
 const CategoryPage: FC = () => {
@@ -39,8 +33,8 @@ const CategoryPage: FC = () => {
 
   return (
     <main className="main-content">
-      <Section styleCss={style.section}>
-        <Headline2>{headline}</Headline2>
+      <Section styleCss={{ margin: '25px 0' }}>
+        <Headline2 styleCss={{ textAlign: 'center' }}>{headline}</Headline2>
         {category && (
           <SearchRefeiments data={products || []} category={category} />
         )}
