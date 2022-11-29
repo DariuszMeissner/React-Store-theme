@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { IProduct } from '../api/feature/apiSlice'
 import { ICartProduct } from '../api/feature/cart-slice/cartSlice'

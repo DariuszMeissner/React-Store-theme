@@ -14,7 +14,6 @@ const Headline2: FC<IProps> = ({ children, color, styleCss }) => {
     marginTop: '20px',
     marginBottom: '20px',
     textTransform: 'capitalize',
-    textAlign: 'center',
     ...styleCss
   } as const
 

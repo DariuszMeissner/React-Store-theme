@@ -21,7 +21,7 @@ const style = {
   cartTop: {
     display: 'flex',
     justifyContent: 'space-between',
-    marginBottom: '30px',
+    marginBottom: 30,
     position: 'relative'
   },
   iconButtonClose: {
@@ -38,7 +38,7 @@ const style = {
   cartInfo: {
     display: 'flex',
     justifyContent: 'space-between',
-    marginBottom: '20px'
+    marginBottom: 20
   },
   headline2: {
     textAlign: 'left'

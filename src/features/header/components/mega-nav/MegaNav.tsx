@@ -1,11 +1,11 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC } from 'react'
 import { IoCloseOutline } from 'react-icons/io5'
 import { useDispatch } from 'react-redux'
-import { useLocation } from 'react-router-dom'
 import { registerModal } from '../../../../api/feature/modal-slice/modalSlice'
 import { Button, Overlay } from '../../../../components'
 import { useDisableScroll } from '../../../../hooks'
 import Section from '../../../../layout/Section'
+import NavBarButton from '../nav-bar/NavBarButton'
 
 interface IProps {
   isOpen: boolean
@@ -52,20 +52,22 @@ const MegaNav: FC<IProps> = ({ isOpen, categories }) => {
   const closeOnClick = () => {
     dispatch(registerModal(null))
     unlockScroll()
+  }
+
+  const gotoOnClick = () => {
+    dispatch(registerModal(null))
     scrollToTop()
   }
 
   const generateLinks = (): JSX.Element[] => {
-    return categories.map((item) => {
+    return categories.map((item, index) => {
       return (
         <li key={item.title}>
-          <Button
-            type="button-link"
-            text={item.title}
-            path={`/products/${item.path}`}
-            variant="underline"
-            onClick={closeOnClick}
-            styleCss={{ color: 'black', lineHeight: '20px' }}
+          <NavBarButton
+            title={item.title}
+            id={index}
+            onClick={gotoOnClick}
+            color="black"
           />
         </li>
       )

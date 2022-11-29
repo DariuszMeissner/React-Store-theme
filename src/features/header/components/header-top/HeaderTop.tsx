@@ -33,12 +33,16 @@ const HeaderTop: FC<IProps> = ({ onClick }) => {
     w50: { width: '50%' },
     alignEnd: { display: 'flex', justifyContent: 'end' },
     cartIcon: {
-      position: 'relative',
-      borderBottom:
-        activeModal === MODALS.CART_ID
-          ? '1px solid #da291c'
-          : '1px solid transparent',
-      transition: '300ms ease-in'
+      base: {
+        position: 'relative'
+      },
+      active: {
+        borderBottom:
+          activeModal === MODALS.CART_ID
+            ? '1px solid #da291c'
+            : '1px solid transparent',
+        transition: '300ms ease-in'
+      }
     },
     itemNumbers: {
       position: 'absolute',
@@ -79,12 +83,13 @@ const HeaderTop: FC<IProps> = ({ onClick }) => {
         {/* search button */}
         {/* <Button label="search" onClick={() => {}} icon={HiSearch} /> */}
 
-        <div style={style.cartIcon}>
+        <div style={style.cartIcon.base}>
           <Button
             type="button"
             label="cart"
             onClick={() => onClick(MODALS.CART_ID)}
-            icon={IoCartOutline}>
+            icon={IoCartOutline}
+            styleCss={style.cartIcon.active}>
             {/* count products badge */}
             {allProductsCart.length !== 0 && (
               <span style={style.itemNumbers}>{allProductsCart.length}</span>

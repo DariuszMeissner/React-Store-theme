@@ -29,11 +29,17 @@ const style = {
     width: '100%'
   },
   menuTop: {
+    width: '100%',
     display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center'
+    justifyContent: 'end'
+  },
+  title: {
+    display: 'flex'
   },
   iconButtonClose: {
+    position: 'absolute',
+    top: 15,
+    right: 10,
     color: 'black',
     margin: 0
   },
@@ -58,8 +64,8 @@ const MenuMobile: FC<IProps> = ({ closeOnClick }) => {
   return (
     <>
       <div className="menu-mobile" style={style.container}>
+        {/* close button */}
         <div style={style.menuTop}>
-          <Headline2>Menu</Headline2>
           <Button
             type="button"
             label="icon-close"
@@ -67,6 +73,11 @@ const MenuMobile: FC<IProps> = ({ closeOnClick }) => {
             onClick={closeOnClick}
             styleCss={style.iconButtonClose}
           />
+        </div>
+
+        {/* title */}
+        <div style={style.title}>
+          <Headline2>Menu</Headline2>
         </div>
 
         {/* menu level 0 */}
