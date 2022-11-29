@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { RootState } from '../../../../api/feature/store'
 
 interface IProps {
@@ -7,9 +8,10 @@ interface IProps {
   id: number
   onClick: () => void
   color?: string
+  path: string
 }
 
-const NavBarButton: FC<IProps> = ({ title, id, onClick, color }) => {
+const NavBarButtonLink: FC<IProps> = ({ title, id, onClick, color, path }) => {
   const [onMouse, setOnMouse] = useState<boolean>(false)
   const activeNav = useSelector((state: RootState) => state.modal.registered)
 
@@ -22,7 +24,8 @@ const NavBarButton: FC<IProps> = ({ title, id, onClick, color }) => {
       textTransform: 'uppercase',
       margin: '0 20px',
       borderBottom: `5px solid ${isActive ? 'white' : 'transparent'}`,
-      position: 'relative'
+      position: 'relative',
+      paddingBottom: 8
     },
     hover: {
       position: 'absolute',
@@ -46,20 +49,20 @@ const NavBarButton: FC<IProps> = ({ title, id, onClick, color }) => {
   const handleOnMouseLeave = () => setOnMouse(false)
 
   return (
-    <button
+    <Link
       style={style.main}
-      type="button"
+      to={path}
       onClick={handleOnClick}
       onMouseEnter={handleOnMouseEnter}
       onMouseLeave={handleOnMouseLeave}>
       <span>{title}</span>
       <div style={style.hover} />
-    </button>
+    </Link>
   )
 }
 
-NavBarButton.defaultProps = {
+NavBarButtonLink.defaultProps = {
   color: '#ffffff'
 }
 
-export default NavBarButton
+export default NavBarButtonLink
