@@ -1,5 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
-import Skeleton from 'react-loading-skeleton'
+import React, { FC } from 'react'
 import { apiSlice } from '../../api/feature/apiSlice'
 import { useSizeScreen } from '../../hooks'
 import ImageBackground from '../ImageBackground'

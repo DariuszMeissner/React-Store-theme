@@ -1,4 +1,4 @@
-import React, { ChangeEvent, CSSProperties, FC } from 'react'
+import React, { ChangeEvent, FC } from 'react'
 import { useSizeScreen } from '../hooks'
 
 interface IProps {

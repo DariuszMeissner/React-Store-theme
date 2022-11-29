@@ -4,7 +4,6 @@ import {
   Description,
   Grid,
   Headline1,
-  Image,
   Button,
   ImageBackground
 } from '../../components'
