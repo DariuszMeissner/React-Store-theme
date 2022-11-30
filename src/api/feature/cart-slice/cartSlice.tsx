@@ -1,5 +1,3 @@
-/* eslint-disable no-return-assign */
-/* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { IProduct } from '../apiSlice'
 
@@ -34,7 +32,7 @@ const cartSlice = createSlice({
       if (exist) {
         state.products.map((item) => {
           if (item.id === product.id) {
-            return (item.quantity += 1)
+            exist.quantity += 1
           }
           return item
         })
@@ -52,27 +50,36 @@ const cartSlice = createSlice({
     },
     removeProduct: (state, action: PayloadAction<number>) => {
       const itemId = action.payload
-      state.products = state.products.filter((el) => el.id !== itemId)
+
+      return {
+        ...state,
+        products: state.products.filter((el) => el.id !== itemId)
+      }
     },
 
     clearCart: (state) => {
-      state.products = []
+      return {
+        ...state,
+        products: []
+      }
     },
 
     increase: (state, action: PayloadAction<number>) => {
       const itemId = action.payload
-      const itemIndex = state.products.findIndex((item) => item.id === itemId)
-      const itemAmount = state.products[itemIndex].quantity
+      const itemInCart = state.products.find((item) => item.id === itemId)
 
-      if (itemAmount) state.products[itemIndex].quantity += 1
+      if (itemInCart) {
+        itemInCart.quantity += 1
+      }
     },
 
     decrease: (state, action: PayloadAction<number>) => {
       const itemId = action.payload
-      const itemIndex = state.products.findIndex((item) => item.id === itemId)
-      const itemAmount = state.products[itemIndex].quantity
+      const itemInCart = state.products.find((item) => item.id === itemId)
 
-      if (itemAmount > 1) state.products[itemIndex].quantity -= 1
+      if (itemInCart) {
+        itemInCart.quantity -= 1
+      }
     }
   }
 })

@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit'
 
 interface IInitialState {
@@ -22,12 +21,11 @@ const modalSlice = createSlice({
   reducers: {
     registerModal: (state, actions: { payload: number | null }) => {
       const id = actions.payload
-      state.registered = id
-      state.scrollY = window.scrollY
 
-      if (id === null) {
-        state.mobileMenu.registered = null
-        state.mobileMenu.level = null
+      return {
+        ...state,
+        registered: id,
+        scrollY: window.scrollY
       }
     },
     registerMenu: (
@@ -37,8 +35,13 @@ const modalSlice = createSlice({
       const menuId = actions.payload.register
       const levelId = actions.payload.level
 
-      state.mobileMenu.registered = menuId
-      state.mobileMenu.level = levelId
+      return {
+        ...state,
+        mobileMenu: {
+          registered: menuId,
+          level: levelId
+        }
+      }
     }
   }
 })

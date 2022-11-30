@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { IProduct } from '../apiSlice'
 
@@ -17,26 +16,41 @@ const searchRefeimentsSlice = createSlice({
     sortByHeigestPrice: (state, actions: PayloadAction<IProduct[]>) => {
       const products = actions.payload || []
 
-      state.products = products.sort(
+      const sortedProducts = products.sort(
         (curr: { price: number }, next: { price: number }) =>
           next.price - curr.price
       )
+
+      return {
+        ...state,
+        products: sortedProducts
+      }
     },
     sortByLowestPrice: (state, actions: PayloadAction<IProduct[]>) => {
       const products = actions.payload || []
 
-      state.products = products.sort(
+      const sortedProducts = products.sort(
         (curr: { price: number }, next: { price: number }) =>
           curr.price - next.price
       )
+
+      return {
+        ...state,
+        products: sortedProducts
+      }
     },
     sortByRating: (state, actions: PayloadAction<IProduct[]>) => {
       const products = actions.payload || []
 
-      state.products = products.sort(
+      const sortedProducts = products.sort(
         (curr: { rating: number }, next: { rating: number }) =>
           next.rating - curr.rating
       )
+
+      return {
+        ...state,
+        products: sortedProducts
+      }
     },
     filterByBrand: (
       state,
@@ -44,9 +58,14 @@ const searchRefeimentsSlice = createSlice({
     ) => {
       const { brand, products } = actions.payload
 
-      state.products = products.filter(
+      const sortedProducts = products.filter(
         (product: { brand: string }) => product.brand === brand
       )
+
+      return {
+        ...state,
+        products: sortedProducts
+      }
     }
   }
 })
