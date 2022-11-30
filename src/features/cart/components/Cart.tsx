@@ -1,13 +1,11 @@
 import React, { FC } from 'react'
 import { IoCloseOutline } from 'react-icons/io5'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import {
   selectAllProductsCart,
   totalPrice
 } from '../../../api/feature/cart-slice/cartSlice'
-import { registerModal } from '../../../api/feature/modal-slice/modalSlice'
 import { Button, Headline2 } from '../../../components'
-import { useDisableScroll } from '../../../hooks'
 import CartItem from './CartItem'
 import CountLabel from './CountLabel'
 import Subtotal from './Subtotal'

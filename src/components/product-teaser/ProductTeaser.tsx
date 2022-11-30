@@ -10,20 +10,20 @@ interface IProps {
   productId: string
 }
 
+const style = {
+  teaser: {
+    marginBottom: 15
+  },
+  data: {
+    marginTop: 10
+  }
+}
+
 const ProductTeaser: FC<IProps> = ({ productId }) => {
   const screen = useSizeScreen()
   const { data } = apiSlice.useGetSingleProductQuery(productId)
 
   const HEIGHT_IMAGE = screen.isS ? '230px' : '300px'
-
-  const style = {
-    teaser: {
-      marginBottom: screen.isS ? '15px' : '40px'
-    },
-    data: {
-      marginTop: '10px'
-    }
-  }
 
   return (
     <div className="product-teaser" style={style.teaser}>

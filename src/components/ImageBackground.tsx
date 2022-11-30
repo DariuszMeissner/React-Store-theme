@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import Skeleton from 'react-loading-skeleton'
+import { Link } from 'react-router-dom'
 import { useImageLoad } from '../hooks'
 
 interface IProps {
@@ -26,9 +27,9 @@ const ImageBackground: FC<IProps> = ({ pathImage, children, height, href }) => {
   ) : (
     <>
       {href && (
-        <a href={href}>
+        <Link to={href}>
           <div style={style}>{children}</div>
-        </a>
+        </Link>
       )}
 
       {!href && <div style={style}>{children}</div>}

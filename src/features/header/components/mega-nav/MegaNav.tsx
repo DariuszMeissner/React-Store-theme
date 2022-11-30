@@ -5,7 +5,6 @@ import { registerModal } from '../../../../api/feature/modal-slice/modalSlice'
 import { Button, Overlay } from '../../../../components'
 import { useDisableScroll } from '../../../../hooks'
 import Section from '../../../../layout/Section'
-import NavBarButton from '../nav-bar/NavBarButton'
 import NavBarButtonLink from '../nav-bar/NavBarButtonLink'
 
 interface IProps {

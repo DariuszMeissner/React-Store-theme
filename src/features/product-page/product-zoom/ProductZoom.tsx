@@ -12,15 +12,22 @@ const ProductZoom: FC<IProps> = ({ images, closeOnClick }) => {
   const screen = useSizeScreen()
 
   const style = {
+    sliderWrapper: {
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
     slider: {
-      height: screen.isS ? '' : '80vh',
-      width: 'max-content',
+      height: screen.isL || screen.isX ? '100%' : undefined,
+      width: screen.isL || screen.isX ? 'max-content' : '100%',
       margin: '0 auto'
     },
     cartTop: {
       display: 'flex',
       justifyContent: 'end',
-      marginBottom: 30,
+      marginBottom: 10,
       position: 'relative'
     },
     iconButtonClose: {
@@ -34,7 +41,7 @@ const ProductZoom: FC<IProps> = ({ images, closeOnClick }) => {
   } as const
 
   return (
-    <div>
+    <div style={{ height: '100vh' }}>
       <div style={style.cartTop}>
         <Button
           type="button"
@@ -45,18 +52,22 @@ const ProductZoom: FC<IProps> = ({ images, closeOnClick }) => {
           styleCss={style.iconButtonClose}
         />
       </div>
-      <Slider
-        spaceBetween={10}
-        slidesPerView={1}
-        navigation
-        navigationPosition="center"
-        configuration="scrollbar">
-        {images?.map((path) => (
-          <div className="image-slider" style={style.slider} key={path}>
-            <Image src={path} />
-          </div>
-        ))}
-      </Slider>
+      <div style={{ height: '90vh', display: 'flex' }}>
+        <Slider
+          spaceBetween={10}
+          slidesPerView={1}
+          navigation
+          navigationPosition="center"
+          configuration="scrollbar">
+          {images?.map((path) => (
+            <div style={style.sliderWrapper}>
+              <div className="image-slider" style={style.slider} key={path}>
+                <Image src={path} />
+              </div>
+            </div>
+          ))}
+        </Slider>
+      </div>
     </div>
   )
 }
