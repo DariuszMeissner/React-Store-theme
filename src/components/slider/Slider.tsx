@@ -56,6 +56,8 @@ const Slider: FC<IProps> = ({
       {navigation ? (
         <SliderNavigation position={navigationPosition} />
       ) : undefined}
+
+      {/* scrollbar */}
       {configuration === 'scrollbar' && <div className="swiper-scrollbar" />}
     </Swiper>
   )
