@@ -51,12 +51,13 @@ const MenuMobileLevel: FC<IProps> = ({ isOpen, categories, title }) => {
     }
   } as const
 
-  const closeLevel = (menuId: number | null, levelId: number) => {
-    dispatch(registerMenu({ register: menuId, level: levelId }))
+  const closeLevel = () => {
+    dispatch(registerMenu({ register: null, level: null }))
   }
 
   const closeMenu = () => {
     dispatch(registerModal(null))
+    dispatch(registerMenu({ register: null, level: null }))
     unlockScroll()
   }
 
@@ -71,7 +72,7 @@ const MenuMobileLevel: FC<IProps> = ({ isOpen, categories, title }) => {
                 type="button"
                 label="icon-back"
                 icon={HiArrowLongLeft}
-                onClick={() => closeLevel(null, 1)}
+                onClick={() => closeLevel()}
                 styleCss={style.iconButton}
               />
               <Headline2 styleCss={style.menuTitle}>{title}</Headline2>

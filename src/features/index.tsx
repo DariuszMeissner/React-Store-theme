@@ -8,8 +8,11 @@ import SearchRefeiments from './category-page/SearchRefeiments'
 import FilterAccordion from './category-page/FilterAccordion'
 import FilterSort from './category-page/FilterSort'
 import FilterBrand from './category-page/FilterBrand'
+
 import Hero from './home/Hero'
 import ProductZoom from './product-page/product-zoom/ProductZoom'
+import ProgressBar from './checkout/ProgressBar'
+
 import SkeletonCategoryPage from './category-page/skeleton/SkeletonCategoryPage'
 import SkeletonCollectionProducts from './home/skeleton/SkeletonCollectionProducts'
 import SkeletonTwoColumnsProducts from './home/skeleton/SkeletonTwoColumnsProducts'
@@ -33,6 +36,9 @@ export {
   FilterBrand,
   Hero,
   ProductZoom,
+
+  // checkout
+  ProgressBar,
 
   // skeletons
   SkeletonHome,

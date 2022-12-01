@@ -18,7 +18,7 @@ const CategoryPage: FC = () => {
     category || ''
   )
   const products = useSelector(
-    (state: RootState) => state.searchRefeimentsSlice.products
+    (state: RootState) => state.searchRefeiments.products
   )
 
   const headline = category?.replace('-', ' ')

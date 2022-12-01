@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import App from './App'
-import OrderPage from './layout/OrderPage'
+import OrderPage from './pages/OrderPage'
 import routes, { routesOrder } from './routes.config'
 
 const AppRoutes: FC = () => {
