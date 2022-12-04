@@ -19,7 +19,7 @@ const CartItem: FC<IProps> = ({ product }) => {
   const screen = useSizeScreen()
   const dispatch = useDispatch()
 
-  const HEIGHT_IMAGE = screen.isX || screen.isL ? '210px' : '160px'
+  const HEIGHT_IMAGE = screen.isX || screen.isL ? '180px' : '160px'
 
   const style = {
     item: {
@@ -27,7 +27,8 @@ const CartItem: FC<IProps> = ({ product }) => {
       marginTop: '25px'
     },
     image: {
-      width: '40%',
+      width: '100%',
+      maxWidth: 160,
       height: HEIGHT_IMAGE
     },
     itemInfo: {

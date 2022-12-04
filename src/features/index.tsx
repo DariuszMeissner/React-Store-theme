@@ -11,7 +11,7 @@ import FilterBrand from './category-page/FilterBrand'
 
 import Hero from './home/Hero'
 import ProductZoom from './product-page/product-zoom/ProductZoom'
-import ProgressBar from './checkout/ProgressBar'
+import CheckoutProgressBar from './checkout/main/CheckoutProgressBar'
 
 import SkeletonCategoryPage from './category-page/skeleton/SkeletonCategoryPage'
 import SkeletonCollectionProducts from './home/skeleton/SkeletonCollectionProducts'
@@ -38,7 +38,7 @@ export {
   ProductZoom,
 
   // checkout
-  ProgressBar,
+  CheckoutProgressBar,
 
   // skeletons
   SkeletonHome,
