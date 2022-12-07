@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC } from 'react'
+import React, { ChangeEvent, FC, useEffect } from 'react'
 import { IProduct } from '../../api/feature/apiSlice'
 import { Button, RadioButton } from '../../components'
 import { useSizeScreen } from '../../hooks'
@@ -20,6 +20,9 @@ const FilterBrand: FC<IProps> = ({
 }) => {
   const screen = useSizeScreen()
 
+  const categories = allCategoryProducts.map((el) => el.brand)
+  const categoriesWithoutDuplicate = [...new Set(categories)]
+
   const style = {
     container: {
       width: '100%',
@@ -38,12 +41,12 @@ const FilterBrand: FC<IProps> = ({
   return (
     <div style={style.container}>
       <div style={style.buttons}>
-        {allCategoryProducts.map((el) => (
+        {categoriesWithoutDuplicate.map((category) => (
           <RadioButton
-            label={el.brand}
-            value={filterBrandValue === el.brand}
+            label={category}
+            value={filterBrandValue === category}
             onChange={onChangeBrandFilter}
-            key={el.id}
+            key={category}
           />
         ))}
         <RadioButton

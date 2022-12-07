@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { AiOutlineMinusCircle, AiOutlinePlusCircle } from 'react-icons/ai'
+import { CiCirclePlus, CiCircleMinus } from 'react-icons/ci'
 import { Button } from '../../../components'
 
 interface IProps {
@@ -18,31 +18,36 @@ const style = {
   button: {
     margin: '0'
   },
+  qtyLabel: {
+    fontWeight: 300
+  },
   qty: {
-    padding: '0 10px'
+    padding: '0 10px',
+    fontWeight: 500
   }
 }
 
 const ItemQuantity: FC<IProps> = ({ qty, stock, increase, decrease }) => {
   return (
     <div className="qty-label" style={style.container}>
+      <span style={style.qtyLabel}>Quantity:</span>
+      <span style={style.qty}>{qty}</span>
       <Button
         type="button"
         label="icon-decrease"
         disabled={qty === 1}
-        icon={AiOutlineMinusCircle}
+        icon={CiCircleMinus}
         onClick={decrease}
         styleCss={{
           ...style.button,
           color: qty === 1 ? 'lightgray' : '#181818'
         }}
       />
-      <span style={style.qty}>{qty}</span>
       <Button
         type="button"
         label="icon-increase"
         disabled={qty === stock}
-        icon={AiOutlinePlusCircle}
+        icon={CiCirclePlus}
         onClick={increase}
         styleCss={{
           ...style.button,

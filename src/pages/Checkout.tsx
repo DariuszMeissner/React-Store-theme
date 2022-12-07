@@ -1,10 +1,30 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { registerStep } from '../api/feature/checkout/checkoutSlice'
+import { Headline1 } from '../components'
+import CheckoutColumnWrapper from '../features/checkout/CheckoutColumnWrapper'
+
 import { Section } from '../layout'
 
 const Checkout: FC = () => {
+  const dispatch = useDispatch()
+  const { step } = useParams()
+
+  useEffect(() => {
+    if (step) {
+      dispatch(registerStep(step))
+    }
+  }, [step])
+
   return (
-    <Section styleCss={{ textAlign: 'center', fontSize: 30 }}>
-      <p>Work in progress!!</p>
+    <Section styleCss={{ margin: 0 }}>
+      <Headline1 styleCss={{ textAlign: 'center', margin: '48px 0' }}>
+        Shopping Bag
+      </Headline1>
+
+      {/* content */}
+      <CheckoutColumnWrapper />
     </Section>
   )
 }

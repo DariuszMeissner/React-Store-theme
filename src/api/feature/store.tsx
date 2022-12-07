@@ -13,19 +13,21 @@ import {
 import { apiSlice } from './apiSlice'
 import cartReducer from './cart-slice/cartSlice'
 import modalReducer from './modal-slice/modalSlice'
+import checkoutReducer from './checkout/checkoutSlice'
 import searchRefeimentsSliceReducer from './search-refeiments-slice/searchRefeimentsSlice'
 
 const persistConfig = {
   key: 'root',
   version: 1,
   storage,
-  blacklist: ['modal', 'searchRefeimentsSlice', 'apiSlice.reducerPath']
+  blacklist: ['modal', 'searchRefeiments', 'checkout', 'apiSlice.reducerPath']
 }
 
 const reducers = combineReducers({
   cart: cartReducer,
   modal: modalReducer,
-  searchRefeimentsSlice: searchRefeimentsSliceReducer,
+  checkout: checkoutReducer,
+  searchRefeiments: searchRefeimentsSliceReducer,
   [apiSlice.reducerPath]: apiSlice.reducer
 })
 

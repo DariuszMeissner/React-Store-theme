@@ -5,6 +5,7 @@ interface IProps {
 }
 
 const style = {
+  fontWeight: 300,
   paddingRight: '10px',
   lineHeight: '16px'
 }

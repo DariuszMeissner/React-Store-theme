@@ -45,7 +45,7 @@ const routes = [
 
 const routesOrder = [
   {
-    path: '/checkout',
+    path: '/checkout/:step',
     name: 'Checkout',
     element: (
       <Suspense fallback={<div />}>

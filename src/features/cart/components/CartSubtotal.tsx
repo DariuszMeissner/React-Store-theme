@@ -4,14 +4,14 @@ interface IProps {
   subtotal: number
 }
 
-const Subtotal: FC<IProps> = ({ subtotal }) => {
+const CartSubtotal: FC<IProps> = ({ subtotal }) => {
   return (
     <div className="subtotal-label">
-      <span>Subtotal:&nbsp;</span>
+      <span>CartSubtotal:&nbsp;</span>
       <span>£&nbsp;</span>
       <span>{subtotal}</span>
     </div>
   )
 }
 
-export default Subtotal
+export default CartSubtotal

@@ -57,9 +57,9 @@ const Button: FC<IProps> = ({
       {type === 'link' && (
         <NavLink to={`${path}`}>
           <span className={`link link-${variant}`} style={styleCss}>
+            {icon && <Icon style={style.icon} />}
             {text}
           </span>
-          {icon && <Icon style={style.icon} />}
         </NavLink>
       )}
 

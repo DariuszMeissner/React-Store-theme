@@ -8,7 +8,7 @@ import {
 import { Button, Headline2 } from '../../../components'
 import CartItem from './CartItem'
 import CountLabel from './CountLabel'
-import Subtotal from './Subtotal'
+import CartSubtotal from './CartSubtotal'
 
 interface IProps {
   closeOnClick: () => void
@@ -40,8 +40,12 @@ const style = {
     justifyContent: 'space-between',
     marginBottom: 20
   },
-  headline2: {
-    textAlign: 'left'
+  procced: {
+    width: '250px',
+    marginLeft: '0',
+    color: 'black',
+    border: '1px solid',
+    padding: 10
   }
 } as const
 
@@ -58,7 +62,7 @@ const Cart: FC<IProps> = ({ closeOnClick }) => {
   const cartList = generateCartList()
 
   return (
-    <div className="cart-modal">
+    <div className="cart">
       <div style={style.cartTop}>
         <Button
           type="button"
@@ -68,7 +72,7 @@ const Cart: FC<IProps> = ({ closeOnClick }) => {
           styleCss={style.iconButtonClose}
         />
       </div>
-      <Headline2 styleCss={style.headline2}>Shopping Bag</Headline2>
+      <Headline2>Shopping Bag</Headline2>
 
       {/* show products */}
       {cartList.length > 0 && (
@@ -76,7 +80,7 @@ const Cart: FC<IProps> = ({ closeOnClick }) => {
           {/* cart info */}
           <div style={style.cartInfo}>
             <CountLabel count={cartList.length} />
-            <Subtotal subtotal={cartTotal} />
+            <CartSubtotal subtotal={cartTotal} />
           </div>
 
           {/* listing products */}
@@ -86,15 +90,10 @@ const Cart: FC<IProps> = ({ closeOnClick }) => {
           <Button
             type="button-link"
             text="Procced to purchase"
-            path="/checkout"
+            path="/checkout/cart"
             onClick={closeOnClick}
             variant="white"
-            styleCss={{
-              width: '250px',
-              marginLeft: '0',
-              color: 'black',
-              border: '1px solid'
-            }}
+            styleCss={style.procced}
           />
         </>
       )}
