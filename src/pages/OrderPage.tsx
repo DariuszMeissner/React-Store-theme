@@ -32,6 +32,9 @@ const OrderPage: FC<TProps> = ({ children }) => {
       display: 'flex',
       alignItems: 'center',
       justifyContent: screen.isX || screen.isL ? 'start' : 'center'
+    },
+    footer: {
+      marginBottom: 20
     }
   } as const
 
@@ -43,7 +46,7 @@ const OrderPage: FC<TProps> = ({ children }) => {
       <main>{children}</main>
       <footer>
         {isStep.cart && (
-          <Section>
+          <Section styleCss={style.footer}>
             <Button
               type="link"
               iconSize={25}

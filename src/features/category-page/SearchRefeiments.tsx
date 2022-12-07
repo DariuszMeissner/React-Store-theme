@@ -63,22 +63,22 @@ const INITIAL_FILTER_BRAND_VALUE = 'Brand-all'
 const SearchRefeiments: FC<IProps> = ({ data, category }) => {
   const screen = useSizeScreen()
   const dispatch = useDispatch()
-
-  // get state active of modal
-  const isActiveModal = useSelector(
-    (state: RootState) => state.modal.registered
-  )
-
   const { lockScroll, unlockScroll } = useDisableScroll()
-
-  // get size of search refeiments
-  const [rect, ref] = useRect()
 
   // filters state
   const [sortingValue, setSortingValue] = useState<string>(INITIAL_SORT_VALUE)
   const [filterBrandValue, setFilterBrandValue] = useState<string>(
     INITIAL_FILTER_BRAND_VALUE
   )
+
+  // get state active of modal
+  const isActiveModal = useSelector(
+    (state: RootState) => state.modal.registered
+  )
+
+  // get size of search refeiments
+  const [rect, ref] = useRect()
+
   // get data for brand filter
   const queryProducts = apiSlice.useGetProductsOfCategoryQuery(category)
 
