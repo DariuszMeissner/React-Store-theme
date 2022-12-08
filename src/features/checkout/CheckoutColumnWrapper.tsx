@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { useSizeScreen } from '../../hooks'
-import CheckoutAside from './aside/CheckoutAside'
-import CheckoutMain from './main/CheckoutMain'
+import CheckoutAside from './aside-column/CheckoutAside'
+import CheckoutMain from './main-column/CheckoutMain'
 
 const CheckoutColumnWrapper: FC = () => {
   const screen = useSizeScreen()

@@ -11,6 +11,11 @@ export interface ICheckout {
   }
   currentStep: string | null
   stepNumber: [{ name: 'cart'; step: 1 }, { name: 'confirmation'; step: 2 }]
+  loginStatus: {
+    current: 'guest' | 'logged'
+    guest: boolean
+    logged: boolean
+  }
   loginInformation: {
     email: string | null
   }
@@ -30,6 +35,12 @@ export interface ICheckout {
     current: 'stripe' | 'transfer' | null
     methods: ['stripe', 'transfer']
   }
+  confirmationStepStatus: {
+    mail: boolean
+    shippingAddress: boolean
+    deliveryMethod: boolean
+    paymentMethod: boolean
+  }
 }
 
 const initialState: ICheckout = {
@@ -42,6 +53,11 @@ const initialState: ICheckout = {
     { name: 'cart', step: 1 },
     { name: 'confirmation', step: 2 }
   ],
+  loginStatus: {
+    current: 'guest',
+    guest: true,
+    logged: false
+  },
   loginInformation: { email: null },
   shippingDetails: {
     name: null,
@@ -58,6 +74,12 @@ const initialState: ICheckout = {
   payment: {
     current: null,
     methods: ['stripe', 'transfer']
+  },
+  confirmationStepStatus: {
+    mail: false,
+    shippingAddress: false,
+    deliveryMethod: false,
+    paymentMethod: false
   }
 }
 
@@ -76,9 +98,41 @@ const checkoutSlice = createSlice({
           confirmation: step === 'confirmation'
         }
       }
+    },
+    saveEmail: (state, action: { payload: string }) => {
+      return {
+        ...state,
+        loginInformation: {
+          email: action.payload
+        }
+      }
+    },
+    registerConfirmationStatus: (
+      state,
+      action: {
+        payload: {
+          type: 'mail' | 'shippingAddress' | 'deliveryMethod' | 'paymentMethod'
+          value: boolean
+        }
+      }
+    ) => {
+      const { type, value } = action.payload
+      return {
+        ...state,
+        confirmationStepStatus: {
+          ...state.confirmationStepStatus,
+          [type]: value
+        }
+      }
     }
   }
 })
+
+export const selectConfirmationStatus = (state: { checkout: ICheckout }) =>
+  state.checkout.confirmationStepStatus
+
+export const selectLoginStatus = (state: { checkout: ICheckout }) =>
+  state.checkout.loginStatus
 
 export const selectAllPaymnetMethods = (state: { checkout: ICheckout }) =>
   state.checkout.payment.methods
@@ -95,7 +149,9 @@ export const selectCurrentStep = (state: { checkout: ICheckout }) =>
 export const selectIsStep = (state: { checkout: ICheckout }) =>
   state.checkout.step
 
-export const { registerStep } = checkoutSlice.actions
+export const { registerStep, saveEmail, registerConfirmationStatus } =
+  checkoutSlice.actions
+
 export const checkoutActions = checkoutSlice.actions
 
 export default checkoutSlice.reducer

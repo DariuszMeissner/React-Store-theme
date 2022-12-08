@@ -24,7 +24,7 @@ const CheckoutPriceSubtotal: FC = () => {
 
   return (
     <div style={style.subtotal.wrapper}>
-      <p style={style.subtotal.label}>Subtotal:&nbsp;</p>
+      <p style={style.subtotal.label}>Subtotal&nbsp;</p>
       <div style={style.subtotal.price}>
         <span>£&nbsp;</span>
         <span>{cartTotal}</span>
