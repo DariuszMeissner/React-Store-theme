@@ -40,13 +40,13 @@ const SliderNavigation: FC<IProps> = ({ position }) => {
     swiper.slidePrev()
     if (disabledNext) setDisabledNext(false)
     if (swiper.isBeginning) setDisabledPrev(true)
-  }, [disabledNext])
+  }, [disabledNext, disabledPrev])
 
   const onClickNext = useCallback(() => {
     swiper.slideNext()
     if (disabledPrev) setDisabledPrev(false)
     if (swiper.isEnd) setDisabledNext(true)
-  }, [disabledPrev])
+  }, [disabledPrev, disabledNext])
 
   return (
     <div style={style.wrapper}>
