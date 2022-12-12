@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import { HiArrowLongLeft } from 'react-icons/hi2'
-import { useSelector } from 'react-redux'
-import { selectIsStep } from '../api/feature/checkout/checkoutSlice'
+import { useParams } from 'react-router-dom'
 import { Button, Logo } from '../components'
 import { useSizeScreen } from '../hooks'
 import Section from '../layout/Section'
@@ -12,11 +11,12 @@ type TProps = {
 
 const OrderPage: FC<TProps> = ({ children }) => {
   const screen = useSizeScreen()
-  const isStep = useSelector(selectIsStep)
+  const { step } = useParams()
 
   const style = {
     header: {
       position: 'sticky',
+      zIndex: 2,
       top: 0,
       height: 80,
       backgroundColor: '#000',
@@ -45,7 +45,7 @@ const OrderPage: FC<TProps> = ({ children }) => {
       </header>
       <main>{children}</main>
       <footer>
-        {isStep.cart && (
+        {step === 'cart' && (
           <Section styleCss={style.footer}>
             <Button
               type="link"

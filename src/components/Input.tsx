@@ -27,16 +27,46 @@ const Input: FC<IProps> = ({
   onBlur,
   error
 }) => {
+  const style = {
+    wrapper: {
+      fontWeight: 300,
+      maxWidth: 400,
+      textAlign: 'left',
+      position: 'relative',
+      paddingBottom: 19
+    },
+    label: { paddingBottom: 8 },
+    input: {
+      width: '100%',
+      minHeight: 46,
+      padding: '0 16px',
+      border: '1px solid',
+      borderColor: error ? '#da291c' : '#000',
+      borderRadius: 46,
+      backgroundColor: 'transparent',
+      WebkitAppearance: 'none',
+      appearance: 'none',
+      color: '#000',
+      fontWeight: 300,
+      fontFamily: 'Poppins'
+    },
+    validation: {
+      padding: '6px 16px 0',
+      color: '#da291c'
+    }
+  } as const
+
   return (
-    <div className="input-wrapper">
+    <div className="input-wrapper" style={style.wrapper}>
       {/* label */}
-      <div>
+      <div style={style.label}>
         <label htmlFor={name}>{label}</label>
       </div>
 
       {/* value */}
       <div>
         <input
+          style={style.input}
           name={name}
           type={type}
           data-val-regex={dataValRegex}
@@ -52,7 +82,7 @@ const Input: FC<IProps> = ({
       </div>
 
       {/* field validation container  */}
-      {error && <div>{error}</div>}
+      {error && <div style={style.validation}>{error}</div>}
     </div>
   )
 }

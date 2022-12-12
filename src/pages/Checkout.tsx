@@ -18,9 +18,9 @@ const Checkout: FC = () => {
   }, [step])
 
   return (
-    <Section styleCss={{ margin: 0 }}>
+    <Section styleCss={{ margin: 0, marginBottom: 48 }}>
       <Headline1 styleCss={{ textAlign: 'center', margin: '48px 0' }}>
-        Shopping Bag
+        {step === 'cart' ? 'Shopping Bag' : 'Proceed to purchase'}
       </Headline1>
 
       {/* content */}

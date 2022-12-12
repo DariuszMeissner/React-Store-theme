@@ -9,7 +9,7 @@ export interface ICheckout {
     cart: boolean
     confirmation: boolean
   }
-  currentStep: string | null
+  currentStep: string | undefined
   stepNumber: [{ name: 'cart'; step: 1 }, { name: 'confirmation'; step: 2 }]
   loginStatus: {
     current: 'guest' | 'logged'
@@ -17,23 +17,16 @@ export interface ICheckout {
     logged: boolean
   }
   loginInformation: {
-    email: string | null
+    email: string | undefined
   }
-  shippingDetails: {
-    name: string | null
-    surname: string | null
-    postcode: string | null
-    country: string | null
-    email: string | null
-    phone: string | null
-  }
-  shipping: {
-    current: 'Standard' | 'Delivery in 4-6 working days' | 'Free' | null
-    methods: ['Standard', 'Delivery in 4-6 working days', 'Free']
+  shippingAddress: IShippingAddress
+  delivery: {
+    current: IDeliveryCurrent | undefined
+    methods: string[]
   }
   payment: {
-    current: 'stripe' | 'transfer' | null
-    methods: ['stripe', 'transfer']
+    current: IPaymentCurrent | undefined
+    methods: string[]
   }
   confirmationStepStatus: {
     mail: boolean
@@ -43,12 +36,29 @@ export interface ICheckout {
   }
 }
 
+interface IDeliveryCurrent {
+  current: 'Standard' | 'Delivery in 4-6 working days' | 'Free'
+}
+
+interface IPaymentCurrent {
+  current: 'stripe' | 'transfer'
+}
+
+interface IShippingAddress {
+  name: string | undefined
+  surname: string | undefined
+  postcode: string | undefined
+  street: string | undefined
+  country: string | undefined
+  phone: string | undefined
+}
+
 const initialState: ICheckout = {
   step: {
     cart: false,
     confirmation: false
   },
-  currentStep: null,
+  currentStep: undefined,
   stepNumber: [
     { name: 'cart', step: 1 },
     { name: 'confirmation', step: 2 }
@@ -58,22 +68,22 @@ const initialState: ICheckout = {
     guest: true,
     logged: false
   },
-  loginInformation: { email: null },
-  shippingDetails: {
-    name: null,
-    surname: null,
-    postcode: null,
-    country: null,
-    email: null,
-    phone: null
+  loginInformation: { email: undefined },
+  shippingAddress: {
+    name: undefined,
+    surname: undefined,
+    postcode: undefined,
+    street: undefined,
+    country: undefined,
+    phone: undefined
   },
-  shipping: {
-    current: null,
-    methods: ['Standard', 'Delivery in 4-6 working days', 'Free']
+  delivery: {
+    current: undefined,
+    methods: ['Standard', 'Delivery in 4-6 working days', 'Express']
   },
   payment: {
-    current: null,
-    methods: ['stripe', 'transfer']
+    current: undefined,
+    methods: ['Stripe', 'Standard transfer']
   },
   confirmationStepStatus: {
     mail: false,
@@ -87,7 +97,7 @@ const checkoutSlice = createSlice({
   name: 'checkout',
   initialState,
   reducers: {
-    registerStep: (state, action: { payload: string | null }) => {
+    registerStep: (state, action: { payload: string | undefined }) => {
       const step = action.payload
 
       return {
@@ -107,11 +117,48 @@ const checkoutSlice = createSlice({
         }
       }
     },
+    saveShippingAddres: (state, action: { payload: IShippingAddress }) => {
+      const data = action.payload
+      return {
+        ...state,
+        shippingAddress: {
+          name: data.name,
+          surname: data.surname,
+          postcode: data.postcode,
+          street: data.street,
+          country: data.country,
+          phone: data.name
+        }
+      }
+    },
+    saveDelivery: (state, action: { payload: IDeliveryCurrent }) => {
+      return {
+        ...state,
+        delivery: {
+          ...state.delivery,
+          current: action.payload
+        }
+      }
+    },
+    savePayment: (state, action: { payload: IPaymentCurrent }) => {
+      return {
+        ...state,
+        payment: {
+          ...state.payment,
+          current: action.payload
+        }
+      }
+    },
     registerConfirmationStatus: (
       state,
       action: {
         payload: {
-          type: 'mail' | 'shippingAddress' | 'deliveryMethod' | 'paymentMethod'
+          type:
+            | 'mail'
+            | 'shippingAddress'
+            | 'deliveryMethod'
+            | 'paymentMethod'
+            | string
           value: boolean
         }
       }
@@ -131,14 +178,11 @@ const checkoutSlice = createSlice({
 export const selectConfirmationStatus = (state: { checkout: ICheckout }) =>
   state.checkout.confirmationStepStatus
 
-export const selectLoginStatus = (state: { checkout: ICheckout }) =>
-  state.checkout.loginStatus
-
 export const selectAllPaymnetMethods = (state: { checkout: ICheckout }) =>
   state.checkout.payment.methods
 
 export const selectAllShippingMethods = (state: { checkout: ICheckout }) =>
-  state.checkout.shipping.methods
+  state.checkout.delivery.methods
 
 export const selectAllSteps = (state: { checkout: ICheckout }) =>
   state.checkout.stepNumber
