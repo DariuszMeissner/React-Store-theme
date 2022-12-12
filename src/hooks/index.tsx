@@ -5,6 +5,7 @@ import useRect from './useRect'
 import useDisableScroll from './useDisableScroll'
 import useSticky from './useSticky'
 import useImageLoad from './useImageLoad'
+import useForm from './useForm'
 
 export {
   useDelayUnmount,
@@ -13,5 +14,6 @@ export {
   useRect,
   useDisableScroll,
   useSticky,
-  useImageLoad
+  useImageLoad,
+  useForm
 }

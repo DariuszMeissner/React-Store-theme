@@ -7,7 +7,7 @@ interface IProps {
 const CartSubtotal: FC<IProps> = ({ subtotal }) => {
   return (
     <div className="subtotal-label">
-      <span>CartSubtotal:&nbsp;</span>
+      <span>Subtotal:&nbsp;</span>
       <span>£&nbsp;</span>
       <span>{subtotal}</span>
     </div>

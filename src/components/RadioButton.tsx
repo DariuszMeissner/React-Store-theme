@@ -11,18 +11,40 @@ const RadioButton: FC<IProps> = ({ label, value, onChange }) => {
   const screen = useSizeScreen()
 
   const style = {
-    radioBtn: { paddingLeft: '10px' },
-    label: {
+    label: { paddingLeft: '30px' },
+    wrapper: {
       display: 'flex',
       alignItems: 'center',
       marginBottom: '20px',
-      paddingLeft: screen.isL || screen.isX ? '10px' : '0'
+      paddingLeft: screen.isL || screen.isX ? '10px' : '0',
+      cursor: 'pointer',
+      position: 'relative',
+      WebkitUserSelect: 'none',
+      MozUserSelect: 'none',
+      MsUserSelect: 'none',
+      userSelect: 'none'
+    },
+    input: {
+      position: 'absolute',
+      opacity: 0,
+      cursor: 'pointer'
+    },
+    checkmark: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      height: 20,
+      width: 20,
+      backgroundColor: value ? '#000' : '#fff',
+      border: '1px solid #000',
+      borderRadius: '50%'
     }
   } as const
 
   return (
-    <label htmlFor={label} style={style.label}>
+    <label htmlFor={label} style={style.wrapper}>
       <input
+        style={style.input}
         type="radio"
         id={label}
         name={label}
@@ -30,7 +52,8 @@ const RadioButton: FC<IProps> = ({ label, value, onChange }) => {
         checked={value}
         onChange={onChange}
       />
-      <span style={style.radioBtn}>{label}</span>
+      <span style={style.checkmark} />
+      <span style={style.label}>{label}</span>
     </label>
   )
 }

@@ -7,8 +7,7 @@ const style = {
     wrapper: {
       textTransform: 'uppercase',
       display: 'flex',
-      justifyContent: 'space-between',
-      marginBottom: 40
+      justifyContent: 'space-between'
     },
     label: {
       fontWeight: 500
