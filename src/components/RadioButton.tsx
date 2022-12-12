@@ -11,12 +11,12 @@ const RadioButton: FC<IProps> = ({ label, value, onChange }) => {
   const screen = useSizeScreen()
 
   const style = {
-    label: { paddingLeft: '30px' },
+    label: { paddingLeft: 20, paddingRight: 35, lineHeight: '20px' },
     wrapper: {
       display: 'flex',
       alignItems: 'center',
-      marginBottom: '20px',
-      paddingLeft: screen.isL || screen.isX ? '10px' : '0',
+      marginBottom: 20,
+      paddingLeft: screen.isL || screen.isX ? 10 : 0,
       cursor: 'pointer',
       position: 'relative',
       WebkitUserSelect: 'none',

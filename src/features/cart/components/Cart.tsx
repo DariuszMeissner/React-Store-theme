@@ -43,7 +43,6 @@ const style = {
   procced: {
     width: '250px',
     marginLeft: '0',
-    color: 'black',
     border: '1px solid',
     padding: 10
   }

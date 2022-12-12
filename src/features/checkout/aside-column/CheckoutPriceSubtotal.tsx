@@ -13,7 +13,8 @@ const style = {
       fontWeight: 500
     },
     price: {
-      fontWeight: 300
+      fontWeight: 300,
+      marginBottom: 20
     }
   }
 } as const

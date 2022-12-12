@@ -40,21 +40,13 @@ const NavBarButtonLink: FC<IProps> = ({ title, id, onClick, color, path }) => {
     }
   } as const
 
-  const handleOnClick = () => {
-    onClick()
-  }
-
-  const handleOnMouseEnter = () => setOnMouse(true)
-
-  const handleOnMouseLeave = () => setOnMouse(false)
-
   return (
     <Link
       style={style.main}
       to={path}
-      onClick={handleOnClick}
-      onMouseEnter={handleOnMouseEnter}
-      onMouseLeave={handleOnMouseLeave}>
+      onClick={() => onClick()}
+      onMouseEnter={() => setOnMouse(true)}
+      onMouseLeave={() => setOnMouse(false)}>
       <span>{title}</span>
       <div style={style.hover} />
     </Link>

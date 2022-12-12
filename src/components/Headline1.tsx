@@ -3,7 +3,7 @@ import React, { CSSProperties, FC } from 'react'
 interface IProps {
   children: React.ReactNode
   color?: string
-  styleCss?: CSSProperties | null
+  styleCss?: CSSProperties
 }
 
 const Headline1: FC<IProps> = ({ children, color, styleCss }) => {
@@ -21,7 +21,7 @@ const Headline1: FC<IProps> = ({ children, color, styleCss }) => {
 
 Headline1.defaultProps = {
   color: '#181818',
-  styleCss: null
+  styleCss: {}
 }
 
 export default Headline1

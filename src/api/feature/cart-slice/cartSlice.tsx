@@ -99,7 +99,7 @@ export const totalQuantity = (state: { cart: ICart }) =>
 export const totalProducts = (state: { cart: ICart }) =>
   state.cart.products.length
 
-export const { addProduct, removeProduct, increase, decrease } =
+export const { addProduct, removeProduct, clearCart, increase, decrease } =
   cartSlice.actions
 
 export const cartActions = cartSlice.actions
