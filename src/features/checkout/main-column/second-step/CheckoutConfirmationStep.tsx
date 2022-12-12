@@ -1,8 +1,8 @@
 import React, { FC, useState } from 'react'
-import { IData } from '../../../../hooks/useForm'
 import steps from '../../stepsConfirmation'
 import CheckoutCheckMailStep from './steps/CheckoutCheckMailStep'
 import CheckoutDeliveryMethodStep from './steps/CheckoutDeliveryMethodStep'
+import CheckoutFinalizationStep from './steps/CheckoutFinalizationStep'
 import CheckoutPaymentMethodStep from './steps/CheckoutPaymentMethodStep'
 import CheckoutShippingAddressStep from './steps/CheckoutShippingAddressStep'
 
@@ -16,7 +16,8 @@ const CheckoutConfirmationStep: FC = () => {
     mail: { active: true, data: false },
     shippingAddress: { active: false, data: false },
     deliveryMethod: { active: false, data: false },
-    paymentMethod: { active: false, data: false }
+    paymentMethod: { active: false, data: false },
+    finalizationStep: { active: false, data: false }
   })
 
   function getNextStep() {
@@ -45,6 +46,10 @@ const CheckoutConfirmationStep: FC = () => {
     }))
   }
 
+  function toggleStep(currentStep: string) {
+    setActiveStep(activeStep === currentStep ? getNextStep() : currentStep)
+  }
+
   const setStepStatus = (id: string) => {
     setStatus((prev) => ({
       ...prev,
@@ -59,37 +64,26 @@ const CheckoutConfirmationStep: FC = () => {
     const stepNotFilled = !status[activeStep as keyof typeof status].data
     if (stepNotFilled) deactivateStep()
 
-    setActiveStep(activeStep === currentStep ? getNextStep() : currentStep)
+    toggleStep(currentStep)
   }
 
-  const goToNextStep = (
-    e: React.MouseEvent<HTMLButtonElement>,
-    id: string,
-    data: IData | string
-  ) => {
-    e.preventDefault()
-
-    // if (onSubmitCheckValidation()) {
-    //   //   dispatch(saveEmail(inputs.email))
-    //   // }
-
+  const goToNextStep = (id: string) => {
     setActiveStep(getNextStep())
     setDataOnReady(id)
   }
 
   return (
     <div className="checkout-confirmation-steps">
-      {/* step 1 of 4 */}
+      {/* step 1 of 5 */}
       <CheckoutCheckMailStep
         id={steps.mail}
+        status={status.mail}
         activeStep={activeStep}
         handleEditStep={editStep}
-        status={status.mail}
         setStepStatus={setStepStatus}
         goToNextStep={goToNextStep}
       />
-
-      {/* step 2 of 4 */}
+      {/* step 2 of 5 */}
       <CheckoutShippingAddressStep
         id={steps.shippingAddress}
         activeStep={activeStep}
@@ -98,8 +92,7 @@ const CheckoutConfirmationStep: FC = () => {
         handleEditStep={editStep}
         goToNextStep={goToNextStep}
       />
-
-      {/* step 3 of 4 */}
+      {/* step 3 of 5 */}
       <CheckoutDeliveryMethodStep
         id={steps.deliveryMethod}
         activeStep={activeStep}
@@ -108,8 +101,7 @@ const CheckoutConfirmationStep: FC = () => {
         handleEditStep={editStep}
         goToNextStep={goToNextStep}
       />
-
-      {/* step 4 of 4 */}
+      {/* step 4 of 5 */}
       <CheckoutPaymentMethodStep
         id={steps.paymentMethod}
         activeStep={activeStep}
@@ -117,6 +109,12 @@ const CheckoutConfirmationStep: FC = () => {
         setStepStatus={setStepStatus}
         handleEditStep={editStep}
         goToNextStep={goToNextStep}
+      />
+
+      {/* finalization step 5 of 5 */}
+      <CheckoutFinalizationStep
+        id={steps.finalizationStep}
+        activeStep={activeStep}
       />
     </div>
   )

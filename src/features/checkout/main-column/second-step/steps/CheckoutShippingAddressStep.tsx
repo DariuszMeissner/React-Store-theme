@@ -1,4 +1,5 @@
 import React, { FC, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { Input } from '../../../../../components'
 import useForm from '../../../../../hooks/useForm'
 import CheckoutButtonPurchase from '../../../CheckoutButtonPurchase'
@@ -6,15 +7,7 @@ import { IPropsSteps } from '../../../checkout.interface'
 import InactiveStep from '../statuses/InActiveStep'
 import FilledStep from '../statuses/FilledStep'
 import ModifyStep from '../statuses/ModifyStep'
-
-const style = {
-  wrapper: {
-    backgroundColor: '#f6f6f6',
-    padding: 25,
-    borderBottom: '1px solid #e1e0e0',
-    position: 'relative'
-  }
-} as const
+import { saveShippingAddress } from '../../../../../api/feature/checkout/checkoutSlice'
 
 const CheckoutShippingAddressStep: FC<IPropsSteps> = ({
   id,
@@ -24,6 +17,8 @@ const CheckoutShippingAddressStep: FC<IPropsSteps> = ({
   handleEditStep,
   goToNextStep
 }) => {
+  const dispatch = useDispatch()
+
   const {
     inputs,
     errors,
@@ -39,9 +34,27 @@ const CheckoutShippingAddressStep: FC<IPropsSteps> = ({
     phone: ''
   })
 
+  const style = {
+    wrapper: {
+      backgroundColor: activeStep !== id ? '#fff' : '#f6f6f6',
+      padding: 25,
+      borderBottom: '1px solid #e1e0e0',
+      position: 'relative'
+    }
+  } as const
+
   useEffect(() => {
     if (activeStep === id) setStepStatus(id)
   }, [activeStep])
+
+  const handleOnProceed = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+
+    if (onSubmitCheckValidation()) {
+      dispatch(saveShippingAddress(inputs))
+      goToNextStep(id)
+    }
+  }
 
   return (
     <div className="step-shippingAddress" style={style.wrapper}>
@@ -60,6 +73,7 @@ const CheckoutShippingAddressStep: FC<IPropsSteps> = ({
         activeStep={activeStep}
         title="Shipping address"
         handleEditStep={handleEditStep}
+        formData={inputs}
       />
 
       {/* not filled step/modify */}
@@ -148,10 +162,7 @@ const CheckoutShippingAddressStep: FC<IPropsSteps> = ({
           error={errors.phone}
         />
 
-        <CheckoutButtonPurchase
-          text="Proceed"
-          onClick={(e) => goToNextStep(e, id, inputs)}
-        />
+        <CheckoutButtonPurchase text="Proceed" onClick={handleOnProceed} />
       </ModifyStep>
     </div>
   )

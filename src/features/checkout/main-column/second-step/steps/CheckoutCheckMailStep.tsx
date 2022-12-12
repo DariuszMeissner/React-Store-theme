@@ -1,4 +1,6 @@
 import React, { FC } from 'react'
+import { useDispatch } from 'react-redux'
+import { saveEmail } from '../../../../../api/feature/checkout/checkoutSlice'
 import Input from '../../../../../components/Input'
 import { useForm } from '../../../../../hooks'
 import { IPropsSteps } from '../../../checkout.interface'
@@ -14,6 +16,8 @@ const CheckoutCheckMailStep: FC<IPropsSteps> = ({
   handleEditStep,
   goToNextStep
 }) => {
+  const dispatch = useDispatch()
+
   const {
     inputs,
     errors,
@@ -26,12 +30,21 @@ const CheckoutCheckMailStep: FC<IPropsSteps> = ({
 
   const style = {
     wrapper: {
-      backgroundColor: '#f6f6f6',
+      backgroundColor: activeStep !== id ? '#fff' : '#f6f6f6',
       padding: 25,
       borderBottom: '1px solid #e1e0e0',
       position: 'relative'
     }
   } as const
+
+  const handleOnProceed = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+
+    if (onSubmitCheckValidation()) {
+      dispatch(saveEmail(inputs.email))
+      goToNextStep(id)
+    }
+  }
 
   return (
     <div className="step-checkMail" style={style.wrapper}>
@@ -42,6 +55,7 @@ const CheckoutCheckMailStep: FC<IPropsSteps> = ({
         activeStep={activeStep}
         title="You are ordering with this email address"
         handleEditStep={handleEditStep}
+        formData={inputs}
       />
 
       {/* not filled/ to edit */}
@@ -64,10 +78,7 @@ const CheckoutCheckMailStep: FC<IPropsSteps> = ({
           error={errors.email}
         />
 
-        <CheckoutButtonPurchase
-          text="Proceed"
-          onClick={(e) => goToNextStep(e, id, inputs)}
-        />
+        <CheckoutButtonPurchase text="Proceed" onClick={handleOnProceed} />
       </ModifyStep>
     </div>
   )
