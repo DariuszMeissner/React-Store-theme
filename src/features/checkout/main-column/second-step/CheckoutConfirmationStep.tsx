@@ -71,11 +71,7 @@ const CheckoutConfirmationStep: FC = () => {
 
     // if (onSubmitCheckValidation()) {
     //   //   dispatch(saveEmail(inputs.email))
-    //   //   dispatch(registerConfirmationStatus({ type: id, value: true }))
-    //   //   handleEditStep(id)
     //   // }
-
-    // dispatch(registerConfirmationStatus({ type: id, value: true }))
 
     setActiveStep(getNextStep())
     setDataOnReady(id)

@@ -14,18 +14,18 @@ interface IProps {
 
 const FilterAccordion: FC<IProps> = ({ id, title, children }) => {
   const dispatch = useDispatch()
-  const contentEl = useRef<HTMLDivElement>(null)
+  const contentElRef = useRef<HTMLDivElement>(null)
   const active = useSelector((state: RootState) => state.modal.registered)
 
   const { lockScroll, unlockScroll } = useDisableScroll()
 
-  const registered = active === id
+  const registeredAccordion = active === id
 
   const positionAccordion = active === MODALS.FILTER_SORT_ID ? 50 : 0
 
   const style = {
     content: {
-      height: registered ? contentEl.current?.scrollHeight : 0,
+      height: registeredAccordion ? contentElRef.current?.scrollHeight : 0,
       position: 'absolute',
       zIndex: 7,
       right: positionAccordion,
@@ -51,7 +51,7 @@ const FilterAccordion: FC<IProps> = ({ id, title, children }) => {
   } as const
 
   const handleRegisterAccordion = () => {
-    if (registered) {
+    if (registeredAccordion) {
       unlockScroll()
       dispatch(registerModal(null))
     } else {
@@ -67,13 +67,13 @@ const FilterAccordion: FC<IProps> = ({ id, title, children }) => {
         onClick={handleRegisterAccordion}
         style={style.button}>
         {title}
-        {registered ? (
+        {registeredAccordion ? (
           <RiArrowUpSFill style={style.iconSize} />
         ) : (
           <RiArrowDownSFill style={style.iconSize} />
         )}
       </button>
-      <div ref={contentEl} style={style.content}>
+      <div ref={contentElRef} style={style.content}>
         {children}
       </div>
     </div>

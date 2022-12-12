@@ -6,12 +6,6 @@ interface IProps {
   productId: string
 }
 
-const style = {
-  center: {
-    textAlign: 'center'
-  }
-} as const
-
 const CollectionProducts: FC<IProps> = ({ productId }) => {
   const { data, isSuccess } = apiSlice.useGetSingleProductQuery(productId)
 
@@ -47,7 +41,7 @@ const CollectionProducts: FC<IProps> = ({ productId }) => {
       )}
 
       {/* button */}
-      <div style={style.center}>
+      <div style={{ textAlign: 'center' }}>
         <Button
           type="link"
           text="Shop"
