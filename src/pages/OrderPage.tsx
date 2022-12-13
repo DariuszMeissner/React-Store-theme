@@ -1,6 +1,8 @@
 import React, { FC } from 'react'
 import { HiArrowLongLeft } from 'react-icons/hi2'
-import { useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+import { selectAllProductsCart } from '../api/feature/cart-slice/cartSlice'
 import { Button, Logo } from '../components'
 import { useSizeScreen } from '../hooks'
 import Section from '../layout/Section'
@@ -11,7 +13,9 @@ type TProps = {
 
 const OrderPage: FC<TProps> = ({ children }) => {
   const screen = useSizeScreen()
+  const navigate = useNavigate()
   const { step } = useParams()
+  const productsCart = useSelector(selectAllProductsCart)
 
   const style = {
     header: {
@@ -39,27 +43,32 @@ const OrderPage: FC<TProps> = ({ children }) => {
   } as const
 
   return (
-    <>
-      <header style={style.header}>
-        <Logo />
-      </header>
-      <main>{children}</main>
-      <footer>
-        {step === 'cart' && (
-          <Section styleCss={style.footer}>
-            <Button
-              type="link"
-              iconSize={25}
-              icon={HiArrowLongLeft}
-              text="Back to shopping"
-              label="icon-back"
-              path="/"
-              styleCss={style.iconButton}
-            />
-          </Section>
-        )}
-      </footer>
-    </>
+    <div>
+      {productsCart.length > 0 && (
+        <>
+          <header style={style.header}>
+            <Logo />
+          </header>
+          <main>{children}</main>
+          <footer>
+            {step === 'cart' && (
+              <Section styleCss={style.footer}>
+                <Button
+                  iconSize={25}
+                  icon={HiArrowLongLeft}
+                  text="Back to shopping"
+                  label="icon-back"
+                  onClick={() => navigate('/')}
+                  styleCss={style.iconButton}
+                />
+              </Section>
+            )}
+          </footer>
+        </>
+      )}
+
+      {productsCart.length === 0 && <p>No product in cart</p>}
+    </div>
   )
 }
 

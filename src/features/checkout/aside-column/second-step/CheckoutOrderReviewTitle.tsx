@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { totalQuantity } from '../../../../api/feature/cart-slice/cartSlice'
 import { Button } from '../../../../components'
 import CountLabel from '../../../cart/components/CountLabel'
@@ -28,6 +29,7 @@ const style = {
 } as const
 
 const CheckoutOrderReviewTitle: FC = () => {
+  const navigate = useNavigate()
   const productNumber = useSelector(totalQuantity)
   return (
     <div style={style.orderReview.wrapper}>
@@ -36,8 +38,7 @@ const CheckoutOrderReviewTitle: FC = () => {
         <p style={style.orderReview.label}>Order Review&nbsp;</p>
 
         <Button
-          type="link"
-          path="/checkout/cart"
+          onClick={() => navigate('/checkout/cart')}
           text="Modify"
           styleCss={style.orderReview.modify}
         />

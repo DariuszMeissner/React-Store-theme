@@ -19,12 +19,14 @@ const style = {
   itemLink: {
     width: '100%'
   },
-  textLink: {
+  button: {
     color: 'black',
     fontSize: '1rem',
     marginLeft: 0,
     marginRight: 0,
     padding: '10px 0',
+    display: 'flex',
+    alignItems: 'center',
     justifyContent: 'space-between',
     width: '100%'
   },
@@ -67,7 +69,6 @@ const MenuMobile: FC<IProps> = ({ closeOnClick }) => {
         {/* close button */}
         <div style={style.menuTop}>
           <Button
-            type="button"
             label="icon-close"
             icon={IoCloseOutline}
             onClick={closeOnClick}
@@ -86,11 +87,10 @@ const MenuMobile: FC<IProps> = ({ closeOnClick }) => {
             return (
               <li id={`${item.id}`} key={item.id} style={style.itemLink}>
                 <Button
-                  type="button"
                   text={item.label}
                   variant="underline"
                   onClick={() => openLevel(item.id, 1)}
-                  styleCss={style.textLink}>
+                  styleCss={style.button}>
                   <HiArrowLongRight style={style.iconArrow} />
                 </Button>
               </li>

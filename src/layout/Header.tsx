@@ -13,9 +13,7 @@ import MODALS from '../util/modalsID'
 const Header: FC = () => {
   const screen = useSizeScreen()
   const dispatch = useDispatch()
-
   const [isSticky, ref] = useSticky()
-
   const { lockScroll, unlockScroll } = useDisableScroll()
 
   const activeModal = useSelector((state: RootState) => state.modal.registered)
@@ -40,9 +38,6 @@ const Header: FC = () => {
       transform: screen.isX ? positionSticky : undefined,
       transition: 'transform 300ms'
     },
-    headerTop: {
-      height: 60
-    },
     modalCart: {
       padding: screen.isS ? 15 : 36
     }
@@ -52,9 +47,7 @@ const Header: FC = () => {
     <>
       <header style={style.header} ref={ref}>
         {/* header top */}
-        <div style={style.headerTop}>
-          <HeaderTop onClick={handleRegisterModal} />
-        </div>
+        <HeaderTop onClick={handleRegisterModal} />
         {/* navbar */}
         {screen.isX && <NavBar />}
 

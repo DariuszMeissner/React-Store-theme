@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { IoCloseOutline } from 'react-icons/io5'
+import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import {
   selectAllProductsCart,
@@ -32,7 +33,8 @@ const style = {
     right: 0
   },
   cartList: {
-    height: '45vh',
+    maxHeight: '45vh',
+    height: '100%',
     overflow: 'auto'
   },
   cartInfo: {
@@ -42,13 +44,12 @@ const style = {
   },
   procced: {
     width: '250px',
-    marginLeft: '0',
-    border: '1px solid',
-    padding: 10
+    marginTop: 40
   }
 } as const
 
 const Cart: FC<IProps> = ({ closeOnClick }) => {
+  const navigate = useNavigate()
   const allProductsCart = useSelector(selectAllProductsCart)
   const cartTotal = useSelector(totalPrice)
 
@@ -60,11 +61,15 @@ const Cart: FC<IProps> = ({ closeOnClick }) => {
 
   const cartList = generateCartList()
 
+  const navToCheckoutAndClose = () => {
+    navigate('/checkout/cart')
+    closeOnClick()
+  }
+
   return (
     <div className="cart">
       <div style={style.cartTop}>
         <Button
-          type="button"
           label="icon-close"
           icon={IoCloseOutline}
           onClick={closeOnClick}
@@ -85,12 +90,10 @@ const Cart: FC<IProps> = ({ closeOnClick }) => {
           {/* listing products */}
           <div style={style.cartList}>{cartList}</div>
 
-          {/* go to checkout button */}
+          {/* go to checkout */}
           <Button
-            type="button-link"
             text="Procced to purchase"
-            path="/checkout/cart"
-            onClick={closeOnClick}
+            onClick={navToCheckoutAndClose}
             variant="white"
             styleCss={style.procced}
           />

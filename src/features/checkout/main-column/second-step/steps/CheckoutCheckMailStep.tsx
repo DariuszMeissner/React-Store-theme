@@ -11,7 +11,6 @@ import ModifyStep from '../statuses/ModifyStep'
 const CheckoutCheckMailStep: FC<IPropsSteps> = ({
   id,
   status,
-  setStepStatus,
   activeStep,
   handleEditStep,
   goToNextStep

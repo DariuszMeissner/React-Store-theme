@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { selectAllShippingMethods } from '../../../../api/feature/checkout/checkoutSlice'
 import { Button } from '../../../../components'
 import CheckoutPriceSubtotal from '../CheckoutPriceSubtotal'
@@ -28,6 +29,7 @@ const style = {
 } as const
 
 const CheckoutSubtotal: FC = () => {
+  const navigate = useNavigate()
   const shippingMethods = useSelector(selectAllShippingMethods)
 
   return (
@@ -43,9 +45,8 @@ const CheckoutSubtotal: FC = () => {
 
       {/* proceed to purchase */}
       <Button
-        type="link"
         text="Procced to purchase"
-        path="/checkout/confirmation"
+        onClick={() => navigate('/checkout/confirmation')}
         variant="black"
         styleCss={style.procced}
       />

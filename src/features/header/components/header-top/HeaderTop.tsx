@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
 import React, { FC } from 'react'
 import { useSelector } from 'react-redux'
 import { IoCartOutline, IoCloseOutline } from 'react-icons/io5'
-// import { HiSearch } from 'react-icons/hi'
 import { AiOutlineMenu } from 'react-icons/ai'
 import { useSizeScreen } from '../../../../hooks'
 import { Button, Logo } from '../../../../components'
@@ -21,9 +19,10 @@ const HeaderTop: FC<IProps> = ({ onClick }) => {
 
   const style = {
     headerTop: {
-      position: 'relative',
-      zIndex: 6,
-      height: '100%',
+      position: screen.isS ? 'fixed' : 'relative',
+      bottom: screen.isS ? 0 : undefined,
+      zIndex: screen.isS ? 8 : 6,
+      height: 60,
       width: '100%',
       color: 'white',
       background: 'black',
@@ -55,21 +54,22 @@ const HeaderTop: FC<IProps> = ({ onClick }) => {
       alignItems: 'center',
       borderRadius: '50%',
       fontSize: 12,
-      background: '#da291c'
+      background: '#da291c',
+      color: '#fff'
+    },
+    icon: {
+      color: '#fff'
     }
   } as const
 
   return (
     <div className="header-top wrap" style={style.headerTop}>
       <div style={style.w50}>
-        {screen.isX ? (
-          <div />
-        ) : (
-          // <Button text="Contact us" path="/" />
+        {!screen.isX && (
           <Button
-            type="button"
             label="hamburger-menu"
             onClick={() => onClick(MODALS.MENU_ID)}
+            styleIcon={style.icon}
             icon={
               activeModal === MODALS.MENU_ID ? IoCloseOutline : AiOutlineMenu
             }
@@ -80,15 +80,12 @@ const HeaderTop: FC<IProps> = ({ onClick }) => {
       <Logo />
 
       <div style={{ ...style.w50, ...style.alignEnd }}>
-        {/* search button */}
-        {/* <Button label="search" onClick={() => {}} icon={HiSearch} /> */}
-
         <div style={style.cartIcon.base}>
           <Button
-            type="button"
             label="cart"
             onClick={() => onClick(MODALS.CART_ID)}
             icon={IoCartOutline}
+            styleIcon={style.icon}
             styleCss={style.cartIcon.active}>
             {/* count products badge */}
             {allProductsCart.length !== 0 && (

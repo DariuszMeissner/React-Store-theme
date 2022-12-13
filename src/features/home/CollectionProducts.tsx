@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { apiSlice } from '../../api/feature/apiSlice'
 import { Grid, Headline1, Image, Button } from '../../components'
 
@@ -7,6 +8,7 @@ interface IProps {
 }
 
 const CollectionProducts: FC<IProps> = ({ productId }) => {
+  const navigate = useNavigate()
   const { data, isSuccess } = apiSlice.useGetSingleProductQuery(productId)
 
   return (
@@ -41,11 +43,10 @@ const CollectionProducts: FC<IProps> = ({ productId }) => {
       )}
 
       {/* button */}
-      <div style={{ textAlign: 'center' }}>
+      <div style={{ textAlign: 'center', marginTop: 25 }}>
         <Button
-          type="link"
           text="Shop"
-          path={`/products/${data?.category}`}
+          onClick={() => navigate(`/products/${data?.category}`)}
           variant="white"
         />
       </div>

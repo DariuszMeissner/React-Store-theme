@@ -1,11 +1,12 @@
-import React, { FC } from 'react'
+import React, { CSSProperties, FC } from 'react'
 import useSizeScreen from '../hooks/useSizeScreen'
 
 interface IProps {
+  styleCss?: CSSProperties
   children: React.ReactNode
 }
 
-const Column: FC<IProps> = ({ children }) => {
+const Column: FC<IProps> = ({ styleCss, children }) => {
   const screen = useSizeScreen()
 
   const width =
@@ -18,7 +19,11 @@ const Column: FC<IProps> = ({ children }) => {
     padding: width || undefined
   } as const
 
-  return <div style={style}>{children}</div>
+  return <div style={{ ...style, ...styleCss }}>{children}</div>
+}
+
+Column.defaultProps = {
+  styleCss: {}
 }
 
 export default Column

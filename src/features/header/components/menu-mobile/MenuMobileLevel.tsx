@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import { HiArrowLongLeft } from 'react-icons/hi2'
 import { IoCloseOutline } from 'react-icons/io5'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import {
   registerMenu,
   registerModal
@@ -22,6 +23,7 @@ interface ICategory {
 
 const MenuMobileLevel: FC<IProps> = ({ isOpen, categories, title }) => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const { unlockScroll } = useDisableScroll()
 
@@ -44,11 +46,7 @@ const MenuMobileLevel: FC<IProps> = ({ isOpen, categories, title }) => {
       display: 'flex',
       alignItems: 'center'
     },
-    menuTitle: { marginLeft: 15 },
-    iconButton: {
-      color: 'black',
-      margin: 0
-    }
+    menuTitle: { marginLeft: 15 }
   } as const
 
   const closeLevel = () => {
@@ -61,6 +59,11 @@ const MenuMobileLevel: FC<IProps> = ({ isOpen, categories, title }) => {
     unlockScroll()
   }
 
+  const navToProductAndClose = (itemPath: string) => {
+    navigate(`/products/${itemPath}`)
+    closeMenu()
+  }
+
   return (
     <div className="menu-mobile-level" style={style.container}>
       {isOpen && (
@@ -69,20 +72,16 @@ const MenuMobileLevel: FC<IProps> = ({ isOpen, categories, title }) => {
           <div style={style.menuTop}>
             <div style={style.menuPath}>
               <Button
-                type="button"
                 label="icon-back"
                 icon={HiArrowLongLeft}
                 onClick={() => closeLevel()}
-                styleCss={style.iconButton}
               />
               <Headline2 styleCss={style.menuTitle}>{title}</Headline2>
             </div>
             <Button
-              type="button"
               label="icon-close"
               icon={IoCloseOutline}
               onClick={closeMenu}
-              styleCss={style.iconButton}
             />
           </div>
 
@@ -92,11 +91,9 @@ const MenuMobileLevel: FC<IProps> = ({ isOpen, categories, title }) => {
               return (
                 <li key={item.title}>
                   <Button
-                    type="button-link"
                     text={item.title}
-                    path={`/products/${item.path}`}
                     variant="underline"
-                    onClick={closeMenu}
+                    onClick={() => navToProductAndClose(item.path)}
                     styleCss={{
                       color: 'black',
                       padding: '10px 0',

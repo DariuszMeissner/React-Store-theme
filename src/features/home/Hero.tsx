@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { apiSlice } from '../../api/feature/apiSlice'
 import Headline1 from '../../components/Headline1'
 import ImageBackground from '../../components/ImageBackground'
@@ -10,13 +11,14 @@ interface IProps {
 }
 
 const Hero: FC<IProps> = ({ productId }) => {
+  const navigate = useNavigate()
   const screen = useSizeScreen()
   const { data, isSuccess } = apiSlice.useGetSingleProductQuery(productId)
 
   const style = {
     hero: {
       width: '100%',
-      height: screen.isS ? '100vh' : '600px'
+      height: screen.isS ? '100vh' : 600
     },
     mediaTitle: {
       display: 'flex',
@@ -36,9 +38,8 @@ const Hero: FC<IProps> = ({ productId }) => {
           <div style={style.mediaTitle}>
             <Headline1 color="white">{isSuccess && data.category}</Headline1>
             <Button
-              type="link"
               text="Discover"
-              path={`/products/${data.category}`}
+              onClick={() => navigate(`/products/${data.category}`)}
               variant="white"
             />
           </div>
