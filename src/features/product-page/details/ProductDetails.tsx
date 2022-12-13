@@ -33,13 +33,14 @@ const ProductDetails: FC<IProps> = ({ data }) => {
       <ProductStock stock={data?.stock || 'no stock'} />
 
       {/* add to cart */}
-      <Button
-        type="button"
-        text="Add to shopping bag"
-        onClick={() => registerModalCart(MODALS.CART_ID)}
-        variant="black"
-        styleCss={{ width: '100%', margin: 0, marginTop: 25 }}
-      />
+      <div style={{ marginTop: 25 }}>
+        <Button
+          text="Add to shopping bag"
+          onClick={() => registerModalCart(MODALS.CART_ID)}
+          variant="black"
+          styleCss={{ width: '100%' }}
+        />
+      </div>
 
       {/* product feature */}
       <Accordion titles={['Description', 'Brand']} styleCss={{ marginTop: 40 }}>

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useEffect } from 'react'
+import React, { ChangeEvent, FC } from 'react'
 import { IProduct } from '../../api/feature/apiSlice'
 import { Button, RadioButton } from '../../components'
 import { useSizeScreen } from '../../hooks'

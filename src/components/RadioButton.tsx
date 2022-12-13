@@ -16,7 +16,7 @@ const RadioButton: FC<IProps> = ({ label, value, onChange }) => {
       display: 'flex',
       alignItems: 'center',
       marginBottom: 20,
-      paddingLeft: screen.isL || screen.isX ? 10 : 0,
+      paddingLeft: 10,
       cursor: 'pointer',
       position: 'relative',
       WebkitUserSelect: 'none',

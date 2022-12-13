@@ -1,3 +1,5 @@
+import { ICart, ICartProduct } from '../cart-slice/cartSlice'
+
 export interface ICheckout {
   step: {
     cart: boolean
@@ -22,6 +24,17 @@ export interface ICheckout {
     current: string | undefined
     methods: string[]
   }
+  orderDetails: IOrder
+}
+
+export interface IOrder {
+  number: string | undefined
+  email: string | undefined
+  subtotal: number | undefined
+  products: ICartProduct[]
+  shippingAddress: IShippingAddress | undefined
+  delivery: string | undefined
+  payment: string | undefined
 }
 
 export interface IStep {

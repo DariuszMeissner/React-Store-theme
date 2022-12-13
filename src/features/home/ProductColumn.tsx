@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { apiSlice } from '../../api/feature/apiSlice'
 import {
   Description,
@@ -22,11 +23,18 @@ export const style = {
     alignItems: 'center',
     justifyContent: 'center',
     height: '100%',
-    textAlign: 'center'
+    textAlign: 'center',
+    maxWidth: 400,
+    width: '100%'
+  },
+  column: {
+    display: 'flex',
+    justifyContent: 'center'
   }
 } as const
 
 const ProductColumn: FC<IProps> = ({ productId }) => {
+  const navigate = useNavigate()
   const { data } = apiSlice.useGetSingleProductQuery(productId)
 
   return (
@@ -43,16 +51,15 @@ const ProductColumn: FC<IProps> = ({ productId }) => {
       />
 
       {/* content column */}
-      <Column>
+      <Column styleCss={style.column}>
         <div style={style.mediaContent}>
           <Headline1>{data?.title || 'title'}</Headline1>
           <Description align="center">
             {data?.description || 'description'}
           </Description>
           <Button
-            type="link"
             text="Buy"
-            path={`/product/${data?.id}`}
+            onClick={() => navigate(`/product/${data?.id}`)}
             variant="white"
           />
         </div>

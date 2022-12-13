@@ -53,7 +53,7 @@ const style = {
     color: 'black',
     position: 'absolute',
     top: 20,
-    right: -5
+    right: 15
   }
 } as const
 
@@ -234,6 +234,7 @@ const SearchRefeiments: FC<IProps> = ({ data, category }) => {
               styleCss={style.iconButtonClose}
             />
             <Headline2>Filter</Headline2>
+
             <Accordion
               styleCss={{ height: 'auto', marginTop: '20px' }}
               titles={[

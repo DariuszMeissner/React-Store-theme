@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { IData } from '../../../hooks/useForm'
-import { ICheckout, IShippingAddress } from './checkoutSlice.interface'
+import { ICheckout, IOrder, IShippingAddress } from './checkoutSlice.interface'
 
 const initialState: ICheckout = {
   step: {
@@ -33,6 +33,15 @@ const initialState: ICheckout = {
   payment: {
     current: undefined,
     methods: ['Stripe', 'Standard transfer']
+  },
+  orderDetails: {
+    number: undefined,
+    email: undefined,
+    subtotal: undefined,
+    products: [],
+    shippingAddress: undefined,
+    delivery: undefined,
+    payment: undefined
   }
 }
 
@@ -73,7 +82,7 @@ const checkoutSlice = createSlice({
           postcode: data.postcode,
           street: data.street,
           country: data.country,
-          phone: data.name
+          phone: data.phone
         }
       }
     },
@@ -94,9 +103,46 @@ const checkoutSlice = createSlice({
           current: action.payload
         }
       }
+    },
+    saveOrder: (state, action: { payload: IOrder }) => {
+      const data = action.payload
+      return {
+        ...state,
+        orderDetails: {
+          ...state.orderDetails,
+          number: data.number,
+          subtotal: data.subtotal,
+          email: data.email,
+          products: data.products,
+          shippingAddress: data.shippingAddress,
+          delivery: data.delivery,
+          payment: data.payment
+        }
+      }
     }
   }
 })
+
+export const checkoutTotalPrice = (state: { checkout: ICheckout }) =>
+  state.checkout.orderDetails.products.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  )
+
+export const selectPaymentDeliveryShipping = (state: {
+  checkout: ICheckout
+}) => ({
+  shippingAddress: state.checkout.shippingAddress,
+  delivery: state.checkout.delivery.current,
+  payment: state.checkout.payment.current,
+  email: state.checkout.loginInformation.email
+})
+
+export const selectOrderDetails = (state: { checkout: ICheckout }) =>
+  state.checkout.orderDetails
+
+export const selectShippingAddress = (state: { checkout: ICheckout }) =>
+  state.checkout.shippingAddress
 
 export const selectAllPaymnetMethods = (state: { checkout: ICheckout }) =>
   state.checkout.payment.methods
@@ -118,7 +164,8 @@ export const {
   saveEmail,
   saveShippingAddress,
   saveDelivery,
-  savePayment
+  savePayment,
+  saveOrder
 } = checkoutSlice.actions
 
 export const checkoutActions = checkoutSlice.actions

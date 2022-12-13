@@ -1,7 +1,15 @@
 import React, { FC } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { clearCart } from '../../../../../api/feature/cart-slice/cartSlice'
+import {
+  clearCart,
+  selectAllProductsCart,
+  totalPrice
+} from '../../../../../api/feature/cart-slice/cartSlice'
+import {
+  saveOrder,
+  selectPaymentDeliveryShipping
+} from '../../../../../api/feature/checkout/checkoutSlice'
 import CheckoutButtonPurchase from '../../../CheckoutButtonPurchase'
 
 interface IProps {
@@ -36,15 +44,45 @@ const style = {
 const CheckoutFinalizationStep: FC<IProps> = ({ id, activeStep }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const productsCart = useSelector(selectAllProductsCart)
+  const userDetails = useSelector(selectPaymentDeliveryShipping)
+  const cartTotal = useSelector(totalPrice)
+
   const modifyStep = activeStep === id
 
-  function navToThankYouPage() {
+  function orderNumber(): string {
+    let now = Date.now().toString()
+    now += now + Math.floor(Math.random() * 10)
+
+    return [now.slice(0, 4), now.slice(4, 10), now.slice(10, 14)].join('-')
+  }
+
+  function navToThankYouPage(): void {
     navigate('/thank-you')
   }
 
-  const placeOrder = () => {
+  function clearCartProducts(): void {
     dispatch(clearCart())
+  }
+
+  function saveUserOrder(): void {
+    dispatch(
+      saveOrder({
+        number: orderNumber(),
+        email: userDetails.email,
+        subtotal: cartTotal,
+        products: productsCart,
+        shippingAddress: { ...userDetails.shippingAddress },
+        delivery: userDetails.delivery,
+        payment: userDetails.payment
+      })
+    )
+  }
+
+  const placeOrder = () => {
+    saveUserOrder()
     navToThankYouPage()
+    clearCartProducts()
   }
 
   return modifyStep ? (

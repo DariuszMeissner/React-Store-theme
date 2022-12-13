@@ -12,22 +12,20 @@ const CheckoutButtonPurchase: FC<IProps> = ({ text, styleCss, onClick }) => {
   const style = {
     button: {
       textTransform: 'uppercase',
-      width: 'auto',
       padding: '12px 18px',
       marginTop: 15,
       position: 'relative',
-      backgroundSize: '200% 100%',
+      backgroundSize: '200% 105%',
       backgroundColor: 'transparent',
       backgroundImage:
         'linear-gradient(to right,#da291c 0%,#da291c 50%,transparent 50%,transparent 100%)',
       backgroundPosition: onMouse ? 'left' : 'right',
       border: '1px solid',
-      borderColor: onMouse ? 'transparent' : '#000',
+      borderColor: onMouse ? '#da291c' : '#000',
       borderRadius: 25,
       color: onMouse ? '#fff' : '#000',
-      outline: 'none',
-      textAlign: 'center',
       overflow: 'hidden',
+      textAlign: 'center',
       willChange: 'color, border-color, background-position',
       transition: 'color 0.25s, border-color 0.25s, background-position 0.25s'
     }

@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Button from './button/Button'
 
 interface IProps {
@@ -6,12 +7,12 @@ interface IProps {
 }
 
 const Breadcrumbs: FC<IProps> = ({ category }) => {
+  const navigate = useNavigate()
   return (
     <div className="breadcrumbs">
       <Button
-        type="link"
         text={`/${category}`}
-        path={`/products/${category}`}
+        onClick={() => navigate(`/products/${category}`)}
         styleCss={{
           color: 'black',
           marginLeft: '0',

@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { apiSlice } from '../../api/feature/apiSlice'
 import { Grid, Headline1, Button, ImageBackground } from '../../components'
 
@@ -17,6 +18,7 @@ export const style = {
 } as const
 
 const TwoColumnsProducts: FC<IProps> = ({ productIdOne, productIdTwo }) => {
+  const navigate = useNavigate()
   const productOne = apiSlice.useGetSingleProductQuery(productIdOne)
   const productTwo = apiSlice.useGetSingleProductQuery(productIdTwo)
 
@@ -36,9 +38,8 @@ const TwoColumnsProducts: FC<IProps> = ({ productIdOne, productIdTwo }) => {
 
         <Headline1>{productOne.data?.category || 'category'}</Headline1>
         <Button
-          type="link"
           text="Shop"
-          path={`/products/${productOne.data?.category}`}
+          onClick={() => navigate(`/products/${productOne.data?.category}`)}
           variant="white"
         />
       </div>
@@ -53,9 +54,8 @@ const TwoColumnsProducts: FC<IProps> = ({ productIdOne, productIdTwo }) => {
         )}
         <Headline1>{productTwo.data?.category || 'category'}</Headline1>
         <Button
-          type="link"
           text="Shop"
-          path={`/products/${productOne.data?.category}`}
+          onClick={() => navigate(`/products/${productOne.data?.category}`)}
           variant="white"
         />
       </div>

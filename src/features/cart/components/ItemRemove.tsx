@@ -15,7 +15,6 @@ const ItemRemove: FC<IProps> = ({ onClick }) => {
         label="icon-remove"
         icon={IoTrashBinOutline}
         onClick={onClick}
-        styleCss={{ color: '#181818', marginLeft: '0', fontWeight: 300 }}
         iconSize={16}
       />
     </div>
