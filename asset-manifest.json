@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/React-Store-theme/static/css/main.d2414942.css",
-    "main.js": "/React-Store-theme/static/js/main.ee980f25.js",
+    "main.css": "/React-Store-theme/static/css/main.9dc8c153.css",
+    "main.js": "/React-Store-theme/static/js/main.b9e3b475.js",
     "static/js/757.c1938f18.chunk.js": "/React-Store-theme/static/js/757.c1938f18.chunk.js",
     "static/js/802.8c48f9e8.chunk.js": "/React-Store-theme/static/js/802.8c48f9e8.chunk.js",
     "static/js/554.f0ce26a6.chunk.js": "/React-Store-theme/static/js/554.f0ce26a6.chunk.js",
     "static/js/616.d19d99d1.chunk.js": "/React-Store-theme/static/js/616.d19d99d1.chunk.js",
     "static/js/960.6e600b2a.chunk.js": "/React-Store-theme/static/js/960.6e600b2a.chunk.js",
     "static/js/787.28cb0dcd.chunk.js": "/React-Store-theme/static/js/787.28cb0dcd.chunk.js",
+    "static/media/poppins-v20-latin-regular.svg": "/React-Store-theme/static/media/poppins-v20-latin-regular.085814c346735baf43f4.svg",
     "static/media/poppins-v20-latin-500.svg": "/React-Store-theme/static/media/poppins-v20-latin-500.0674aeab989e140ad8ae.svg",
-    "static/media/poppins-v20-latin-regular.svg": "/React-Store-theme/static/media/poppins-v20-latin-regular.04277a799cb3f1b29dfa.svg",
-    "static/media/poppins-v20-latin-300.svg": "/React-Store-theme/static/media/poppins-v20-latin-300.1cdcf50ce905e85b25d7.svg",
+    "static/media/poppins-v20-latin-300.svg": "/React-Store-theme/static/media/poppins-v20-latin-300.f920339b18d9e804c731.svg",
     "static/media/poppins-v20-latin-300.ttf": "/React-Store-theme/static/media/poppins-v20-latin-300.6cc700ae42da226508cf.ttf",
     "static/media/poppins-v20-latin-regular.ttf": "/React-Store-theme/static/media/poppins-v20-latin-regular.80946c0880373b223d9c.ttf",
     "static/media/poppins-v20-latin-500.ttf": "/React-Store-theme/static/media/poppins-v20-latin-500.c5bf954f85d4e113650f.ttf",
@@ -24,8 +24,8 @@
     "static/media/poppins-v20-latin-300.woff2": "/React-Store-theme/static/media/poppins-v20-latin-300.39576fe9df8a22cc1bcc.woff2",
     "static/media/poppins-v20-latin-500.woff2": "/React-Store-theme/static/media/poppins-v20-latin-500.08491d3f7fe7ae88ef44.woff2",
     "index.html": "/React-Store-theme/index.html",
-    "main.d2414942.css.map": "/React-Store-theme/static/css/main.d2414942.css.map",
-    "main.ee980f25.js.map": "/React-Store-theme/static/js/main.ee980f25.js.map",
+    "main.9dc8c153.css.map": "/React-Store-theme/static/css/main.9dc8c153.css.map",
+    "main.b9e3b475.js.map": "/React-Store-theme/static/js/main.b9e3b475.js.map",
     "757.c1938f18.chunk.js.map": "/React-Store-theme/static/js/757.c1938f18.chunk.js.map",
     "802.8c48f9e8.chunk.js.map": "/React-Store-theme/static/js/802.8c48f9e8.chunk.js.map",
     "554.f0ce26a6.chunk.js.map": "/React-Store-theme/static/js/554.f0ce26a6.chunk.js.map",
@@ -34,7 +34,7 @@
     "787.28cb0dcd.chunk.js.map": "/React-Store-theme/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d2414942.css",
-    "static/js/main.ee980f25.js"
+    "static/css/main.9dc8c153.css",
+    "static/js/main.b9e3b475.js"
   ]
 }
