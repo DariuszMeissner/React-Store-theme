@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable import/no-cycle */
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
@@ -33,8 +34,8 @@ const SkeletonCategoryPage = () => {
           columnGap={[20, 20, 20, 20]}
           gridColumns={[2, 3, 4, 4]}
           columnEqual>
-          {[...Array(PRODUCT_PER_PAGE)].map(() => (
-            <SkeletonProductTeaser />
+          {[...Array(PRODUCT_PER_PAGE)].map((el, index) => (
+            <SkeletonProductTeaser key={index} />
           ))}
         </Grid>
 
