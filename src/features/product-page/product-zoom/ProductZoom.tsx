@@ -28,15 +28,15 @@ const ProductZoom: FC<IProps> = ({ images, closeOnClick }) => {
       display: 'flex',
       justifyContent: 'end',
       marginBottom: 10,
-      position: 'relative'
+      position: 'relative',
+      paddingRight: 10,
+      paddingTop: 10
     },
     iconButtonClose: {
       color: 'black',
-      zIndex: 10,
-      marginRight: 0,
       background: 'white',
       borderRadius: '50%',
-      width: 50
+      width: 'auto'
     }
   } as const
 

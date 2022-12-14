@@ -1,5 +1,4 @@
 import React, { ChangeEvent, FC } from 'react'
-import { useSizeScreen } from '../hooks'
 
 interface IProps {
   label: string
@@ -8,8 +7,6 @@ interface IProps {
 }
 
 const RadioButton: FC<IProps> = ({ label, value, onChange }) => {
-  const screen = useSizeScreen()
-
   const style = {
     label: { paddingLeft: 20, paddingRight: 35, lineHeight: '20px' },
     wrapper: {

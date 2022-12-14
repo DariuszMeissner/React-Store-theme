@@ -32,6 +32,7 @@ Private project to learn create ecommerce website.
 #### tech stack
 
 - React
+- React hooks
 - Typescript
 - Redux Toolkit
 - RTK Query
@@ -39,4 +40,10 @@ Private project to learn create ecommerce website.
 - Loading skeleton
 - React Router Dom
 - Swiper slider
-- Custom Hooks
+- Custom Hooks :
+  - useSizeScreen: to detect size of screen
+  - useRect: to get primary value of element from getBoundingClientRect()
+  - useOutClick: to detect click out of element
+  - useImageLoad: to detect when image is loading
+  - useForm: to automate fill out inputs, detect errors and validate
+  - useDisableScroll: to turn off/on scroll when modal is close/open

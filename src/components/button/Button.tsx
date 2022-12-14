@@ -73,6 +73,7 @@ const Button: FC<IProps> = ({
       fontWeight: 300,
       display: 'flex',
       alignItems: 'center',
+      justifyContent: 'center',
       textTransform: 'capitalize'
     },
     skeleton: {
