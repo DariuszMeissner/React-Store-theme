@@ -25,6 +25,7 @@ const RelatedItems: FC<IProps> = ({ product }) => {
         navigation={false}
         configuration="scrollbar">
         {/* slides */}
+
         {relatedProducts.data?.products.map((item) => (
           <ProductTeaser productId={`${item.id}`} key={item.id} />
         ))}

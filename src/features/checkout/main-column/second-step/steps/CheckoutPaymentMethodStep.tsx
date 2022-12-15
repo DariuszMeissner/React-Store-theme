@@ -10,6 +10,7 @@ import {
 } from '../../../../../api/feature/checkout/checkoutSlice'
 import { RadioButton } from '../../../../../components'
 import CheckoutButtonPurchase from '../../../CheckoutButtonPurchase'
+import Lists from '../../../../../components/Lists'
 
 const CheckoutPaymentMethodStep: FC<IPropsSteps> = ({
   id,
@@ -38,6 +39,17 @@ const CheckoutPaymentMethodStep: FC<IPropsSteps> = ({
 
   const onChangePaymentMethod = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPayment(e.target.value)
+  }
+
+  const renderListElement = (method: string) => {
+    return (
+      <RadioButton
+        label={method}
+        value={method === payment}
+        onChange={onChangePaymentMethod}
+        key={method}
+      />
+    )
   }
 
   const handleOnProceed = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -69,15 +81,7 @@ const CheckoutPaymentMethodStep: FC<IPropsSteps> = ({
 
       {/* not filled step/modify */}
       <ModifyStep activeStep={activeStep} id={id} title="Payment">
-        {paymentMethods.map((method) => (
-          <RadioButton
-            label={method}
-            value={method === payment}
-            onChange={onChangePaymentMethod}
-            key={method}
-          />
-        ))}
-
+        <Lists data={paymentMethods} renderItem={renderListElement} />
         <CheckoutButtonPurchase text="Proceed" onClick={handleOnProceed} />
       </ModifyStep>
     </div>

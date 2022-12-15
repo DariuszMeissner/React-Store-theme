@@ -3,6 +3,7 @@ import { IoCloseOutline } from 'react-icons/io5'
 import { useDispatch } from 'react-redux'
 import { registerModal } from '../../../../api/feature/modal-slice/modalSlice'
 import { Button, Overlay } from '../../../../components'
+import Lists from '../../../../components/Lists'
 import { useDisableScroll } from '../../../../hooks'
 import Section from '../../../../layout/Section'
 import NavBarButtonLink from '../nav-bar/NavBarButtonLink'
@@ -60,23 +61,19 @@ const MegaNav: FC<IProps> = ({ isOpen, categories }) => {
     unlockScroll()
   }
 
-  const generateLinks = (): JSX.Element[] => {
-    return categories.map((item, index) => {
-      return (
-        <li key={item.title}>
-          <NavBarButtonLink
-            title={item.title}
-            id={index}
-            onClick={gotoOnClick}
-            color="black"
-            path={`/products/${item.path}`}
-          />
-        </li>
-      )
-    })
+  const renderMenuLinks = (item: ICategory) => {
+    return (
+      <li key={item.title}>
+        <NavBarButtonLink
+          title={item.title}
+          id={item.title}
+          onClick={gotoOnClick}
+          color="black"
+          path={`/products/${item.path}`}
+        />
+      </li>
+    )
   }
-
-  const links = generateLinks()
 
   return (
     <>
@@ -93,8 +90,10 @@ const MegaNav: FC<IProps> = ({ isOpen, categories }) => {
             />
           </div>
 
-          {/* links */}
-          <ul style={style.section}>{links}</ul>
+          {/* list of links */}
+          <ul style={style.section}>
+            <Lists data={categories} renderItem={renderMenuLinks} />
+          </ul>
         </Section>
       </div>
       {/* overlay */}

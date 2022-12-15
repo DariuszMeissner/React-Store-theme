@@ -5,7 +5,7 @@ import { RootState } from '../../../../api/feature/store'
 
 interface IProps {
   title: string
-  id: number
+  id: number | string
   onClick: () => void
   color?: string
   path: string

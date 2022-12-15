@@ -1,6 +1,7 @@
 import React, { ChangeEvent, FC } from 'react'
 import { IProduct } from '../../api/feature/apiSlice'
 import { Button, RadioButton } from '../../components'
+import Lists from '../../components/Lists'
 import { useSizeScreen } from '../../hooks'
 
 interface IProps {
@@ -20,8 +21,8 @@ const FilterBrand: FC<IProps> = ({
 }) => {
   const screen = useSizeScreen()
 
-  const categories = allCategoryProducts.map((el) => el.brand)
-  const categoriesWithoutDuplicate = [...new Set(categories)]
+  const getCategories = allCategoryProducts.map((el) => el.brand)
+  const categoriesWithoutDuplicate = [...new Set(getCategories)]
 
   const style = {
     container: {
@@ -38,17 +39,24 @@ const FilterBrand: FC<IProps> = ({
     }
   } as const
 
+  const renderListElement = (category: string) => {
+    return (
+      <RadioButton
+        label={category}
+        value={filterBrandValue === category}
+        onChange={onChangeBrandFilter}
+        key={category}
+      />
+    )
+  }
+
   return (
     <div style={style.container}>
       <div style={style.buttons}>
-        {categoriesWithoutDuplicate.map((category) => (
-          <RadioButton
-            label={category}
-            value={filterBrandValue === category}
-            onChange={onChangeBrandFilter}
-            key={category}
-          />
-        ))}
+        <Lists
+          data={categoriesWithoutDuplicate}
+          renderItem={renderListElement}
+        />
         <RadioButton
           label="Brand All"
           value={filterBrandValue === 'Brand-all'}

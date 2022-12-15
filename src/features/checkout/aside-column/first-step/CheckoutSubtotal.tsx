@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { selectAllShippingMethods } from '../../../../api/feature/checkout/checkoutSlice'
 import { Button } from '../../../../components'
+import Lists from '../../../../components/Lists'
 import CheckoutPriceSubtotal from '../CheckoutPriceSubtotal'
 
 const style = {
@@ -32,6 +33,10 @@ const CheckoutSubtotal: FC = () => {
   const navigate = useNavigate()
   const shippingMethods = useSelector(selectAllShippingMethods)
 
+  const renderListElement = (method: string) => {
+    return <div style={style.shipping.method}>{method}</div>
+  }
+
   return (
     <div className="checkout-order-summary" style={style.wrapper}>
       {/* subtotal */}
@@ -39,9 +44,9 @@ const CheckoutSubtotal: FC = () => {
 
       {/* shipping method */}
       <p style={style.shipping.label}>Shipping method&nbsp;</p>
-      {shippingMethods.map((method) => (
-        <div style={style.shipping.method}>{method}</div>
-      ))}
+
+      {/* available shipping methods */}
+      <Lists data={shippingMethods} renderItem={renderListElement} />
 
       {/* proceed to purchase */}
       <Button

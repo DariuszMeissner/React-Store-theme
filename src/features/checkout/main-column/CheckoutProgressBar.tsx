@@ -5,6 +5,7 @@ import {
   selectCurrentStep,
   selectIsStep
 } from '../../../api/feature/checkout/checkoutSlice'
+import Lists from '../../../components/Lists'
 
 const style = {
   wrapper: {
@@ -31,20 +32,23 @@ const CheckoutProgressBar: FC = () => {
   const currentStep = useSelector(selectCurrentStep)
   const isStep = useSelector(selectIsStep)
 
+  const renderListElement = (steps: { name: string; step: number }) => {
+    return steps.name === currentStep ? (
+      <li style={style.stepItem}>
+        <span>{`${steps.step}/${allSteps.length} ${
+          isStep.cart ? 'Shopping Bag' : 'Proceed with the order'
+        }`}</span>
+      </li>
+    ) : (
+      <div />
+    )
+  }
+
   return (
     <div className="progressBar" style={style.wrapper}>
       <div style={style.steps}>
         <ol style={style.lists}>
-          {allSteps.map(
-            (steps) =>
-              steps.name === currentStep && (
-                <li style={style.stepItem}>
-                  <span>{`${steps.step}/${allSteps.length} ${
-                    isStep.cart ? 'Shopping Bag' : 'Proceed with the order'
-                  }`}</span>
-                </li>
-              )
-          )}
+          <Lists data={allSteps} renderItem={renderListElement} />
         </ol>
       </div>
     </div>

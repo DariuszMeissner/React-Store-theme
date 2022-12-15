@@ -2,10 +2,11 @@ import React, { FC, useEffect } from 'react'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { apiSlice } from '../api/feature/apiSlice'
+import { apiSlice, IProduct } from '../api/feature/apiSlice'
 import { searchRefeimentsActions } from '../api/feature/search-refeiments-slice/searchRefeimentsSlice'
 import { RootState } from '../api/feature/store'
 import { Grid, Headline2, ProductTeaser } from '../components'
+import Lists from '../components/Lists'
 import { LoadMore, SearchRefeiments } from '../features'
 import { Section } from '../layout'
 
@@ -31,6 +32,10 @@ const CategoryPage: FC = () => {
     }
   }, [isSuccess, category, data])
 
+  const renderProductsList = (item: IProduct) => {
+    return <ProductTeaser productId={`${item.id}`} key={item.id} />
+  }
+
   return (
     <main className="main-content">
       <Section styleCss={{ margin: '25px 0' }}>
@@ -38,16 +43,17 @@ const CategoryPage: FC = () => {
         {category && (
           <SearchRefeiments data={products || []} category={category} />
         )}
-        <Grid
-          rowGap={[20, 20, 20, 20]}
-          columnGap={[20, 20, 20, 20]}
-          gridColumns={[2, 3, 4, 4]}
-          columnEqual>
-          {products &&
-            products?.map((item) => (
-              <ProductTeaser productId={`${item.id}`} key={item.id} />
-            ))}
-        </Grid>
+
+        {products && (
+          <Grid
+            rowGap={[20, 20, 20, 20]}
+            columnGap={[20, 20, 20, 20]}
+            gridColumns={[2, 3, 4, 4]}
+            columnEqual>
+            <Lists data={products} renderItem={renderProductsList} />
+          </Grid>
+        )}
+
         <LoadMore length={products?.length || 0} />
       </Section>
     </main>
