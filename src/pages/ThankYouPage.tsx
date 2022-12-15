@@ -2,8 +2,10 @@ import React, { FC } from 'react'
 import { HiArrowLongLeft } from 'react-icons/hi2'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { ICartProduct } from '../api/feature/cart-slice/cartSlice'
 import { selectOrderDetails } from '../api/feature/checkout/checkoutSlice'
 import { Button, Headline2 } from '../components'
+import Lists from '../components/Lists'
 import { Section } from '../layout'
 
 const style = {
@@ -53,6 +55,15 @@ const ThankYouPage: FC = () => {
   const navigate = useNavigate()
   const orderDetails = useSelector(selectOrderDetails)
 
+  const renderOrderProductsElement = (product: ICartProduct) => {
+    return (
+      <div style={style.content} key={product.id}>
+        <span>{product.quantity}&nbsp;x&nbsp;</span>
+        <span>{product.title}</span>
+      </div>
+    )
+  }
+
   return (
     <Section>
       <Headline2 styleCss={{ textAlign: 'center' }}>
@@ -68,12 +79,10 @@ const ThankYouPage: FC = () => {
         <h3 style={style.details}>Details</h3>
         <p style={style.label}>Products</p>
 
-        {orderDetails.products.map((product) => (
-          <div style={style.content} key={product.id}>
-            <span>{product.quantity}&nbsp;x&nbsp;</span>
-            <span>{product.title}</span>
-          </div>
-        ))}
+        <Lists
+          data={orderDetails.products}
+          renderItem={renderOrderProductsElement}
+        />
 
         <div style={style.totalWrapper}>
           <span style={style.label}>Total:&nbsp;</span>

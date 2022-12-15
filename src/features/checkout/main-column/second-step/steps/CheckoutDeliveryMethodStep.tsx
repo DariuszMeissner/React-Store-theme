@@ -10,6 +10,7 @@ import {
 } from '../../../../../api/feature/checkout/checkoutSlice'
 import { RadioButton } from '../../../../../components'
 import CheckoutButtonPurchase from '../../../CheckoutButtonPurchase'
+import Lists from '../../../../../components/Lists'
 
 const CheckoutDeliveryMethodStep: FC<IPropsSteps> = ({
   id,
@@ -38,6 +39,17 @@ const CheckoutDeliveryMethodStep: FC<IPropsSteps> = ({
 
   const onChangeShippingMethod = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDelivery(e.target.value)
+  }
+
+  const renderListShippingMethods = (method: string) => {
+    return (
+      <RadioButton
+        label={method}
+        value={method === delivery}
+        onChange={onChangeShippingMethod}
+        key={method}
+      />
+    )
   }
 
   const handleOnProceed = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -69,14 +81,7 @@ const CheckoutDeliveryMethodStep: FC<IPropsSteps> = ({
 
       {/* not filled step/modify */}
       <ModifyStep activeStep={activeStep} id={id} title="Delivery information">
-        {shippingMethods.map((method) => (
-          <RadioButton
-            label={method}
-            value={method === delivery}
-            onChange={onChangeShippingMethod}
-            key={method}
-          />
-        ))}
+        <Lists data={shippingMethods} renderItem={renderListShippingMethods} />
         <CheckoutButtonPurchase text="Proceed" onClick={handleOnProceed} />
       </ModifyStep>
     </div>

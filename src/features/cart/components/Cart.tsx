@@ -3,6 +3,7 @@ import { IoCloseOutline } from 'react-icons/io5'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import {
+  ICartProduct,
   selectAllProductsCart,
   totalPrice
 } from '../../../api/feature/cart-slice/cartSlice'
@@ -10,6 +11,7 @@ import { Button, Headline2 } from '../../../components'
 import CartItem from './CartItem'
 import CountLabel from './CountLabel'
 import CartSubtotal from './CartSubtotal'
+import Lists from '../../../components/Lists'
 
 interface IProps {
   closeOnClick: () => void
@@ -50,16 +52,12 @@ const style = {
 
 const Cart: FC<IProps> = ({ closeOnClick }) => {
   const navigate = useNavigate()
-  const allProductsCart = useSelector(selectAllProductsCart)
+  const productsCart = useSelector(selectAllProductsCart)
   const cartTotal = useSelector(totalPrice)
 
-  const generateCartList = () => {
-    return allProductsCart.map((product) => (
-      <CartItem product={product} key={product.id} />
-    ))
+  const renderProductsCart = (product: ICartProduct) => {
+    return <CartItem product={product} key={product.id} />
   }
-
-  const cartList = generateCartList()
 
   const navToCheckoutAndClose = () => {
     navigate('/checkout/cart')
@@ -79,16 +77,18 @@ const Cart: FC<IProps> = ({ closeOnClick }) => {
       <Headline2>Shopping Bag</Headline2>
 
       {/* show products */}
-      {cartList.length > 0 && (
+      {productsCart.length > 0 && (
         <>
           {/* cart info */}
           <div style={style.cartInfo}>
-            <CountLabel count={cartList.length} />
+            <CountLabel count={productsCart.length} />
             <CartSubtotal subtotal={cartTotal} />
           </div>
 
           {/* listing products */}
-          <div style={style.cartList}>{cartList}</div>
+          <div style={style.cartList}>
+            <Lists data={productsCart} renderItem={renderProductsCart} />
+          </div>
 
           {/* go to checkout */}
           <Button
@@ -102,7 +102,7 @@ const Cart: FC<IProps> = ({ closeOnClick }) => {
 
       {/* no item in cart */}
       <ul style={style.cartList}>
-        {cartList.length === 0 && <p>no item in cart</p>}
+        {productsCart.length === 0 && <p>no item in cart</p>}
       </ul>
     </div>
   )
