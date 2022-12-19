@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/React-Store-theme/static/css/main.9dc8c153.css",
-    "main.js": "/React-Store-theme/static/js/main.658dc3ed.js",
+    "main.js": "/React-Store-theme/static/js/main.469928d0.js",
     "static/js/757.7a929aa7.chunk.js": "/React-Store-theme/static/js/757.7a929aa7.chunk.js",
     "static/js/802.8009037f.chunk.js": "/React-Store-theme/static/js/802.8009037f.chunk.js",
     "static/js/554.c4903c1f.chunk.js": "/React-Store-theme/static/js/554.c4903c1f.chunk.js",
@@ -25,7 +25,7 @@
     "static/media/poppins-v20-latin-500.woff2": "/React-Store-theme/static/media/poppins-v20-latin-500.08491d3f7fe7ae88ef44.woff2",
     "index.html": "/React-Store-theme/index.html",
     "main.9dc8c153.css.map": "/React-Store-theme/static/css/main.9dc8c153.css.map",
-    "main.658dc3ed.js.map": "/React-Store-theme/static/js/main.658dc3ed.js.map",
+    "main.469928d0.js.map": "/React-Store-theme/static/js/main.469928d0.js.map",
     "757.7a929aa7.chunk.js.map": "/React-Store-theme/static/js/757.7a929aa7.chunk.js.map",
     "802.8009037f.chunk.js.map": "/React-Store-theme/static/js/802.8009037f.chunk.js.map",
     "554.c4903c1f.chunk.js.map": "/React-Store-theme/static/js/554.c4903c1f.chunk.js.map",
@@ -35,6 +35,6 @@
   },
   "entrypoints": [
     "static/css/main.9dc8c153.css",
-    "static/js/main.658dc3ed.js"
+    "static/js/main.469928d0.js"
   ]
 }
