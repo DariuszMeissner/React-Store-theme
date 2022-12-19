@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/React-Store-theme/static/css/main.9dc8c153.css",
-    "main.js": "/React-Store-theme/static/js/main.b9e3b475.js",
-    "static/js/757.c1938f18.chunk.js": "/React-Store-theme/static/js/757.c1938f18.chunk.js",
-    "static/js/802.8c48f9e8.chunk.js": "/React-Store-theme/static/js/802.8c48f9e8.chunk.js",
-    "static/js/554.f0ce26a6.chunk.js": "/React-Store-theme/static/js/554.f0ce26a6.chunk.js",
-    "static/js/616.d19d99d1.chunk.js": "/React-Store-theme/static/js/616.d19d99d1.chunk.js",
-    "static/js/960.6e600b2a.chunk.js": "/React-Store-theme/static/js/960.6e600b2a.chunk.js",
+    "main.js": "/React-Store-theme/static/js/main.658dc3ed.js",
+    "static/js/757.7a929aa7.chunk.js": "/React-Store-theme/static/js/757.7a929aa7.chunk.js",
+    "static/js/802.8009037f.chunk.js": "/React-Store-theme/static/js/802.8009037f.chunk.js",
+    "static/js/554.c4903c1f.chunk.js": "/React-Store-theme/static/js/554.c4903c1f.chunk.js",
+    "static/js/616.b16c6d7f.chunk.js": "/React-Store-theme/static/js/616.b16c6d7f.chunk.js",
+    "static/js/960.6bb50fc7.chunk.js": "/React-Store-theme/static/js/960.6bb50fc7.chunk.js",
     "static/js/787.28cb0dcd.chunk.js": "/React-Store-theme/static/js/787.28cb0dcd.chunk.js",
     "static/media/poppins-v20-latin-regular.svg": "/React-Store-theme/static/media/poppins-v20-latin-regular.085814c346735baf43f4.svg",
     "static/media/poppins-v20-latin-500.svg": "/React-Store-theme/static/media/poppins-v20-latin-500.0674aeab989e140ad8ae.svg",
@@ -25,16 +25,16 @@
     "static/media/poppins-v20-latin-500.woff2": "/React-Store-theme/static/media/poppins-v20-latin-500.08491d3f7fe7ae88ef44.woff2",
     "index.html": "/React-Store-theme/index.html",
     "main.9dc8c153.css.map": "/React-Store-theme/static/css/main.9dc8c153.css.map",
-    "main.b9e3b475.js.map": "/React-Store-theme/static/js/main.b9e3b475.js.map",
-    "757.c1938f18.chunk.js.map": "/React-Store-theme/static/js/757.c1938f18.chunk.js.map",
-    "802.8c48f9e8.chunk.js.map": "/React-Store-theme/static/js/802.8c48f9e8.chunk.js.map",
-    "554.f0ce26a6.chunk.js.map": "/React-Store-theme/static/js/554.f0ce26a6.chunk.js.map",
-    "616.d19d99d1.chunk.js.map": "/React-Store-theme/static/js/616.d19d99d1.chunk.js.map",
-    "960.6e600b2a.chunk.js.map": "/React-Store-theme/static/js/960.6e600b2a.chunk.js.map",
+    "main.658dc3ed.js.map": "/React-Store-theme/static/js/main.658dc3ed.js.map",
+    "757.7a929aa7.chunk.js.map": "/React-Store-theme/static/js/757.7a929aa7.chunk.js.map",
+    "802.8009037f.chunk.js.map": "/React-Store-theme/static/js/802.8009037f.chunk.js.map",
+    "554.c4903c1f.chunk.js.map": "/React-Store-theme/static/js/554.c4903c1f.chunk.js.map",
+    "616.b16c6d7f.chunk.js.map": "/React-Store-theme/static/js/616.b16c6d7f.chunk.js.map",
+    "960.6bb50fc7.chunk.js.map": "/React-Store-theme/static/js/960.6bb50fc7.chunk.js.map",
     "787.28cb0dcd.chunk.js.map": "/React-Store-theme/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9dc8c153.css",
-    "static/js/main.b9e3b475.js"
+    "static/js/main.658dc3ed.js"
   ]
 }
