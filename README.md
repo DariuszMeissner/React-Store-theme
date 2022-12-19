@@ -33,6 +33,7 @@ Private project to learn create ecommerce website.
 
 - React
 - React hooks
+- Styles:inline, by js object/react native
 - Typescript
 - Redux Toolkit
 - RTK Query
@@ -40,7 +41,6 @@ Private project to learn create ecommerce website.
 - Loading skeleton
 - React Router Dom
 - Swiper slider
-- styles: inline, by js object like in react native
 - Custom Hooks :
   - useSizeScreen: to detect size of screen
   - useRect: to get primary value of element from getBoundingClientRect()
