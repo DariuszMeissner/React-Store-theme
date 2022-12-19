@@ -38,7 +38,7 @@ const CategoryPage: FC = () => {
 
   return (
     <main className="main-content">
-      <Section styleCss={{ margin: '25px 0' }}>
+      <Section styleCss={{ marginBottom: 25, marginTop: 25 }}>
         <Headline2 styleCss={{ textAlign: 'center' }}>{headline}</Headline2>
         {category && (
           <SearchRefeiments data={products || []} category={category} />

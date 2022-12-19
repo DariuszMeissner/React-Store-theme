@@ -24,7 +24,8 @@ const ProductPage: FC = () => {
       display: 'flex',
       justifyContent: 'space-between',
       flexDirection: screen.isS || screen.isM ? 'column' : 'row',
-      margin: '25px 0'
+      marginTop: 25,
+      marginBottom: 25
     }
   } as const
 
