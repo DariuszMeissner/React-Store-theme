@@ -1,5 +1,6 @@
 import React, { CSSProperties, FC } from 'react'
 import useSizeScreen from '../hooks/useSizeScreen'
+import { BREAKPOINTS } from '../util'
 
 interface IProps {
   children: React.ReactNode
@@ -19,10 +20,17 @@ const Section: FC<IProps> = ({ children, type, styleCss }) => {
 
   const style = {
     padding: type === 'wrap' ? width : undefined,
-    margin: (screen.isS && '64px 0') || screen.isM ? '56px 0' : '96px 0'
+    margin:
+      (screen.isS && '64px auto') || screen.isM ? '56px auto' : '96px auto',
+    maxWidth: BREAKPOINTS.X,
+    width: '100%'
   } as const
 
-  return <div style={{ ...style, ...styleCss }}>{children}</div>
+  return (
+    <div className="section" style={{ ...style, ...styleCss }}>
+      {children}
+    </div>
+  )
 }
 
 Section.defaultProps = {
