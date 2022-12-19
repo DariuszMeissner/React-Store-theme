@@ -19,6 +19,10 @@ const useDisableScroll = () => {
     document.body.style.overflow = ''
     document.body.style.top = ''
     document.body.style.width = ''
+
+    // ios
+    document.body.style.touchAction = ''
+
     window.scrollTo(0, parseInt(scrollY || '0', 10) * -1)
   }, [])
 
