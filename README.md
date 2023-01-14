@@ -70,3 +70,4 @@ Private project to learn create ecommerce website with typescript. To prepare to
   - useImageLoad: to detect when image is loading
   - useForm: to automate fill out inputs, detect errors and validate
   - useDisableScroll: to turn off/on scroll when modal is close/open
+
