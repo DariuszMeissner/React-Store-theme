@@ -1,10 +1,11 @@
 # React-Store-theme
 
-Private project to learn create ecommerce website.
+Private project to learn create ecommerce website with typescript. To prepare to create mobile app, i created styles and animations by inline styles.
 
 #### demo https://dariuszmeissner.github.io/React-Store-theme/
 
 #### Desktop
+
 <div>
 <img src="https://user-images.githubusercontent.com/59477908/208514673-98ab305c-5186-4e6f-97c6-d2ef58e20e8a.png" height="300">
 <img src="https://user-images.githubusercontent.com/59477908/208515224-f72f133b-9e81-48e8-96e5-3cfd73e0eb73.png" height="300">
@@ -16,6 +17,7 @@ Private project to learn create ecommerce website.
 </div>
 
 #### Mobile
+
 <div>
 <img src="https://user-images.githubusercontent.com/59477908/208517146-19320f50-3e29-4378-9483-4fc4e98f31ae.png" height="300">
 <img src="https://user-images.githubusercontent.com/59477908/208517548-1b0e01a0-c931-43cd-9a5d-c2beb35979f4.png" height="300">
@@ -53,8 +55,8 @@ Private project to learn create ecommerce website.
 
 - React
 - React hooks
-- Styles:inline, by js object/react native
 - Typescript
+- Styles & animations:inline, by js object
 - Redux Toolkit
 - RTK Query
 - Fake Rest Api(dummyJSON)
@@ -68,3 +70,4 @@ Private project to learn create ecommerce website.
   - useImageLoad: to detect when image is loading
   - useForm: to automate fill out inputs, detect errors and validate
   - useDisableScroll: to turn off/on scroll when modal is close/open
+
