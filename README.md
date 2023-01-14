@@ -2,6 +2,8 @@
 
 Private project to learn create ecommerce website.
 
+#### demo https://dariuszmeissner.github.io/React-Store-theme/
+
 #### Desktop
 <div>
 <img src="https://user-images.githubusercontent.com/59477908/208514673-98ab305c-5186-4e6f-97c6-d2ef58e20e8a.png" height="300">
@@ -21,10 +23,6 @@ Private project to learn create ecommerce website.
 <img src="https://user-images.githubusercontent.com/59477908/208517562-defa9d5a-84df-4062-9382-6ae3a69c4414.png" height="300">
 <img src="https://user-images.githubusercontent.com/59477908/208517570-f22fb400-df1d-4615-98ee-baf041b1ab78.png" height='300'>
 </div>
-
-
-
-#### demo https://dariuszmeissner.github.io/React-Store-theme/
 
 ##### Pages
 
