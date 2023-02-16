@@ -1,6 +1,6 @@
 # React-Store-theme
 
-Private project to learn create ecommerce website with typescript. To prepare to create mobile app, i created styles and animations by inline styles.
+Private project to learn create ecommerce website with React, typescript and Fake Rest Api. To prepare to create mobile app, i created styles and animations by inline styles.
 
 #### demo https://dariuszmeissner.github.io/React-Store-theme/
 
