@@ -6,21 +6,21 @@ Private project to learn create ecommerce website with React, typescript and Fak
 
 #### demo https://dariuszmeissner.github.io/React-Store-theme/
 
-## Table of contents
+### Table of contents
 * [Pages](#pages)
 * [Features](#features)
 * [What next](#tech-stack)
 * [Gallery desktop](#desktop)
 * [Gallery mobile](#mobile)
 
-## Pages
+### Pages
 - Home page
 - Products listing page
 - Product page
 - Checkout page
 - Thank you page
 
-## Features
+### Features
 - Full responsive website(
   breakpoints:  
    S: 767,
@@ -36,7 +36,7 @@ Private project to learn create ecommerce website with React, typescript and Fak
 - Filters on products listing page
 - Zoom gallery
 
-## Tech stack
+### Tech stack
 - React
 - React hooks
 - Typescript
@@ -56,7 +56,7 @@ Private project to learn create ecommerce website with React, typescript and Fak
   - useDisableScroll: to turn off/on scroll when modal is close/open
 
 
-## Desktop
+### Desktop
 
 <div>
 <img src="https://user-images.githubusercontent.com/59477908/208514673-98ab305c-5186-4e6f-97c6-d2ef58e20e8a.png" height="300">
@@ -68,7 +68,7 @@ Private project to learn create ecommerce website with React, typescript and Fak
 <img src="https://user-images.githubusercontent.com/59477908/208515265-8691c58f-7988-41ea-86e0-bb5224c5589d.png" height="300">
 </div>
 
-## Mobile
+### Mobile
 
 <div>
 <img src="https://user-images.githubusercontent.com/59477908/208517146-19320f50-3e29-4378-9483-4fc4e98f31ae.png" height="300">
